@@ -2,13 +2,14 @@
 <html lang="en"> 
 <head> 
 	<meta charset="UTF-8" />
-	<title>Phaser - Making your first game, part 1</title>
-		<script type="text/javascript" src="/Tutorial/node_modules/phaser/build/phaser.min.js"></script>>
+	<title>Space Pirates Tower D</title>
+		<script type="text/javascript" src="phaser.min.js"></script>>
     <style type="text/css">
         body {
             margin: 0;
         }
     </style>
+            
 </head>
 
 <body>
@@ -28,13 +29,13 @@ function preload() {
     
     //Load Images
     game.load.image('tiles', 'tiles_sheet.png');
-    game.load.image('tree', 'assets/Tree_1.png');
-    game.load.image('shipsMisc3', 'assets/2nd_ship_new_3.png');
-    game.load.atlasXML('shipsMisc1','assets/shipsMiscellaneous_sheet.png','Spritesheets/shipsMiscellaneous_sheet.xml');
-    game.load.atlasXML('shipsMisc2','assets/shipsMiscellaneous_sheet@2.png','Spritesheets/shipsMiscellaneous_sheet@2.xml');
-    game.load.image('villager', 'assets/spr_m_unko.png'); 
-    game.load.atlasXML('spaceItems', 'assets/spaceItems.png', 'Spritesheets/spaceItems.xml');
-    game.load.image('star', 'assets/star.png');
+    game.load.image('tree', 'Tree_1.png');
+    game.load.image('shipsMisc3', '2nd_ship_new_3.png');
+    game.load.atlasXML('shipsMisc1','shipsMiscellaneous_sheet.png','shipsMiscellaneous_sheet.xml');
+    game.load.atlasXML('shipsMisc2','shipsMiscellaneous_sheet@2.png','shipsMiscellaneous_sheet@2.xml');
+    game.load.image('villager', 'spr_m_unko.png'); 
+    game.load.atlasXML('spaceItems', 'spaceItems.png', 'spaceItems.xml');
+    game.load.image('star', 'star.png');
     
     
     game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;

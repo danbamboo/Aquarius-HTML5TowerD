@@ -2,16 +2,15 @@ var express = require('express');
 var app = express();
 var path = require("path");
 
+var sitePath = process.argv[2] || ".";
+
 //WILL NEED TO MANUALLY ASSIGN PORT ON EC2
-var port = process.env.PORT; //Use for could9 autoassign port
+// var port = process.env.PORT; //Use for could9 autoassign port
 
- app.use(express.static('hellophaser'));  //Where express checks for content
-// app.use(express.static('src/views'));  //Second static dir 
-// app.use(express.static('bower_components'));
-
-
-// app.set('views', './src/views');
-// app.set('view engine', 'ejs');
+//Where express checks for content
+app.use(express.static(__dirname + '/js'));
+app.use(express.static(__dirname + '/assets'));
+app.use(express.static(__dirname + '/Spritesheets'));
 
 
 //DEMO HOW TO ADD SOME JSON WITH  ROUTE
@@ -29,10 +28,10 @@ var port = process.env.PORT; //Use for could9 autoassign port
 // });
 
 app.get('/', function(req, res){
-   res.sendFile(path.join(__dirname+'/hellophaser/index.html')); 
+   res.sendFile(path.join(__dirname+'/towerClassProto.html')); 
 });
 
-app.listen(port, function(err){
-    console.log("The server is running on port: " + port);
+app.listen(8080, function(err){
+    console.log("The server is running on port: " + 8080);
 });
 
