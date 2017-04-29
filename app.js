@@ -31,7 +31,7 @@ app.get('/', function(req, res){
    res.sendFile(path.join(__dirname+'/towerClassProto.html')); 
 });
 
-app.listen(8080, function(err){
-    console.log("The server is running on port: " + 8080);
+app.listen(3000, function(err){
+    console.log("The server is running on port: " + 3000);
 });
 
