@@ -24,7 +24,7 @@ var game = new Phaser.Game(1920, 1920, Phaser.AUTO, '', { preload: preload, crea
 
 //load necessary game assets
 function preload() {
-    //load mapp
+    //load map
     game.load.tilemap('pirateMapOcean', 'pirateMapProto4-1.json', null, Phaser.Tilemap.TILED_JSON);
     
     //Load Images
@@ -36,8 +36,6 @@ function preload() {
     game.load.image('villager', 'spr_m_unko.png'); 
     game.load.atlasXML('spaceItems', 'spaceItems.png', 'spaceItems.xml');
     game.load.image('star', 'star.png');
-    
-    //newAdditionto branch now
     
     
     game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
