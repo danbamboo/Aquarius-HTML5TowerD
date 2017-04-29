@@ -1,0 +1,441 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+	<meta charset="UTF-8" />
+	<title>Phaser - Making your first game, part 1</title>
+		<script type="text/javascript" src="/Tutorial/node_modules/phaser/build/phaser.min.js"></script>>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+<script type="text/javascript">
+
+var game = new Phaser.Game(1920, 1920, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render});
+
+//***************************
+// Phaser Standard Functions
+//***************************
+
+//load necessary game assets
+function preload() {
+    //load map
+    game.load.tilemap('pirateMapOcean', 'pirateMapProto4-1.json', null, Phaser.Tilemap.TILED_JSON);
+    
+    //Load Images
+    game.load.image('tiles', 'tiles_sheet.png');
+    game.load.image('tree', 'assets/Tree_1.png');
+    game.load.image('shipsMisc3', 'assets/2nd_ship_new_3.png');
+    game.load.atlasXML('shipsMisc1','assets/shipsMiscellaneous_sheet.png','Spritesheets/shipsMiscellaneous_sheet.xml');
+    game.load.atlasXML('shipsMisc2','assets/shipsMiscellaneous_sheet@2.png','Spritesheets/shipsMiscellaneous_sheet@2.xml');
+    game.load.image('villager', 'assets/spr_m_unko.png'); 
+    game.load.atlasXML('spaceItems', 'assets/spaceItems.png', 'Spritesheets/spaceItems.xml');
+    game.load.image('star', 'assets/star.png');
+    
+    
+    game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    //game.scale.setScreenSize(true);
+    
+}
+
+//***************************
+// Global Variables
+//***************************
+    
+var map;
+var layer;
+var text;
+
+//Sprites from spaceItems
+var berzTower;
+
+//Tower Groups
+var berzerkers;
+
+//Ranage Tower Group
+var towerRange;
+
+//Groups
+var stars;
+var enemies;
+var weapon;
+
+
+var spTree;
+var villager1;
+
+//===Sprites====
+var whiteShip = 'ship (1).png';
+var blueShip = 'ship (17).png';
+var blackShip = 'ship (24).png';
+
+//Self Made Path Variables
+var pathArr = [];
+var path1,path2,path3,path4,path5;
+var timeoutIndex =0;
+
+
+function create() {
+    
+    game.physics.startSystem(Phaser.Physics.ARCADE);
+    
+    //to load the map into the map
+    map = game.add.tilemap('pirateMapOcean');
+    //add the tileset from the json file
+    map.addTilesetImage('tiles_sheet', 'tiles');
+    
+    
+    layer = map.createLayer('Ground');
+    layer = map.createLayer('Background');
+    layer = map.createLayer('Foreground');
+    
+
+    //Makeshift Menu
+    text = game.add.text(1400, 16, "Click Here to Start Next Wave", { font: "32px Arial", fill: "#ff0044" });
+    text.inputEnabled = true;
+    
+    //to create group for berzerker towers
+    berzerkers = game.add.group();
+    towerRange = game.add.group();
+    
+    //First BerzTower object init
+    berzTower = new BerzTower(game);
+    game.world.add(berzTower);
+    berzerkers.add(berzTower);
+    
+    
+    //Misc Sprites
+    spTree = game.add.sprite(1250, 1000, 'tree');
+    spTree.scale.x = .6;
+    spTree.scale.y = .6;
+    
+    villager1 = game.add.sprite(1400, 600, 'villager');
+    villager1.width = 100;
+    villager1.height = 165;
+    
+    
+    //Game Board Alignment
+    layer.resizeWorld();
+    game.scale.pageAlignVertically = true;
+    game.scale.pageAlignHorizontally = true; 
+    game.scale.refresh();
+
+
+    //Enemies
+    enemies = game.add.group();
+    game.physics.arcade.enable(enemies);
+   
+
+    //Tower bullets
+    /*stars = game.add.group();
+    stars.enableBody = true;
+    stars.physicsBodyType = Phaser.Physics.ARCADE;
+    stars.createMultiple(50, 'star');*/
+    
+    
+    weapon = game.add.weapon(30, 'star');
+    weapon.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
+    weapon.bulletKillDistance = 150;
+    weapon.bulletSpeed = 2000;
+    weapon.fireRate = 300;
+    weapon.trackRotation = true;
+    weapon.autoFire = true;    
+    weapon.multiFire = true;
+
+
+     //Self Made Path Variables
+    path1 = [{x:200,y:535},{x:1695,y:520},{x:1695,y:860},{x:70,y:860},{x:70,y:1820},{x:2500,y:1820}];
+    path2 = [{x:200,y:535},{x:1150,y:520},{x:1150,y:190},{x:1695,y:190},{x:1695,y:860},{x:70,y:860},{x:70,y:1820},{x:2500,y:1820}];
+    //Path 3 goes around the first island
+    path3 = [{x:200,y:535},{x:510,y:520},{x:510,y:860},{x:1040,y:860},{x:1040,y:1420},{x:70,y:1420},{x:70,y:1820},{x:2500,y:1820}];
+    path4 = [{x:200,y:535},{x:1695,y:520},{x:1695,y:860},{x:1000,y:860},{x:1000,y:1420},{x:70,y:1420},{x:70,y:1820},{x:2500,y:1820}];
+
+  
+    //Initiate Tween
+    text.events.onInputDown.add(wave1, this);
+    
+}
+
+
+function start() {
+
+    text.visible = false;
+}
+
+
+function update() {
+    
+    //***causing error***
+    //to have the towers follow the ships
+   /*berzerkers.forEach(function(item){
+        item.rotation = game.physics.arcade.angleBetween(item, enemies.children[0]) - 80;
+    }, this);*/  
+    
+    
+    //Check for collision between bullets and enemies
+    game.physics.arcade.overlap(weapon.bullets, enemies, collisionCheck, null, this);
+   
+}
+
+//Removes enemies killed
+function collisionCheck(star, enemy){
+        
+    star.kill();
+    enemy.destroy();
+}
+ 
+    
+function render(){
+    
+    game.debug.body(berzerkers);
+}
+
+
+
+//******************
+// BerzTower Class
+//*******************
+
+var BerzTower = function(TDgame){
+    
+    Phaser.Sprite.call(this, TDgame, 1500, 45, 'spaceItems', 'playerShip1_blue.png');
+    
+    this.anchor.setTo(.5,.5);
+    this.angle += 180;
+    this.inputEnabled = true; 
+    game.physics.arcade.enable(this);
+    this.body.setCircle(150,-100,-112);
+    this.input.enableDrag(true);
+
+} 
+ 
+BerzTower.prototype = Object.create(Phaser.Sprite.prototype);
+BerzTower.prototype.constructor = BerzTower;
+ 
+ 
+//******************
+// BerzTower Setup
+//******************* 
+
+function dragBerzTower(){
+    
+    var newBerzTower = new BerzTower(game);
+    game.world.add(newBerzTower);
+    berzerkers.add(newBerzTower);
+} 
+ 
+function setBerzTower(tower){
+    
+    tower.input.disableDrag();
+
+    tower.rotation = game.physics.arcade.angleBetween(tower, enemies); 
+}
+
+
+BerzTower.prototype.update = function(){
+  
+    this.events.onDragStart.add(dragBerzTower, this);
+    this.events.onDragStop.add(function(){setBerzTower(this)}, this); 
+ 
+    //Add Radius on hover 
+    if(this.input.pointerOver()){
+        var fireRadius = game.add.graphics();
+        game.physics.arcade.enable(fireRadius);
+        fireRadius.lineStyle(5, 0xFF000B, 0.8);
+        fireRadius.drawCircle(0, 0, 300);
+        this.addChild(fireRadius);
+    }    
+    else{
+            if(this.children[0] != null){
+                this.children[0].destroy();
+            }
+    }
+    
+    weapon.trackSprite(enemies, 0, 0);
+    
+    //Check when enemy enter boundary
+   game.physics.arcade.overlap(this, enemies, boundCheck, null, this);
+    
+    
+}
+
+//Init tower to fire at enemy
+function boundCheck(tower, enemy){
+    
+   weapon.trackSprite(tower, 0, 0);
+   //weapon.fireAtSprite(enemy,);
+   weapon.fire();
+}
+
+
+//================================
+//ENEMY SHIP FUNCTIONS BEGIN
+
+function wave1() {
+    
+    //Function for sending multiple units down the path at constant speed
+    pathArr = [path1,path2,path3,path4];
+    sendWave('shipsMisc1',whiteShip,5,pathArr,null,wave2);
+    text.visible = false;
+}
+
+function wave2(){
+    text.visible = true;
+    text.events.onInputDown.removeAll();
+    text.events.onInputDown.add(wrapSendWave('shipsMisc1',blueShip,5,pathArr,text,wave3), this);
+}
+
+function wave3(){
+    text.visible = true;
+    text.events.onInputDown.removeAll();
+    text.events.onInputDown.add(wrapSendWave('shipsMisc1',blackShip,5,pathArr,text), this);
+}
+
+
+
+//Function Inputs - A single sprite and a path (extracted from XML of paths defined in tiled)
+// 
+function movePath(theSprite,pathArr){
+    var tempTween = [];
+    var tempRotateTween = [];
+    var time;
+    var randomPathChoosen;
+    var rotateThisWay;
+    var rotateTween;
+    
+    //External Function chooses a random path to send current unit
+    randomPathChoosen = pickRandomPathLevel1(pathArr.length);
+    
+    var path = pathArr[randomPathChoosen];
+    
+    for(var i=0, len = path.length; i < len; i++)
+    {
+        //If inital travel path, use current theSprite position to first x/y vertex
+        if(i==0)
+        {
+            time = normalizeDist(theSprite.position.x,theSprite.position.y,path[i].x,path[i].y);
+            tempTween[i] = game.add.tween(theSprite).to({x:path[i].x, y:path[i].y},time);
+            //rotate
+            rotateThisWay = rotateBasedOnNextDirection(i,pathArr[randomPathChoosen]);
+            tempRotateTween[i] = game.add.tween(theSprite).to({angle:rotateThisWay}, 150);
+            tempTween[i].chain(tempRotateTween[i]);
+        }
+        else{
+            
+            
+            time = normalizeDist(path[i-1].x,path[i-1].y, path[i].x,path[i].y);
+            tempTween[i] = game.add.tween(theSprite).to({x:path[i].x,y:path[i].y},time);
+           
+           //Give Rotation
+            if(i+1<len){  //The last point on map does not require rotation after reacing
+                rotateThisWay = rotateBasedOnNextDirection(i,pathArr[randomPathChoosen]);
+                tempRotateTween[i] = game.add.tween(theSprite).to({angle:rotateThisWay}, 150);
+               //Chain previous rotation to next movement
+                tempRotateTween[i-1].chain(tempTween[i]);
+                //Chain new rotation to current movement
+                tempTween[i].chain(tempRotateTween[i]);
+            }
+            else{
+                tempRotateTween[i-1].chain(tempTween[i]);
+            }
+    }
+}
+    //Start movement
+    tempTween[0].start();
+}
+
+//Inputs are current point (x1,y1) to point (x2,y2)
+//Returns Velocity to travel
+//IN THE FUTURE, HAVE THREE VARIABLES FOR SPEED CONTROL (SLOW/MEDIUM/FAST)
+//AND PASS IN OBJECT PROPERTIES TO DETERMINE SPEED OF UNIT
+function normalizeDist(x1,y1,x2,y2){
+    var speedControl=.3;  //The smaller the variable, the slower
+    var velocity;
+    velocity = (Math.abs(x2-x1) + Math.abs(y2-y1))/speedControl;
+    return velocity;
+}
+
+//Determine which way the ship should rotate based on current and next x/y corrdinates.
+//Return  rotation angle function variable
+function rotateBasedOnNextDirection(i,pathArr){
+    
+    //Subtract x1-x2, if not 0, than vertical rotation required
+    var xAxisRotation = pathArr[i].x-pathArr[i+1].x;
+    var yAxisRotation = pathArr[i].y-pathArr[i+1].y;
+    
+    if(xAxisRotation!=0){
+        if(xAxisRotation>0){
+           return 90;
+        }
+        else{
+            return -90;
+        }
+    }
+    //Subtract y1-y2, if not 0, than horizontal rotation required
+    else if(yAxisRotation!=0){
+         if(yAxisRotation>0){
+           return -180;
+        }
+        else{
+            return 0;
+        }
+    }
+}
+
+
+
+//This function was created in order to use the setTimeout function in a loop
+//because placing setTimout() in a for loop is non-blocking
+function sendWave(spriteSheet, sprite, howMany,pathArr,text,callNext){
+    var timeBetweenUnits = 2000;
+     if(text){text.visible=false;}
+    setTimeout(function (){
+        var currentSprite = game.add.sprite(135,-400,spriteSheet,sprite);
+        enemies.add(currentSprite);
+        
+        //Add physics to Sprites-----
+        game.physics.arcade.enable(currentSprite);
+        // currentSprite.body.collideWorldBounds = true;  //Add Ghost Effect, but won't leave map
+        currentSprite.anchor.setTo(.5,.5);
+        movePath(currentSprite,pathArr);
+        timeoutIndex++;
+    if(timeoutIndex<howMany){
+        sendWave(spriteSheet, sprite, howMany,pathArr,text,callNext);
+    }
+    else{
+        timeoutIndex=0;
+        if(callNext){
+        callNext();
+        }
+    }
+    },timeBetweenUnits)
+}
+
+
+
+
+function wrapSendWave(spriteSheet, sprite, howMany,pathArr,text,callNext){
+    return function(){
+        sendWave(spriteSheet, sprite, howMany,pathArr,text,callNext);
+}}
+
+
+//Retruns a random number from 0 to (numberOfPossiblePaths-1)
+//to account for array index base 0
+//i.e if 3 paths, returns 0,1,or 2
+function pickRandomPathLevel1(numberOfPossiblePaths){
+    return Math.floor((Math.random()*100) % numberOfPossiblePaths);
+}
+
+//ENEMY SHIP FUNCTIONS END
+//============================
+
+
+</script>
+
+</body>
+</html>
