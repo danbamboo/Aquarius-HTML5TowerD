@@ -50,7 +50,7 @@ function preload() {
     
 var map;
 var layer;
-var text;
+var sendWaveButton;
 
 //Sprites from spaceItems
 var berzTower;
@@ -95,14 +95,11 @@ function create() {
     layer = map.createLayer('Background');
     layer = map.createLayer('Foreground');
     
-
-    //Makeshift Menu
-    text = game.add.text(1400, 16, "Click Here to Start Next Wave", { font: "32px Arial", fill: "#ff0044" });
-    text.inputEnabled = true;
-    
     //Send Wave Button
-    sendWaveButton = game.add.sprite(1400,16,'sendNextWaveButtn');
+    sendWaveButton = game.add.sprite(1600,16,'sendNextWaveButtn');
     sendWaveButton.inputEnabled = true;
+    sendWaveButton.scale.x = 1.5;
+    sendWaveButton.scale.y = 1.5;
     
     
     //to create group for berzerker towers
@@ -163,7 +160,7 @@ function create() {
 
   
     //Initiate Tween
-    text.events.onInputDown.add(wave1, this);
+    sendWaveButton.events.onInputDown.add(wave1, this);
     
 }
 
@@ -287,19 +284,19 @@ function wave1() {
     //Function for sending multiple units down the path at constant speed
     pathArr = [path1,path2,path3,path4];
     sendWave('shipsMisc1',whiteShip,5,pathArr,null,wave2);
-    text.visible = false;
+    sendWaveButton.visible = false;
 }
 
 function wave2(){
-    text.visible = true;
-    text.events.onInputDown.removeAll();
-    text.events.onInputDown.add(wrapSendWave('shipsMisc1',blueShip,5,pathArr,text,wave3), this);
+    sendWaveButton.visible = true;
+    sendWaveButton.events.onInputDown.removeAll();
+    sendWaveButton.events.onInputDown.add(wrapSendWave('shipsMisc1',blueShip,5,pathArr,sendWaveButton,wave3), this);
 }
 
 function wave3(){
-    text.visible = true;
-    text.events.onInputDown.removeAll();
-    text.events.onInputDown.add(wrapSendWave('shipsMisc1',blackShip,5,pathArr,text), this);
+    sendWaveButton.visible = true;
+    sendWaveButton.events.onInputDown.removeAll();
+    sendWaveButton.events.onInputDown.add(wrapSendWave('shipsMisc1',blackShip,5,pathArr,sendWaveButton), this);
 }
 
 
@@ -397,9 +394,9 @@ function rotateBasedOnNextDirection(i,pathArr){
 
 //This function was created in order to use the setTimeout function in a loop
 //because placing setTimout() in a for loop is non-blocking
-function sendWave(spriteSheet, sprite, howMany,pathArr,text,callNext){
+function sendWave(spriteSheet, sprite, howMany,pathArr,button,callNext){
     var timeBetweenUnits = 2000;
-     if(text){text.visible=false;}
+     if(button){button.visible=false;}
     setTimeout(function (){
         var currentSprite = game.add.sprite(135,-400,spriteSheet,sprite);
         enemies.add(currentSprite);
@@ -411,7 +408,7 @@ function sendWave(spriteSheet, sprite, howMany,pathArr,text,callNext){
         movePath(currentSprite,pathArr);
         timeoutIndex++;
     if(timeoutIndex<howMany){
-        sendWave(spriteSheet, sprite, howMany,pathArr,text,callNext);
+        sendWave(spriteSheet, sprite, howMany,pathArr,button,callNext);
     }
     else{
         timeoutIndex=0;
@@ -425,9 +422,9 @@ function sendWave(spriteSheet, sprite, howMany,pathArr,text,callNext){
 
 
 
-function wrapSendWave(spriteSheet, sprite, howMany,pathArr,text,callNext){
+function wrapSendWave(spriteSheet, sprite, howMany,pathArr,button,callNext){
     return function(){
-        sendWave(spriteSheet, sprite, howMany,pathArr,text,callNext);
+        sendWave(spriteSheet, sprite, howMany,pathArr,button,callNext);
 }}
 
 
