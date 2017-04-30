@@ -3,7 +3,7 @@
 <head> 
 	<meta charset="UTF-8" />
 	<title>Space Pirates Tower D</title>
-		<script type="text/javascript" src="phaser.min.js"></script>>
+		<script ty pe="text/javascript" src="phaser.min.js"></script>>
     <style type="text/css">
         body {
             margin: 0;
@@ -29,6 +29,7 @@ function preload() {
     
     //Load Images
     game.load.image('tiles', 'tiles_sheet.png');
+    game.load.image('sendNextWaveButtn', 'SendWaveRed.png');
     game.load.image('tree', 'Tree_1.png');
     game.load.image('shipsMisc3', '2nd_ship_new_3.png');
     game.load.atlasXML('shipsMisc1','shipsMiscellaneous_sheet.png','shipsMiscellaneous_sheet.xml');
@@ -98,6 +99,11 @@ function create() {
     //Makeshift Menu
     text = game.add.text(1400, 16, "Click Here to Start Next Wave", { font: "32px Arial", fill: "#ff0044" });
     text.inputEnabled = true;
+    
+    //Send Wave Button
+    sendWaveButton = game.add.sprite(1400,16,'sendNextWaveButtn');
+    button.inputEnabled = true;
+    
     
     //to create group for berzerker towers
     berzerkers = game.add.group();
