@@ -74,6 +74,8 @@ var villager1;
 var whiteShip = 'ship (1).png';
 var blueShip = 'ship (17).png';
 var blackShip = 'ship (24).png';
+var redShip = 'ship (3).png';
+var greenShip = 'ship (4).png';
 
 //Self Made Path Variables
 var pathArr = [];
@@ -164,11 +166,6 @@ function create() {
     
 }
 
-
-function start() {
-
-    text.visible = false;
-}
 
 
 function update() {
@@ -290,10 +287,22 @@ function wave1() {
 function wave2(){
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
-    sendWaveButton.events.onInputDown.add(wrapSendWave('shipsMisc1',blueShip,5,pathArr,sendWaveButton,wave3), this);
+    sendWaveButton.events.onInputDown.add(wrapSendWave('shipsMisc1',greenShip,5,pathArr,sendWaveButton,wave3), this);
 }
 
 function wave3(){
+    sendWaveButton.visible = true;
+    sendWaveButton.events.onInputDown.removeAll();
+    sendWaveButton.events.onInputDown.add(wrapSendWave('shipsMisc1',blueShip,5,pathArr,sendWaveButton,wave4), this);
+}
+
+function wave4(){
+    sendWaveButton.visible = true;
+    sendWaveButton.events.onInputDown.removeAll();
+    sendWaveButton.events.onInputDown.add(wrapSendWave('shipsMisc1',redShip,5,pathArr,sendWaveButton,wave5), this);
+}
+
+function wave5(){
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
     sendWaveButton.events.onInputDown.add(wrapSendWave('shipsMisc1',blackShip,5,pathArr,sendWaveButton), this);
