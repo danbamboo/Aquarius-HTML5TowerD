@@ -6,6 +6,7 @@ var sitePath = process.argv[2] || ".";
 
 //WILL NEED TO MANUALLY ASSIGN PORT ON EC2
 var port = process.env.PORT; //Use for could9 autoassign port
+var dynamicPortAssignment;  //Choose port based on deployment (cloud9 vs EC2)
 
 //Where express checks for content
 app.use(express.static(__dirname + '/js'));
@@ -36,8 +37,13 @@ app.get('/', function(req, res){
 //     console.log("The server is running on port: " + 3000);
 // });
 
+
+
+if(!port){dynamicPortAssignment = 3000;}
+else{dynamicPortAssignment=port;}
+
 //For use with Cloud9 Testing
-app.listen(port, function(err){
-    console.log("The server is running on port: " + port);
+app.listen(dynamicPortAssignment, function(err){
+    console.log("The server is running on port: " + dynamicPortAssignment);
 });
 
