@@ -2,15 +2,14 @@
 <html lang="en"> 
 <head> 
 	<meta charset="UTF-8" />
-	<title>Phaser - Making your first game, part 1</title>
+	<title>Space Pirates Tower D</title>
 		<script ty pe="text/javascript" src="phaser.min.js"></script>>
-		<script type="text/javascript" src="brigBlaster.js"></script>
-	
     <style type="text/css">
         body {
             margin: 0;
         }
     </style>
+            
 </head>
 
 <body>
@@ -54,7 +53,7 @@ var layer;
 var sendWaveButton;
 
 //Sprites from spaceItems
-var brigBlasterTower;
+var berzTower;
 
 //Tower Groups
 var berzerkers;
@@ -92,11 +91,12 @@ function create() {
     map = game.add.tilemap('pirateMapOcean');
     //add the tileset from the json file
     map.addTilesetImage('tiles_sheet', 'tiles');
-    
-    
+
+
     layer = map.createLayer('Ground');
     layer = map.createLayer('Background');
     layer = map.createLayer('Foreground');
+
     
     //Send Wave Button
     sendWaveButton = game.add.sprite(1600,16,'sendNextWaveButtn');
@@ -109,11 +109,11 @@ function create() {
     berzerkers = game.add.group();
     towerRange = game.add.group();
     
-    //Init first BrigBlasterTower obj
-    brigBlasterTower = new BrigBlasterTower(game);
-    //game.world.add(brigBlasterTower);
-    //berzerkers.add(brigBlasterTower);
-
+    //First BerzTower object init
+    berzTower = new BerzTower(game);
+    game.world.add(berzTower);
+    berzerkers.add(berzTower);
+    
     
     //Misc Sprites
     spTree = game.add.sprite(1250, 1000, 'tree');
@@ -197,6 +197,83 @@ function render(){
     game.debug.body(berzerkers);
 }
 
+
+
+//******************
+// BerzTower Class
+//*******************
+
+var BerzTower = function(TDgame){
+    
+    Phaser.Sprite.call(this, TDgame, 1500, 45, 'spaceItems', 'playerShip1_blue.png');
+    
+    this.anchor.setTo(.5,.5);
+    this.angle += 180;
+    this.inputEnabled = true; 
+    game.physics.arcade.enable(this);
+    this.body.setCircle(150,-100,-112);
+    this.input.enableDrag(true);
+
+} 
+ 
+BerzTower.prototype = Object.create(Phaser.Sprite.prototype);
+BerzTower.prototype.constructor = BerzTower;
+ 
+ 
+//******************
+// BerzTower Setup
+//******************* 
+
+function dragBerzTower(){
+    
+
+    var newBerzTower = new BerzTower(game);
+    game.world.add(newBerzTower);
+    berzerkers.add(newBerzTower);
+    
+} 
+ 
+function setBerzTower(tower){
+    
+    tower.input.disableDrag();
+    tower.rotation = game.physics.arcade.angleBetween(tower, enemies); 
+}
+
+
+BerzTower.prototype.update = function(){
+  
+    this.events.onDragStart.add(dragBerzTower, this);
+    this.events.onDragStop.add(function(){setBerzTower(this)}, this); 
+ 
+    //Add Radius on hover 
+    if(this.input.pointerOver()){
+        var fireRadius = game.add.graphics();
+        game.physics.arcade.enable(fireRadius);
+        fireRadius.lineStyle(5, 0xFF000B, 0.8);
+        fireRadius.drawCircle(0, 0, 300);
+        this.addChild(fireRadius);
+    }    
+    else{
+            if(this.children[0] != null){
+                this.children[0].destroy();
+            }
+    }
+    
+    weapon.trackSprite(enemies, 0, 0);
+    
+    //Check when enemy enter boundary
+   game.physics.arcade.overlap(this, enemies, boundCheck, null, this);
+    
+    
+}
+
+//Init tower to fire at enemy
+function boundCheck(tower, enemy){
+    
+   weapon.trackSprite(tower, 0, 0);
+   weapon.fireAtSprite(enemy);
+   weapon.fire();
+}
 
 
 //================================
