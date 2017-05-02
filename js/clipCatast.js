@@ -1,33 +1,32 @@
 //**********************************************************
-// BrigBlasterTower Class for Brigantine Blaster Tower Type
+// ClipCatastTower Class for Clipper Catastrophe Tower Type
 //**********************************************************
 
-var BrigBlasterTower = function(TDgame){
+var ClipCatastTower = function(TDgame){
     
-    Phaser.Sprite.call(this, TDgame, 1500, 45, 'spaceItems', 'playerShip3_blue.png');
+    Phaser.Sprite.call(this, TDgame, 1380, 45, 'spaceItems', 'enemyRed1.png');
     
-    this.towerType = "brigBlaster";
+    this.towerType = "clipCatast";
     this.anchor.setTo(.5,.5);
     this.angle += 180;
     this.inputEnabled = true; 
     this.input.enableDrag(true);
     game.physics.arcade.enable(this);
-    this.body.setCircle(150,-100,-112);
+    this.body.setCircle(150,-100,-112);     //need to update size
     
     game.world.add(this);
-    berzerkers.add(this);
-    
+    berzerkers.add(this);  
 } 
  
-BrigBlasterTower.prototype = Object.create(Phaser.Sprite.prototype);
-BrigBlasterTower.prototype.constructor = BrigBlasterTower;
+ClipCatastTower.prototype = Object.create(Phaser.Sprite.prototype);
+ClipCatastTower.prototype.constructor = ClipCatastTower;
  
  
-//************************
-// BrigBlasterTower Setup
-//************************ 
+//***********************
+// ClipCatastTower Setup
+//*********************** 
 
-BrigBlasterTower.prototype.update = function(){
+ClipCatastTower.prototype.update = function(){
   
     this.events.onDragStart.add(function(){dragTower(this)}, this);
     this.events.onDragStop.add(function(){setTower(this)}, this); 
@@ -36,8 +35,8 @@ BrigBlasterTower.prototype.update = function(){
     if(this.input.pointerOver()){
         var fireRadius = game.add.graphics();
         game.physics.arcade.enable(fireRadius);
-        fireRadius.lineStyle(5, 0xFF000B, 0.8);
-        fireRadius.drawCircle(0, 0, 300);
+        fireRadius.lineStyle(5, 0xFF000B, 0.8); 
+        fireRadius.drawCircle(0, 0, 300);     //need to update size
         this.addChild(fireRadius);
     }    
     else{
@@ -52,4 +51,3 @@ BrigBlasterTower.prototype.update = function(){
    game.physics.arcade.overlap(this, enemies, boundCheck, null, this);
     
 }
-

@@ -3,8 +3,11 @@
 <head> 
 	<meta charset="UTF-8" />
 	<title>Phaser - Making your first game, part 1</title>
-		<script ty pe="text/javascript" src="phaser.min.js"></script>>
+		<script ty pe="text/javascript" src="phaser.min.js"></script>
+		<script type="text/javascript" src="tower.js"></script>
 		<script type="text/javascript" src="brigBlaster.js"></script>
+		<script type="text/javascript" src="clipCatast.js"></script>
+		<script type="text/javascript" src="fleetSinker.js"></script>
 	
     <style type="text/css">
         body {
@@ -55,7 +58,9 @@ var sendWaveButton;
 
 //Sprites from spaceItems
 var brigBlasterTower;
-
+var clipCatastTower;
+var fleetSinkerTower;
+    
 //Tower Groups
 var berzerkers;
 
@@ -111,10 +116,11 @@ function create() {
     berzerkers = game.add.group();
     towerRange = game.add.group();
     
-    //Init first BrigBlasterTower obj
+    //Init first tower objects
     brigBlasterTower = new BrigBlasterTower(game);
-    //game.world.add(brigBlasterTower);
-    //berzerkers.add(brigBlasterTower);
+    clipCatastTower = new ClipCatastTower(game);
+    fleetSinkerTower = new FleetSinkerTower(game);
+    
 
     
     //Misc Sprites
