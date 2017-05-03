@@ -36,7 +36,7 @@ BrigBlasterTower.prototype.update = function(){
         var fireRadius = game.add.graphics();
         game.physics.arcade.enable(fireRadius);
         fireRadius.lineStyle(5, 0xFF000B, 0.8);
-        fireRadius.drawCircle(0, 0, 300);
+        fireRadius.drawCircle(0, 0, 600);
         this.addChild(fireRadius);
     }    
     else{

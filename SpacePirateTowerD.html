@@ -8,7 +8,10 @@
 		<script type="text/javascript" src="brigBlaster.js"></script>
 		<script type="text/javascript" src="clipCatast.js"></script>
 		<script type="text/javascript" src="fleetSinker.js"></script>
-	
+		<!--Enemy Ships-->
+		<script type="text/javascript" src="enemyClass.js"></script>
+		<script type="text/javascript" src="enemyBrethren.js"></script>
+		
     <style type="text/css">
         body {
             margin: 0;
@@ -88,7 +91,7 @@ var redShip = 'ship (3).png';
 var greenShip = 'ship (4).png';
 
 //Self Made Path Variables
-var pathArr = [];
+var level1Path = [];
 var path1,path2,path3,path4,path5;
 var timeoutIndex =0;
 
@@ -106,7 +109,9 @@ function create() {
     layer = map.createLayer('Ground');
     layer = map.createLayer('Background');
     layer = map.createLayer('Foreground');
-    
+    layer = map.createLayer('TowerCollision');
+    var style = { font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
+    text = game.add.text(0, 0, "phaser 2.4 text bounds", style);
     //Send Wave Button
     sendWaveButton = game.add.sprite(1600,16,'sendNextWaveButtn');
     sendWaveButton.inputEnabled = true;
@@ -181,7 +186,7 @@ function create() {
     //Path 3 goes around the first island
     path3 = [{x:200,y:535},{x:510,y:520},{x:510,y:860},{x:1040,y:860},{x:1040,y:1420},{x:70,y:1420},{x:70,y:1820},{x:2500,y:1820}];
     path4 = [{x:200,y:535},{x:1695,y:520},{x:1695,y:860},{x:1000,y:860},{x:1000,y:1420},{x:70,y:1420},{x:70,y:1820},{x:2500,y:1820}];
-
+    level1Path = [path1,path2,path3,path4];
   
     //Initiate Tween
     sendWaveButton.events.onInputDown.add(wave1, this);
@@ -223,177 +228,25 @@ function render(){
 
 
 //================================
-//ENEMY SHIP FUNCTIONS BEGIN
+//ENEMY LEVEL 1 WAVES
 
 function wave1() {
-    
-    //Function for sending multiple units down the path at constant speed
-    pathArr = [path1,path2,path3,path4];
-    sendWave('shipsMisc1',whiteShip,5,pathArr,null,wave2);
+    sendWave(brethren,5,level1Path,null,wave2);
     sendWaveButton.visible = false;
 }
 
 function wave2(){
     sendWaveButton.visible = true;
-    sendWaveButton.events.onInputDown.removeAll();
-    sendWaveButton.events.onInputDown.add(wrapSendWave('shipsMisc1',greenShip,5,pathArr,sendWaveButton,wave3), this);
+    sendWaveButton.events.onInputDown.add(wrapSendWave(brethren,5,level1Path,sendWaveButton,wave3), this);
 }
 
 function wave3(){
     sendWaveButton.visible = true;
-    sendWaveButton.events.onInputDown.removeAll();
-    sendWaveButton.events.onInputDown.add(wrapSendWave('shipsMisc1',blueShip,5,pathArr,sendWaveButton,wave4), this);
-}
-
-function wave4(){
-    sendWaveButton.visible = true;
-    sendWaveButton.events.onInputDown.removeAll();
-    sendWaveButton.events.onInputDown.add(wrapSendWave('shipsMisc1',redShip,5,pathArr,sendWaveButton,wave5), this);
-}
-
-function wave5(){
-    sendWaveButton.visible = true;
-    sendWaveButton.events.onInputDown.removeAll();
-    sendWaveButton.events.onInputDown.add(wrapSendWave('shipsMisc1',blackShip,5,pathArr,sendWaveButton), this);
+    sendWaveButton.events.onInputDown.add(wrapSendWave(brethren,blackShip,5,level1Path,sendWaveButton), this);
 }
 
 
-
-//Function Inputs - A single sprite and a path (extracted from XML of paths defined in tiled)
-// 
-function movePath(theSprite,pathArr){
-    var tempTween = [];
-    var tempRotateTween = [];
-    var time;
-    var randomPathChoosen;
-    var rotateThisWay;
-    var rotateTween;
-    
-    //External Function chooses a random path to send current unit
-    randomPathChoosen = pickRandomPathLevel1(pathArr.length);
-    
-    var path = pathArr[randomPathChoosen];
-    
-    for(var i=0, len = path.length; i < len; i++)
-    {
-        //If inital travel path, use current theSprite position to first x/y vertex
-        if(i==0)
-        {
-            time = normalizeDist(theSprite.position.x,theSprite.position.y,path[i].x,path[i].y);
-            tempTween[i] = game.add.tween(theSprite).to({x:path[i].x, y:path[i].y},time);
-            //rotate
-            rotateThisWay = rotateBasedOnNextDirection(i,pathArr[randomPathChoosen]);
-            tempRotateTween[i] = game.add.tween(theSprite).to({angle:rotateThisWay}, 150);
-            tempTween[i].chain(tempRotateTween[i]);
-        }
-        else{
-            
-            
-            time = normalizeDist(path[i-1].x,path[i-1].y, path[i].x,path[i].y);
-            tempTween[i] = game.add.tween(theSprite).to({x:path[i].x,y:path[i].y},time);
-           
-           //Give Rotation
-            if(i+1<len){  //The last point on map does not require rotation after reacing
-                rotateThisWay = rotateBasedOnNextDirection(i,pathArr[randomPathChoosen]);
-                tempRotateTween[i] = game.add.tween(theSprite).to({angle:rotateThisWay}, 150);
-               //Chain previous rotation to next movement
-                tempRotateTween[i-1].chain(tempTween[i]);
-                //Chain new rotation to current movement
-                tempTween[i].chain(tempRotateTween[i]);
-            }
-            else{
-                tempRotateTween[i-1].chain(tempTween[i]);
-            }
-    }
-}
-    //Start movement
-    tempTween[0].start();
-}
-
-//Inputs are current point (x1,y1) to point (x2,y2)
-//Returns Velocity to travel
-//IN THE FUTURE, HAVE THREE VARIABLES FOR SPEED CONTROL (SLOW/MEDIUM/FAST)
-//AND PASS IN OBJECT PROPERTIES TO DETERMINE SPEED OF UNIT
-function normalizeDist(x1,y1,x2,y2){
-    var speedControl=.3;  //The smaller the variable, the slower
-    var velocity;
-    velocity = (Math.abs(x2-x1) + Math.abs(y2-y1))/speedControl;
-    return velocity;
-}
-
-//Determine which way the ship should rotate based on current and next x/y corrdinates.
-//Return  rotation angle function variable
-function rotateBasedOnNextDirection(i,pathArr){
-    
-    //Subtract x1-x2, if not 0, than vertical rotation required
-    var xAxisRotation = pathArr[i].x-pathArr[i+1].x;
-    var yAxisRotation = pathArr[i].y-pathArr[i+1].y;
-    
-    if(xAxisRotation!=0){
-        if(xAxisRotation>0){
-           return 90;
-        }
-        else{
-            return -90;
-        }
-    }
-    //Subtract y1-y2, if not 0, than horizontal rotation required
-    else if(yAxisRotation!=0){
-         if(yAxisRotation>0){
-           return -180;
-        }
-        else{
-            return 0;
-        }
-    }
-}
-
-
-
-//This function was created in order to use the setTimeout function in a loop
-//because placing setTimout() in a for loop is non-blocking
-function sendWave(spriteSheet, sprite, howMany,pathArr,button,callNext){
-    var timeBetweenUnits = 2000;
-     if(button){button.visible=false;}
-    setTimeout(function (){
-        var currentSprite = game.add.sprite(135,-400,spriteSheet,sprite);
-        enemies.add(currentSprite);
-        
-        //Add physics to Sprites-----
-        game.physics.arcade.enable(currentSprite);
-        // currentSprite.body.collideWorldBounds = true;  //Add Ghost Effect, but won't leave map
-        currentSprite.anchor.setTo(.5,.5);
-        movePath(currentSprite,pathArr);
-        timeoutIndex++;
-    if(timeoutIndex<howMany){
-        sendWave(spriteSheet, sprite, howMany,pathArr,button,callNext);
-    }
-    else{
-        timeoutIndex=0;
-        if(callNext){
-        callNext();
-        }
-    }
-    },timeBetweenUnits)
-}
-
-
-
-
-function wrapSendWave(spriteSheet, sprite, howMany,pathArr,button,callNext){
-    return function(){
-        sendWave(spriteSheet, sprite, howMany,pathArr,button,callNext);
-}}
-
-
-//Retruns a random number from 0 to (numberOfPossiblePaths-1)
-//to account for array index base 0
-//i.e if 3 paths, returns 0,1,or 2
-function pickRandomPathLevel1(numberOfPossiblePaths){
-    return Math.floor((Math.random()*100) % numberOfPossiblePaths);
-}
-
-//ENEMY SHIP FUNCTIONS END
+//ENEMY LEVEL 1 WAVES
 //============================
 
 
