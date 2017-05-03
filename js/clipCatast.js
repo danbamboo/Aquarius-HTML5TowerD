@@ -16,6 +16,14 @@ var ClipCatastTower = function(TDgame){
     
     game.world.add(this);
     berzerkers.add(this);  
+    
+    //to add radius around the tower
+    var fireRadius = game.add.graphics();
+        game.physics.arcade.enable(fireRadius);
+        fireRadius.lineStyle(5, 0xFF000B, 0.8); 
+        fireRadius.drawCircle(0, 0, 500);     //need to update size
+        this.addChild(fireRadius);
+        this.children[0].visible = false;
 } 
  
 ClipCatastTower.prototype = Object.create(Phaser.Sprite.prototype);
@@ -33,19 +41,16 @@ ClipCatastTower.prototype.update = function(){
  
     //Add Radius on hover 
     if(this.input.pointerOver()){
-        var fireRadius = game.add.graphics();
-        game.physics.arcade.enable(fireRadius);
-        fireRadius.lineStyle(5, 0xFF000B, 0.8); 
-        fireRadius.drawCircle(0, 0, 500);     //need to update size
-        this.addChild(fireRadius);
+
+        this.children[0].visible = true;
+
     }    
     else{
-            if(this.children[0] != null){
-                this.children[0].destroy();
-            }
+        
+        this.children[0].visible = false;
     }
     
-    weapon.trackSprite(enemies, 0, 0);
+    weaponClipCatast.trackSprite(enemies, 0, 0);
     
     //Check when enemy enter boundary
    game.physics.arcade.overlap(this, enemies, boundCheck, null, this);
