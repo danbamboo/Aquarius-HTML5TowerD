@@ -33,7 +33,22 @@ function setTower(tower){
 //Init tower's weapon to fire at enemy
 function boundCheck(tower, enemy){
     
-   weapon.trackSprite(tower, 0, 0);
-   weapon.fireAtSprite(enemy);
-   weapon.fire();
+   if(tower.towerType == "brigBlaster")
+    {
+        weaponBrigBlaster.trackSprite(tower, 0, 0);
+        weaponBrigBlaster.fireAtSprite(enemy);
+        weaponBrigBlaster.fire();
+    }
+    else if(tower.towerType == "clipCatast")
+    {
+        weaponClipCatast.trackSprite(tower, 0, 0);
+        weaponClipCatast.fireAtSprite(enemy);
+        weaponClipCatast.fire();
+    }
+    else if(tower.towerType == "fleetSinker")
+    {
+        weaponFleetSinker.trackSprite(tower, 0, 0);
+        weaponFleetSinker.fireAtSprite(enemy);
+        weaponFleetSinker.fire();
+    }  
 }

@@ -45,7 +45,7 @@ ClipCatastTower.prototype.update = function(){
             }
     }
     
-    weapon.trackSprite(enemies, 0, 0);
+    weaponClipCatast.trackSprite(enemies, 0, 0);
     
     //Check when enemy enter boundary
    game.physics.arcade.overlap(this, enemies, boundCheck, null, this);

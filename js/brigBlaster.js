@@ -13,7 +13,6 @@ var BrigBlasterTower = function(TDgame){
     this.input.enableDrag(true);
     game.physics.arcade.enable(this);
     this.body.setCircle(150,-100,-112);
-    
     game.world.add(this);
     berzerkers.add(this);
     
@@ -46,7 +45,7 @@ BrigBlasterTower.prototype.update = function(){
             }
     }
     
-    weapon.trackSprite(enemies, 0, 0);
+    weaponBrigBlaster.trackSprite(enemies, 0, 0);
     
     //Check when enemy enter boundary
    game.physics.arcade.overlap(this, enemies, boundCheck, null, this);

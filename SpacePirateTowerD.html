@@ -60,6 +60,7 @@ var sendWaveButton;
 var brigBlasterTower;
 var clipCatastTower;
 var fleetSinkerTower;
+
     
 //Tower Groups
 var berzerkers;
@@ -68,9 +69,12 @@ var berzerkers;
 var towerRange;
 
 //Groups
-var stars;
 var enemies;
-var weapon;
+
+//Tower weapons
+var weaponBrigBlaster;
+var weaponClipCatast;
+var weaponFleetSinker;
 
 
 var spTree;
@@ -142,22 +146,33 @@ function create() {
     enemies = game.add.group();
     game.physics.arcade.enable(enemies);
    
-
-    //Tower bullets
-    /*stars = game.add.group();
-    stars.enableBody = true;
-    stars.physicsBodyType = Phaser.Physics.ARCADE;
-    stars.createMultiple(50, 'star');*/
+    weaponBrigBlaster = game.add.weapon(30, 'spaceItems', 'beam6.png');
+    weaponClipCatast = game.add.weapon(30, 'spaceItems', 'beam1.png');
+    weaponFleetSinker = game.add.weapon(30,'spaceItems', 'laserGreen13.png');
+   
+    weaponBrigBlaster.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
+    weaponBrigBlaster.bulletKillDistance = 150;
+    weaponBrigBlaster.bulletSpeed = 2000;
+    weaponBrigBlaster.fireRate = 300;
+    weaponBrigBlaster.trackRotation = true;
+    weaponBrigBlaster.autoFire = true;    
+    weaponBrigBlaster.multiFire = true;
     
+    weaponClipCatast.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
+    weaponClipCatast.bulletKillDistance = 75;
+    weaponClipCatast.bulletSpeed = 3000;
+    weaponClipCatast.fireRate = 150;
+    weaponClipCatast.trackRotation = true;
+    weaponClipCatast.autoFire = true;    
+    weaponClipCatast.multiFire = true;
     
-    weapon = game.add.weapon(30, 'star');
-    weapon.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
-    weapon.bulletKillDistance = 150;
-    weapon.bulletSpeed = 2000;
-    weapon.fireRate = 300;
-    weapon.trackRotation = true;
-    weapon.autoFire = true;    
-    weapon.multiFire = true;
+    weaponFleetSinker.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
+    weaponFleetSinker.bulletKillDistance = 50;
+    weaponFleetSinker.bulletSpeed = 4000;
+    weaponFleetSinker.fireRate = 75;
+    weaponFleetSinker.trackRotation = true;
+    weaponFleetSinker.autoFire = true;    
+    weaponFleetSinker.multiFire = true;
 
 
      //Self Made Path Variables
@@ -186,7 +201,9 @@ function update() {
     
     
     //Check for collision between bullets and enemies
-    game.physics.arcade.overlap(weapon.bullets, enemies, collisionCheck, null, this);
+    game.physics.arcade.overlap(weaponBrigBlaster.bullets, enemies, collisionCheck, null, this);
+    game.physics.arcade.overlap(weaponClipCatast.bullets, enemies, collisionCheck, null, this);
+    game.physics.arcade.overlap(weaponFleetSinker.bullets, enemies, collisionCheck, null, this);
    
 }
 

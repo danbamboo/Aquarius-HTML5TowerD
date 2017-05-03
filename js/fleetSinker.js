@@ -13,7 +13,7 @@ var FleetSinkerTower = function(TDgame){
     this.input.enableDrag(true);
     game.physics.arcade.enable(this);
     this.body.setCircle(150,-100,-112);     //need to update size
-    
+
     game.world.add(this);
     berzerkers.add(this);
     
@@ -46,7 +46,7 @@ FleetSinkerTower.prototype.update = function(){
             }
     }
     
-    weapon.trackSprite(enemies, 0, 0);
+    weaponFleetSinker.trackSprite(enemies, 0, 0);
     
     //Check when enemy enter boundary
    game.physics.arcade.overlap(this, enemies, boundCheck, null, this);
