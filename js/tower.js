@@ -6,7 +6,7 @@
 function dragTower(tower){
     
     var newTower;
-   
+        
     if(tower.towerType == "brigBlaster")
     {
         newTower = new BrigBlasterTower(game);
@@ -18,13 +18,17 @@ function dragTower(tower){
     else if(tower.towerType == "fleetSinker")
     {
         newTower = new FleetSinkerTower(game);
-    }   
+    } 
 } 
 
 
 //Set tower in placed
 function setTower(tower){
     
+    game.physics.arcade.enable(tower);
+    tower.body.setCircle(150,-100,-112);
+    berzerkers.add(tower);
+
     tower.input.disableDrag();
     tower.rotation = game.physics.arcade.angleBetween(tower, enemies); 
 }
