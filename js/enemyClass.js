@@ -23,6 +23,28 @@ enemy.prototype = Object.create(Phaser.Sprite.prototype);
 enemy.prototype.constructor = enemy;
 
 
+/*SHIP ENEMIES BY DIFFICULTY
+1- brethren
+2- scourge
+3- squirrel
+4- royal
+5- dragon
+6- admiral
+*/
+
+/*WAVES
+1- brethren(10) + scourge(1) + brethren(2)
+2- brethren(4) + scourge(5) + brethren(1) + scourge(5)
+3- squirrel(2) + scourge(5) + brethren(2) + squirrel(6)
+4- squirrel(5) + royal(3) + brethren(2) + scourge(9)
+5- royal(5) + squirrel(2) + royal(8) + dragon(1)
+6- squirrel(2) + dragon(5) + brethren(1) + royal(6)
+7- dragon(5) + royal(15)
+8- squirrel(3) + admiral(2) + royal(10)
+9- brethren(3) + scourge(1) + squirrel(2) + royal(2) + dragon(5) + admiral(8)
+10- admiral(15) + dragon(10)
+*/
+
 //************************
 // Enemy Related Functions
 //************************
@@ -129,7 +151,7 @@ function rotateBasedOnNextDirection(i,pathArr){
 //This function was created in order to use the setTimeout function in a loop
 //because placing setTimout() in a for loop is non-blocking
 function sendWave(enemyType, howMany,pathArr,text,callNext){
-    var timeBetweenUnits = 3000;
+    var timeBetweenUnits = Math.floor((Math.random()*1000) % 2000) + 2500;
      if(text){text.visible=false;}
     setTimeout(function (){
         var currentSprite = new enemy(game,enemyType);

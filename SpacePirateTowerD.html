@@ -2,7 +2,7 @@
 <html lang="en"> 
 <head> 
 	<meta charset="UTF-8" />
-	<title>Phaser - Making your first game, part 1</title>
+	<title>Space Pirate Defense</title>
 		<script ty pe="text/javascript" src="phaser.min.js"></script>
 		<script type="text/javascript" src="tower.js"></script>
 		<script type="text/javascript" src="brigBlaster.js"></script>
@@ -10,7 +10,12 @@
 		<script type="text/javascript" src="fleetSinker.js"></script>
 		<!--Enemy Ships-->
 		<script type="text/javascript" src="enemyClass.js"></script>
-		<script type="text/javascript" src="enemyBrethren.js"></script>
+		<script type="text/javascript" src="enemyS-BrethrenOfTheCoast.js"></script>
+		<script type="text/javascript" src="enemyS-ScourgeOfTheSevenSeas.js"></script>
+		<script type="text/javascript" src="enemyS-TheSquirrel.js"></script>
+		<script type="text/javascript" src="enemyS-RoyalFortune.js"></script>
+		<script type="text/javascript" src="enemyS-FlyingDragon.js"></script>
+		<script type="text/javascript" src="enemyS-AdmiralOfTheBlack.js"></script>
 		
     <style type="text/css">
         body {
@@ -197,7 +202,7 @@ function update() {
 
 //Removes enemies killed
 function collisionCheck(star, enemy){
-        
+    console.log(enemy.damage);
     star.kill();
     enemy.destroy();
 }
@@ -209,25 +214,104 @@ function render(){
 }
 
 
-
 //================================
 //ENEMY LEVEL 1 WAVES
 
 function wave1() {
-    sendWave(brethren,5,level1Path,null,wave2);
+    sendWave(brethren,10,level1Path,null,
+    wrapSendWave(scourge,1,level1Path,null,
+    wrapSendWave(brethren,2,level1Path,null,wave2)));
     sendWaveButton.visible = false;
 }
 
 function wave2(){
     sendWaveButton.visible = true;
-    sendWaveButton.events.onInputDown.add(wrapSendWave(brethren,5,level1Path,sendWaveButton,wave3), this);
+    sendWaveButton.events.onInputDown.removeAll();
+    // sendWaveButton.events.onInputDown.add(wrapSendWave(admiral,1,level1Path,sendWaveButton), this);
+
+    sendWaveButton.events.onInputDown.add(
+        wrapSendWave(brethren,4,level1Path,sendWaveButton,
+        wrapSendWave(scourge,5,level1Path,null,
+        wrapSendWave(brethren,1,level1Path,null,
+        wrapSendWave(scourge,5,level1Path,null,wave3)))), this);
 }
 
 function wave3(){
     sendWaveButton.visible = true;
-    sendWaveButton.events.onInputDown.add(wrapSendWave(brethren,blackShip,5,level1Path,sendWaveButton), this);
+    sendWaveButton.events.onInputDown.removeAll();
+        sendWaveButton.events.onInputDown.add(
+        wrapSendWave(squirrel,2,level1Path,sendWaveButton,
+        wrapSendWave(scourge,5,level1Path,null,
+        wrapSendWave(brethren,2,level1Path,null,
+        wrapSendWave(squirrel,6,level1Path,null,wave4)))), this);
 }
 
+function wave4(){
+    sendWaveButton.visible = true;
+    sendWaveButton.events.onInputDown.removeAll();
+        sendWaveButton.events.onInputDown.add(
+        wrapSendWave(squirrel,5,level1Path,sendWaveButton,
+        wrapSendWave(royal,4,level1Path,null,
+        wrapSendWave(brethren,2,level1Path,null,
+        wrapSendWave(scourge,9,level1Path,null,wave5)))), this);
+}
+
+function wave5(){
+    sendWaveButton.visible = true;
+    sendWaveButton.events.onInputDown.removeAll();
+        sendWaveButton.events.onInputDown.add(
+        wrapSendWave(royal,5,level1Path,sendWaveButton,
+        wrapSendWave(squirrel,2,level1Path,null,
+        wrapSendWave(royal,8,level1Path,null,
+        wrapSendWave(dragon,1,level1Path,null,wave6)))), this);
+}
+
+function wave6(){
+    sendWaveButton.visible = true;
+    sendWaveButton.events.onInputDown.removeAll();
+        sendWaveButton.events.onInputDown.add(
+        wrapSendWave(squirrel,2,level1Path,sendWaveButton,
+        wrapSendWave(dragon,5,level1Path,null,
+        wrapSendWave(brethren,1,level1Path,null,
+        wrapSendWave(royal,6,level1Path,null,wave7)))), this);
+}
+
+function wave7(){
+    sendWaveButton.visible = true;
+    sendWaveButton.events.onInputDown.removeAll();
+        sendWaveButton.events.onInputDown.add(
+        wrapSendWave(dragon,5,level1Path,sendWaveButton,
+        wrapSendWave(royal,15,level1Path,null,wave8)), this);
+}
+
+function wave8(){
+    sendWaveButton.visible = true;
+    sendWaveButton.events.onInputDown.removeAll();
+        sendWaveButton.events.onInputDown.add(
+        wrapSendWave(squirrel,3,level1Path,sendWaveButton,
+        wrapSendWave(admiral,2,level1Path,null,
+        wrapSendWave(royal,10,level1Path,null,wave9))), this);
+}
+
+function wave9(){
+    sendWaveButton.visible = true;
+    sendWaveButton.events.onInputDown.removeAll();
+        sendWaveButton.events.onInputDown.add(
+        wrapSendWave(brethren,3,level1Path,sendWaveButton,
+        wrapSendWave(scourge,1,level1Path,null,
+        wrapSendWave(squirrel,2,level1Path,null,
+        wrapSendWave(royal,2,level1Path,null,
+        wrapSendWave(dragon,5,level1Path,null,
+        wrapSendWave(admiral,8,level1Path,null,wave10)))))), this);
+}
+
+function wave10(){
+    sendWaveButton.visible = true;
+    sendWaveButton.events.onInputDown.removeAll();
+        sendWaveButton.events.onInputDown.add(
+        wrapSendWave(dragon,10,level1Path,sendWaveButton,
+        wrapSendWave(admiral,15,level1Path,null)), this);
+}
 
 //ENEMY LEVEL 1 WAVES
 //============================
