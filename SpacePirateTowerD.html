@@ -105,7 +105,9 @@ function create() {
     layer = map.createLayer('Ground');
     layer = map.createLayer('Background');
     layer = map.createLayer('Foreground');
-    
+    layer = map.createLayer('TowerCollision');
+    var style = { font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
+    text = game.add.text(0, 0, "phaser 2.4 text bounds", style);
     //Send Wave Button
     sendWaveButton = game.add.sprite(1600,16,'sendNextWaveButtn');
     sendWaveButton.inputEnabled = true;

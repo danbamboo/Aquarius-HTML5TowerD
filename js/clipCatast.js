@@ -36,7 +36,7 @@ ClipCatastTower.prototype.update = function(){
         var fireRadius = game.add.graphics();
         game.physics.arcade.enable(fireRadius);
         fireRadius.lineStyle(5, 0xFF000B, 0.8); 
-        fireRadius.drawCircle(0, 0, 300);     //need to update size
+        fireRadius.drawCircle(0, 0, 500);     //need to update size
         this.addChild(fireRadius);
     }    
     else{
