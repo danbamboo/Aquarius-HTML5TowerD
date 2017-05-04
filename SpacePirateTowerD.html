@@ -80,9 +80,16 @@ var towerRange;
 var enemies;
 
 //Tower weapons
-var weaponBrigBlaster;
-var weaponClipCatast;
-var weaponFleetSinker;
+var weaponBrigBlaster = {
+    damage:3,
+    name:'BrigBullet'
+};
+var weaponClipCatast = {
+    damage:6
+};
+var weaponFleetSinker ={
+    damage:8
+};
 
 
 var spTree;
@@ -167,7 +174,9 @@ function create() {
     weaponBrigBlaster.trackRotation = true;
     weaponBrigBlaster.autoFire = true;    
     weaponBrigBlaster.multiFire = true;
-    
+    weaponBrigBlaster.damage = 3;
+    weaponBrigBlaster.bullets.damage = '3';
+
     weaponClipCatast.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
     weaponClipCatast.bulletKillDistance = 75;
     weaponClipCatast.bulletSpeed = 3000;
@@ -175,6 +184,7 @@ function create() {
     weaponClipCatast.trackRotation = true;
     weaponClipCatast.autoFire = true;    
     weaponClipCatast.multiFire = true;
+    weaponClipCatast.damage = 6;
     
     weaponFleetSinker.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
     weaponFleetSinker.bulletKillDistance = 50;
@@ -183,6 +193,8 @@ function create() {
     weaponFleetSinker.trackRotation = true;
     weaponFleetSinker.autoFire = true;    
     weaponFleetSinker.multiFire = true;
+    weaponFleetSinker.damage = 8;
+
 
 
      //Self Made Path Variables
@@ -211,9 +223,21 @@ function update() {
 
 //Removes enemies killed
 function collisionCheck(star, enemy){
-    console.log(enemy.damage);
-    star.kill();
-    enemy.destroy();
+    console.log("HEALTH " + enemy.health);
+    console.log("KEY " + star.key);
+    console.log("test " + star.damage);
+    console.log("test " + star.name);
+    
+    
+    if(enemy.health > 0){
+        
+        enemy.health -= 5;
+    }
+    else{
+
+        enemy.destroy();
+    }    
+        star.kill();
 }
  
     

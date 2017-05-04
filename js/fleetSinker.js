@@ -6,8 +6,6 @@ var FleetSinkerTower = function(TDgame){
     
     Phaser.Sprite.call(this, TDgame, 1265, 45, 'spaceItems', 'enemyGreen3.png');
     
-    game.physics.arcade.enable(this);
-    
     this.towerType = "fleetSinker";
     this.anchor.setTo(.5,.5);
     this.angle += 180;
