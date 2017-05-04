@@ -44,12 +44,15 @@ function setTower(tower){
     berzerkers.add(tower);
 
     tower.input.disableDrag();
-    tower.rotation = game.physics.arcade.angleBetween(tower, enemies); 
+    //tower.rotation = game.physics.arcade.angleBetween(tower, enemies); 
 }
 
 
 //Init tower's weapon to fire at enemy
 function boundCheck(tower, enemy){
+    
+    //to follow first enemy within tower radius
+    tower.rotation = game.physics.arcade.angleBetween(tower, enemy) - 80; 
     
    if(tower.towerType == "brigBlaster")
     {

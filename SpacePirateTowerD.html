@@ -205,7 +205,7 @@ function update() {
     //to have the towers follow the ships need to ensure there are items in the group
     if(enemies.length != 0){    
         berzerkers.forEach(function(item){
-            item.rotation = game.physics.arcade.angleBetween(item, enemies.children[0]) - 80;
+            //item.rotation = game.physics.arcade.angleBetween(item, enemies.children[0]) - 80;
         }, this);  
     }
     
