@@ -64,19 +64,16 @@ function boundCheck(tower, enemy){
     {
         weaponBrigBlaster.trackSprite(tower, 0, 0);
         weaponBrigBlaster.fireAtSprite(enemy);
-        weaponBrigBlaster.fire();
         
     }
     else if(tower.towerType == "clipCatast")
     {
         weaponClipCatast.trackSprite(tower, 0, 0);
         weaponClipCatast.fireAtSprite(enemy);
-        weaponClipCatast.fire();
     }
     else if(tower.towerType == "fleetSinker")
     {
         weaponFleetSinker.trackSprite(tower, 0, 0);
         weaponFleetSinker.fireAtSprite(enemy);
-        weaponFleetSinker.fire();
     }  
 }
