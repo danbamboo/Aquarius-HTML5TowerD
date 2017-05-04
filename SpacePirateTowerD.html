@@ -27,13 +27,10 @@
 <body>
 
 <script type="text/javascript">
-
 var game = new Phaser.Game(1920, 1920, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render});
-
 //***************************
 // Phaser Standard Functions
 //***************************
-
 //load necessary game assets
 function preload() {
     //load map
@@ -55,7 +52,6 @@ function preload() {
     //game.scale.setScreenSize(true);
     
 }
-
 //***************************
 // Global Variables
 //***************************
@@ -63,51 +59,33 @@ function preload() {
 var map;
 var layer;
 var sendWaveButton;
-
 //Sprites from spaceItems
 var brigBlasterTower;
 var clipCatastTower;
 var fleetSinkerTower;
-
     
 //Tower Groups
 var berzerkers;
-
 //Ranage Tower Group
 var towerRange;
-
 //Groups
 var enemies;
-
 //Tower weapons
-var weaponBrigBlaster = {
-    damage:3,
-    name:'BrigBullet'
-};
-var weaponClipCatast = {
-    damage:6
-};
-var weaponFleetSinker ={
-    damage:8
-};
-
-
+var weaponBrigBlaster;
+var weaponClipCatast;
+var weaponFleetSinker;
 var spTree;
 var villager1;
-
 //===Sprites====
 var whiteShip = 'ship (1).png';
 var blueShip = 'ship (17).png';
 var blackShip = 'ship (24).png';
 var redShip = 'ship (3).png';
 var greenShip = 'ship (4).png';
-
 //Self Made Path Variables
 var level1Path = [];
 var path1,path2,path3,path4,path5;
 var timeoutIndex =0;
-
-
 function create() {
     
     game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -140,7 +118,6 @@ function create() {
     clipCatastTower = new ClipCatastTower(game);
     fleetSinkerTower = new FleetSinkerTower(game);
     
-
     
     //Misc Sprites
     spTree = game.add.sprite(1250, 1000, 'tree');
@@ -157,16 +134,13 @@ function create() {
     game.scale.pageAlignVertically = true;
     game.scale.pageAlignHorizontally = true; 
     game.scale.refresh();
-
-
     //Enemies
     enemies = game.add.group();
     game.physics.arcade.enable(enemies);
    
     weaponBrigBlaster = game.add.weapon(30, 'spaceItems', 'beam6.png');
-    weaponClipCatast = game.add.weapon(30, 'spaceItems', 'laserRed13.png');
-    weaponFleetSinker = game.add.weapon(30,'spaceItems', 'beam1.png');
-   
+    weaponClipCatast = game.add.weapon(30, 'spaceItems', 'beam1.png');
+    weaponFleetSinker = game.add.weapon(30,'spaceItems', 'laserGreen13.png');
     weaponBrigBlaster.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
     weaponBrigBlaster.bulletKillDistance = 300;
     weaponBrigBlaster.bulletSpeed = 2000;
@@ -175,8 +149,8 @@ function create() {
     weaponBrigBlaster.autoFire = true;    
     weaponBrigBlaster.multiFire = true;
     weaponBrigBlaster.damage = 3;
-    weaponBrigBlaster.bullets.damage = '3';
-
+    weaponBrigBlaster.bullets.type = 156;
+    
     weaponClipCatast.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
     weaponClipCatast.bulletKillDistance = 75;
     weaponClipCatast.bulletSpeed = 3000;
@@ -194,9 +168,6 @@ function create() {
     weaponFleetSinker.autoFire = true;    
     weaponFleetSinker.multiFire = true;
     weaponFleetSinker.damage = 8;
-
-
-
      //Self Made Path Variables
     path1 = [{x:200,y:535},{x:1695,y:520},{x:1695,y:860},{x:70,y:860},{x:70,y:1820},{x:2500,y:1820}];
     path2 = [{x:200,y:535},{x:1150,y:520},{x:1150,y:190},{x:1695,y:190},{x:1695,y:860},{x:70,y:860},{x:70,y:1820},{x:2500,y:1820}];
@@ -209,9 +180,6 @@ function create() {
     sendWaveButton.events.onInputDown.add(wave1, this);
     
 }
-
-
-
 function update() {
     
     //Check for collision between bullets and enemies
@@ -220,21 +188,17 @@ function update() {
     game.physics.arcade.overlap(weaponFleetSinker.bullets, enemies, collisionCheck, null, this);
    
 }
-
 //Removes enemies killed
 function collisionCheck(star, enemy){
     console.log("HEALTH " + enemy.health);
-    console.log("KEY " + star.key);
-    console.log("test " + star.damage);
-    console.log("test " + star.name);
+    console.log("CURRENT DAMAGE " + star.data.bulletManager.damage);
     
     
     if(enemy.health > 0){
         
-        enemy.health -= 5;
+        enemy.health -= star.data.bulletManager.damage;
     }
     else{
-
         enemy.destroy();
     }    
         star.kill();
@@ -245,30 +209,24 @@ function render(){
     
     game.debug.body(berzerkers);
 }
-
-
 //================================
 //ENEMY LEVEL 1 WAVES
-
 function wave1() {
     sendWave(brethren,10,level1Path,null,
     wrapSendWave(scourge,1,level1Path,null,
     wrapSendWave(brethren,2,level1Path,null,wave2)));
     sendWaveButton.visible = false;
 }
-
 function wave2(){
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
     // sendWaveButton.events.onInputDown.add(wrapSendWave(admiral,1,level1Path,sendWaveButton), this);
-
     sendWaveButton.events.onInputDown.add(
         wrapSendWave(brethren,4,level1Path,sendWaveButton,
         wrapSendWave(scourge,5,level1Path,null,
         wrapSendWave(brethren,1,level1Path,null,
         wrapSendWave(scourge,5,level1Path,null,wave3)))), this);
 }
-
 function wave3(){
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
@@ -278,7 +236,6 @@ function wave3(){
         wrapSendWave(brethren,2,level1Path,null,
         wrapSendWave(squirrel,6,level1Path,null,wave4)))), this);
 }
-
 function wave4(){
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
@@ -288,7 +245,6 @@ function wave4(){
         wrapSendWave(brethren,2,level1Path,null,
         wrapSendWave(scourge,9,level1Path,null,wave5)))), this);
 }
-
 function wave5(){
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
@@ -298,7 +254,6 @@ function wave5(){
         wrapSendWave(royal,8,level1Path,null,
         wrapSendWave(dragon,1,level1Path,null,wave6)))), this);
 }
-
 function wave6(){
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
@@ -308,7 +263,6 @@ function wave6(){
         wrapSendWave(brethren,1,level1Path,null,
         wrapSendWave(royal,6,level1Path,null,wave7)))), this);
 }
-
 function wave7(){
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
@@ -316,7 +270,6 @@ function wave7(){
         wrapSendWave(dragon,5,level1Path,sendWaveButton,
         wrapSendWave(royal,15,level1Path,null,wave8)), this);
 }
-
 function wave8(){
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
@@ -325,7 +278,6 @@ function wave8(){
         wrapSendWave(admiral,2,level1Path,null,
         wrapSendWave(royal,10,level1Path,null,wave9))), this);
 }
-
 function wave9(){
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
@@ -337,7 +289,6 @@ function wave9(){
         wrapSendWave(dragon,5,level1Path,null,
         wrapSendWave(admiral,8,level1Path,null,wave10)))))), this);
 }
-
 function wave10(){
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
@@ -345,11 +296,8 @@ function wave10(){
         wrapSendWave(dragon,10,level1Path,sendWaveButton,
         wrapSendWave(admiral,15,level1Path,null)), this);
 }
-
 //ENEMY LEVEL 1 WAVES
 //============================
-
-
 </script>
 
 </body>
