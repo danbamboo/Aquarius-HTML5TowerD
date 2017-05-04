@@ -36,18 +36,17 @@ ClipCatastTower.prototype.update = function(){
     this.events.onDragStop.add(function(){setTower(this)}, this); 
  
     //Add Radius on hover 
-    if(this.children[0] != null){
-   
-        if(this.input.pointerOver()){
+    if(this.input.pointerOver()){
 
-            this.children[0].visible = true;
-
-        }    
-        else{
+        this.children[0].visible = true;
         
-            this.children[0].visible = false;
-        }
     }    
+    else{
+        
+        this.children[0].visible = false;
+    }
+
+    
     
     weaponClipCatast.trackSprite(enemies, 0, 0);
     

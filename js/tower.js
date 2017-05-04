@@ -26,7 +26,21 @@ function dragTower(tower){
 function setTower(tower){
     
     game.physics.arcade.enable(tower);
-    tower.body.setCircle(150,-100,-112);
+    
+    //to set the radius of each different type of tower for collision detection
+    if(tower.towerType == "brigBlaster")
+    {
+        tower.body.setCircle(300, -300, -300);
+    }
+    else if(tower.towerType == "clipCatast")
+    {
+        tower.body.setCircle(250,-250,-250);
+    }
+    else if(tower.towerType == "fleetSinker")
+    {
+        tower.body.setCircle(150,-150,-150);
+    }  
+
     berzerkers.add(tower);
 
     tower.input.disableDrag();

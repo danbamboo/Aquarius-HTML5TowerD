@@ -6,12 +6,15 @@ var FleetSinkerTower = function(TDgame){
     
     Phaser.Sprite.call(this, TDgame, 1265, 45, 'spaceItems', 'enemyGreen3.png');
     
+    game.physics.arcade.enable(this);
+    
     this.towerType = "fleetSinker";
     this.anchor.setTo(.5,.5);
     this.angle += 180;
     this.inputEnabled = true; 
     this.input.enableDrag(true);
     game.world.add(this);
+    
 
     var fireRadius = game.add.graphics();
     game.physics.arcade.enable(fireRadius);
@@ -36,18 +39,16 @@ FleetSinkerTower.prototype.update = function(){
     this.events.onDragStop.add(function(){setTower(this)}, this); 
  
     //Add Radius on hover 
-    if(this.children[0] != null){
-   
-        if(this.input.pointerOver()){
+    if(this.input.pointerOver()){
 
-            this.children[0].visible = true;
+        this.children[0].visible = true;
 
-        }    
-        else{
-        
-            this.children[0].visible = false;
-        }
     }    
+    else{
+        
+        this.children[0].visible = false;
+    }
+    
     
     weaponFleetSinker.trackSprite(enemies, 0, 0);
     

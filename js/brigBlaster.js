@@ -13,6 +13,7 @@ var BrigBlasterTower = function(TDgame){
     this.input.enableDrag(true);
     game.world.add(this);
     
+    
     //to add one child for radius
     var fireRadius = game.add.graphics();
     game.physics.arcade.enable(fireRadius);
@@ -21,6 +22,7 @@ var BrigBlasterTower = function(TDgame){
     fireRadius.drawCircle(0, 0, 600);
     this.addChild(fireRadius);
     this.children[0].visible = false;
+    //this.setCircle = 600;
     
 } 
  
@@ -38,22 +40,17 @@ BrigBlasterTower.prototype.update = function(){
     this.events.onDragStop.add(function(){setTower(this)}, this); 
  
     //Add Radius on hover 
-    if(this.children[0] != null){
-   
-        if(this.input.pointerOver()){
+    if(this.input.pointerOver()){
 
-            this.children[0].visible = true;
+        this.children[0].visible = true;           
+    }
+    else{
 
-        }    
-        else{
-        
-            this.children[0].visible = false;
-        }
-    }    
+        this.children[0].visible = false;
+    }
     
     weaponBrigBlaster.trackSprite(enemies, 0, 0);
     
-    //Check when enemy enter boundary
     game.physics.arcade.overlap(this, enemies, boundCheck, null, this);
     
 }
