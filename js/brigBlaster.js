@@ -5,7 +5,7 @@
 var BrigBlasterTower = function(TDgame){
     
     Phaser.Sprite.call(this, TDgame, 1500, 45, 'spaceItems', 'playerShip3_blue.png');
-    
+
     this.towerType = "brigBlaster";
     this.anchor.setTo(.5,.5);
     this.angle += 180;
@@ -22,7 +22,6 @@ var BrigBlasterTower = function(TDgame){
     fireRadius.drawCircle(0, 0, 600);
     this.addChild(fireRadius);
     this.children[0].visible = false;
-    //this.setCircle = 600;
     
 } 
  

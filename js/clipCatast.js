@@ -15,11 +15,11 @@ var ClipCatastTower = function(TDgame){
    
     //to add radius around the tower
     var fireRadius = game.add.graphics();
-        game.physics.arcade.enable(fireRadius);
-        fireRadius.lineStyle(5, 0xFF000B, 0.8); 
-        fireRadius.drawCircle(0, 0, 500);     //need to update size
-        this.addChild(fireRadius);
-        this.children[0].visible = false;
+    game.physics.arcade.enable(fireRadius);
+    fireRadius.lineStyle(5, 0xFF000B, 0.8); 
+    fireRadius.drawCircle(0, 0, 500);     //need to update size
+    this.addChild(fireRadius);
+    this.children[0].visible = false;
 } 
  
 ClipCatastTower.prototype = Object.create(Phaser.Sprite.prototype);
