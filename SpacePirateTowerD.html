@@ -202,14 +202,6 @@ function create() {
 
 function update() {
     
-    //to have the towers follow the ships need to ensure there are items in the group
-    if(enemies.length != 0){    
-        berzerkers.forEach(function(item){
-            //item.rotation = game.physics.arcade.angleBetween(item, enemies.children[0]) - 80;
-        }, this);  
-    }
-    
-    
     //Check for collision between bullets and enemies
     game.physics.arcade.overlap(weaponBrigBlaster.bullets, enemies, collisionCheck, null, this);
     game.physics.arcade.overlap(weaponClipCatast.bullets, enemies, collisionCheck, null, this);
