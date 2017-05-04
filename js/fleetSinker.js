@@ -33,7 +33,7 @@ FleetSinkerTower.prototype.constructor = FleetSinkerTower;
 
 FleetSinkerTower.prototype.update = function(){
   
-    this.events.onDragStart.add(function(){dragTower(this)}, this);
+    //this.events.onDragStart.add(function(){dragTower(this)}, this);
     this.events.onDragStop.add(function(){setTower(this)}, this); 
  
     //Add Radius on hover 
@@ -54,4 +54,3 @@ FleetSinkerTower.prototype.update = function(){
     game.physics.arcade.overlap(this, enemies, boundCheck, null, this);
     
 }
-

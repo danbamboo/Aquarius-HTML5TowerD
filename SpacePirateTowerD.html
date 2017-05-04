@@ -118,6 +118,10 @@ function create() {
     clipCatastTower = new ClipCatastTower(game);
     fleetSinkerTower = new FleetSinkerTower(game);
     
+    brigBlasterTower.events.onDragStart.add(function(){dragTower(brigBlasterTower)}, this);
+    clipCatastTower.events.onDragStart.add(function(){dragTower(clipCatastTower)}, this);
+    fleetSinkerTower.events.onDragStart.add(function(){dragTower(fleetSinkerTower)}, this);
+    
     
     //Misc Sprites
     spTree = game.add.sprite(1250, 1000, 'tree');
