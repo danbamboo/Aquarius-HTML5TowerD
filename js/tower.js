@@ -44,7 +44,6 @@ function setTower(tower){
     berzerkers.add(tower);
 
     tower.input.disableDrag();
-    //tower.rotation = game.physics.arcade.angleBetween(tower, enemies); 
 }
 
 
@@ -59,6 +58,7 @@ function boundCheck(tower, enemy){
         weaponBrigBlaster.trackSprite(tower, 0, 0);
         weaponBrigBlaster.fireAtSprite(enemy);
         weaponBrigBlaster.fire();
+        
     }
     else if(tower.towerType == "clipCatast")
     {
