@@ -5,7 +5,7 @@
 var BrigBlasterTower = function(TDgame){
     
     Phaser.Sprite.call(this, TDgame, 1500, 45, 'spaceItems', 'playerShip3_blue.png');
-
+    
     this.towerType = "brigBlaster";
     this.anchor.setTo(.5,.5);
     this.angle += 180;
@@ -20,14 +20,24 @@ var BrigBlasterTower = function(TDgame){
     this.weapon.autoFire = true;    
     this.weapon.multiFire = true;
     this.weapon.damage = 3;
+
     //to add one child for radius
     var fireRadius = game.add.graphics();
     game.physics.arcade.enable(fireRadius);
     //to make it invisible upon creation
-    fireRadius.lineStyle(5, 0xFF000B, 0.8);
+    fireRadius.lineStyle(5, 0x191970, 0.8);
     fireRadius.drawCircle(0, 0, 600);
     this.addChild(fireRadius);
     this.children[0].visible = false;
+    
+    //to show if the placement is invalid
+    var invalidPlacement = game.add.graphics();
+    game.physics.arcade.enable(invalidPlacement);
+    invalidPlacement.beginFill(0xFF0000, 0.3);
+    invalidPlacement.drawCircle(0, 0, 250);
+    this.addChild(invalidPlacement);
+    this.children[1].visible = false;
+    
     game.world.add(this);
     
 } 
@@ -43,8 +53,10 @@ BrigBlasterTower.prototype.constructor = BrigBlasterTower;
 BrigBlasterTower.prototype.update = function(){
   
     //this.events.onDragStart.add(function(){dragTower(this)}, this);
-    this.events.onDragStop.add(function(){setTower(this)}, this); 
-
+    console.log("TRUE/FALSE " + game.physics.arcade.overlap((this, towerRange, towerCollide, null, this)));
+    if(!game.physics.arcade.overlap(this, berzerkers, towerCollide, null, this)){;
+        this.events.onDragStop.add(function(){setTower(this)}, this); 
+    }
     //Add Radius on hover 
     if(this.input.pointerOver()){
 
@@ -56,6 +68,8 @@ BrigBlasterTower.prototype.update = function(){
     }
     
     this.weapon.trackSprite(enemies, 0, 0);
+    
+    ;
     
     game.physics.arcade.overlap(this, enemies, boundCheck, null, this);
     

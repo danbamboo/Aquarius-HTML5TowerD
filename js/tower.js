@@ -11,6 +11,7 @@ function dragTower(tower){
     {
         newTower = new BrigBlasterTower(game);
         newTower.events.onDragStart.add(function(){dragTower(newTower)}, this);
+
     }
     else if(tower.towerType == "clipCatast")
     {
@@ -21,41 +22,39 @@ function dragTower(tower){
     {
         newTower = new FleetSinkerTower(game);
         newTower.events.onDragStart.add(function(){dragTower(newTower)}, this);
-    } 
+    }
+    
+    towerRange.add(newTower);
 } 
 
 
 //Set tower in placed
 function setTower(tower){
+    console.log("****SETTTTTTTTIIIINNGGGG*********");
+    game.physics.arcade.enable(tower);
     
-    if((tower.overlap(berzerkers)) == false)
+    //to set the radius of each different type of tower for collision detection
+    if(tower.towerType == "brigBlaster")
     {
-        game.physics.arcade.enable(tower);
-        
-        //to set the radius of each different type of tower for collision detection
-        if(tower.towerType == "brigBlaster")
-        {
-            tower.body.setCircle(300, -300, -300);
-        }
-        else if(tower.towerType == "clipCatast")
-        {
-            tower.body.setCircle(250,-250,-250);
-        }
-        else if(tower.towerType == "fleetSinker")
-        {
-            tower.body.setCircle(150,-150,-150);
-        }  
-        
-        berzerkers.add(tower);
-        //towerRange.add(tower);
-        
-        console.log("Berz " + berzerkers.length + " towerR " + towerRange.length);
-        
-        tower.input.disableDrag();
+        tower.body.setCircle(300, -300, -300);
     }
-    else{
-        console.log("OVERLAP");
+    else if(tower.towerType == "clipCatast")
+    {
+        tower.body.setCircle(250,-250,-250);
     }
+    else if(tower.towerType == "fleetSinker")
+    {
+        tower.body.setCircle(150,-150,-150);
+    }  
+    
+    
+    console.log("Berz " + berzerkers.length + " towerR " + towerRange.length);
+    //console.log("TOWERR " + towerRange.children[0].towerType);
+    
+    tower.input.disableDrag();
+    tower.children[1].visible = false;
+    berzerkers.add(tower);
+
     
 }
 
@@ -67,22 +66,13 @@ function boundCheck(tower, enemy){
     tower.rotation = game.physics.arcade.angleBetween(tower, enemy) - 80; 
     tower.weapon.trackSprite(tower, 0, 0);
     tower.weapon.fireAtSprite(enemy);
+}
 
-
-  /* if(tower.towerType == "brigBlaster")
-    {
-        weaponBrigBlaster.trackSprite(tower, 0, 0);
-        weaponBrigBlaster.fireAtSprite(enemy);
-        
-    }
-    else if(tower.towerType == "clipCatast")
-    {
-        weaponClipCatast.trackSprite(tower, 0, 0);
-        weaponClipCatast.fireAtSprite(enemy);
-    }
-    else if(tower.towerType == "fleetSinker")
-    {
-        weaponFleetSinker.trackSprite(tower, 0, 0);
-        weaponFleetSinker.fireAtSprite(enemy);
-    }*/  
+function towerCollide(tower, colTower){
+    
+    console.log("BOUNDS 1 " + tower.children[0].getBounds());
+    console.log("BOUNDS 2 " + colTower.children[0].getBounds());
+        tower.children[1].visible = true;
+        tower.input.enableDrag();
+    
 }

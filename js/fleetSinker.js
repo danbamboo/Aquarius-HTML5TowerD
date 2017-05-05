@@ -20,12 +20,22 @@ var FleetSinkerTower = function(TDgame){
     this.weapon.autoFire = true;    
     this.weapon.multiFire = true;
     this.weapon.damage = 8;
+
     var fireRadius = game.add.graphics();
     game.physics.arcade.enable(fireRadius);
-    fireRadius.lineStyle(5, 0xFF000B, 0.8);
+    fireRadius.lineStyle(5, 0x191970, 0.8);
     fireRadius.drawCircle(0, 0, 300);       //need to update size
     this.addChild(fireRadius);
     this.children[0].visible = false;
+    
+    //to show if the placement is invalid
+    var invalidPlacement = game.add.graphics();
+    game.physics.arcade.enable(invalidPlacement);
+    invalidPlacement.beginFill(0xFF0000, 0.3);
+    invalidPlacement.drawCircle(0, 0, 250);
+    this.addChild(invalidPlacement);
+    this.children[1].visible = false;
+    
     game.world.add(this);
     
 
@@ -44,7 +54,10 @@ FleetSinkerTower.prototype.constructor = FleetSinkerTower;
 FleetSinkerTower.prototype.update = function(){
   
     //this.events.onDragStart.add(function(){dragTower(this)}, this);
-    this.events.onDragStop.add(function(){setTower(this)}, this); 
+    console.log("TRUE/FALSE " + game.physics.arcade.overlap((this, towerRange, towerCollide, null, this)));
+    if(!game.physics.arcade.overlap(this, berzerkers, towerCollide, null, this)){;
+        this.events.onDragStop.add(function(){setTower(this)}, this); 
+    }
  
     //Add Radius on hover 
     if(this.input.pointerOver()){
