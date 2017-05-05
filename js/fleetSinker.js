@@ -54,7 +54,6 @@ FleetSinkerTower.prototype.constructor = FleetSinkerTower;
 FleetSinkerTower.prototype.update = function(){
   
     //this.events.onDragStart.add(function(){dragTower(this)}, this);
-    console.log("TRUE/FALSE " + game.physics.arcade.overlap((this, towerRange, towerCollide, null, this)));
     if(!game.physics.arcade.overlap(this, berzerkers, towerCollide, null, this)){;
         this.events.onDragStop.add(function(){setTower(this)}, this); 
     }
