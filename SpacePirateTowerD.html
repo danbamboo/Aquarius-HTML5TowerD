@@ -142,35 +142,7 @@ function create() {
     enemies = game.add.group();
     game.physics.arcade.enable(enemies);
    
-    weaponBrigBlaster = game.add.weapon(30, 'spaceItems', 'beam6.png');
-    weaponClipCatast = game.add.weapon(30, 'spaceItems', 'beam1.png');
-    weaponFleetSinker = game.add.weapon(30,'spaceItems', 'laserGreen13.png');
-    weaponBrigBlaster.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
-    weaponBrigBlaster.bulletKillDistance = 300;
-    weaponBrigBlaster.bulletSpeed = 2000;
-    weaponBrigBlaster.fireRate = 150;
-    weaponBrigBlaster.trackRotation = true;
-    weaponBrigBlaster.autoFire = true;    
-    weaponBrigBlaster.multiFire = true;
-    weaponBrigBlaster.damage = 3;
-
-    weaponClipCatast.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
-    weaponClipCatast.bulletKillDistance = 75;
-    weaponClipCatast.bulletSpeed = 3000;
-    weaponClipCatast.fireRate = 400;
-    weaponClipCatast.trackRotation = true;
-    weaponClipCatast.autoFire = true;    
-    weaponClipCatast.multiFire = true;
-    weaponClipCatast.damage = 6;
-    
-    weaponFleetSinker.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
-    weaponFleetSinker.bulletKillDistance = 50;
-    weaponFleetSinker.bulletSpeed = 4000;
-    weaponFleetSinker.fireRate = 550;
-    weaponFleetSinker.trackRotation = true;
-    weaponFleetSinker.autoFire = true;    
-    weaponFleetSinker.multiFire = true;
-    weaponFleetSinker.damage = 8;
+ 
      //Self Made Path Variables
     path1 = [{x:200,y:535},{x:1695,y:520},{x:1695,y:860},{x:70,y:860},{x:70,y:1820},{x:2500,y:1820}];
     path2 = [{x:200,y:535},{x:1150,y:520},{x:1150,y:190},{x:1695,y:190},{x:1695,y:860},{x:70,y:860},{x:70,y:1820},{x:2500,y:1820}];
@@ -186,9 +158,9 @@ function create() {
 function update() {
     
     //Check for collision between bullets and enemies
-    game.physics.arcade.overlap(weaponBrigBlaster.bullets, enemies, collisionCheck, null, this);
-    game.physics.arcade.overlap(weaponClipCatast.bullets, enemies, collisionCheck, null, this);
-    game.physics.arcade.overlap(weaponFleetSinker.bullets, enemies, collisionCheck, null, this);
+    game.physics.arcade.overlap(brigBlasterTower.weapon.bullets, enemies, collisionCheck, null, this);
+    game.physics.arcade.overlap(clipCatastTower.bullets, enemies, collisionCheck, null, this);
+    game.physics.arcade.overlap(fleetSinkerTower.bullets, enemies, collisionCheck, null, this);
    
 }
 //Removes enemies killed

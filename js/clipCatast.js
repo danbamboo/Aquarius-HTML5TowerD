@@ -11,8 +11,15 @@ var ClipCatastTower = function(TDgame){
     this.angle += 180;
     this.inputEnabled = true; 
     this.input.enableDrag(true);
-    game.world.add(this);
-   
+    this.weapon = game.add.weapon(30, 'spaceItems', 'beam1.png');
+    this.weapon.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
+    this.weapon.bulletKillDistance = 75;
+    this.weapon.bulletSpeed = 3000;
+    this.weapon.fireRate = 400;
+    this.weapon.trackRotation = true;
+    this.weapon.autoFire = true;    
+    this.weapon.multiFire = true;
+    this.weapon.damage = 6;
     //to add radius around the tower
     var fireRadius = game.add.graphics();
     game.physics.arcade.enable(fireRadius);
@@ -20,6 +27,9 @@ var ClipCatastTower = function(TDgame){
     fireRadius.drawCircle(0, 0, 500);     //need to update size
     this.addChild(fireRadius);
     this.children[0].visible = false;
+    game.world.add(this);
+   
+    
 } 
  
 ClipCatastTower.prototype = Object.create(Phaser.Sprite.prototype);
@@ -48,7 +58,7 @@ ClipCatastTower.prototype.update = function(){
 
     
     
-    weaponClipCatast.trackSprite(enemies, 0, 0);
+    this.weapon.trackSprite(enemies, 0, 0);
     
     //Check when enemy enter boundary
     game.physics.arcade.overlap(this, enemies, boundCheck, null, this);

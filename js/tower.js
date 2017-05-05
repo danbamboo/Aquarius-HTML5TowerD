@@ -47,8 +47,14 @@ function setTower(tower){
         }  
         
         berzerkers.add(tower);
+        //towerRange.add(tower);
+        
+        console.log("Berz " + berzerkers.length + " towerR " + towerRange.length);
         
         tower.input.disableDrag();
+    }
+    else{
+        console.log("OVERLAP");
     }
     
 }
@@ -59,8 +65,11 @@ function boundCheck(tower, enemy){
     
     //to follow first enemy within tower radius
     tower.rotation = game.physics.arcade.angleBetween(tower, enemy) - 80; 
+    tower.weapon.trackSprite(tower, 0, 0);
+    tower.weapon.fireAtSprite(enemy);
 
-   if(tower.towerType == "brigBlaster")
+
+  /* if(tower.towerType == "brigBlaster")
     {
         weaponBrigBlaster.trackSprite(tower, 0, 0);
         weaponBrigBlaster.fireAtSprite(enemy);
@@ -75,5 +84,5 @@ function boundCheck(tower, enemy){
     {
         weaponFleetSinker.trackSprite(tower, 0, 0);
         weaponFleetSinker.fireAtSprite(enemy);
-    }  
+    }*/  
 }

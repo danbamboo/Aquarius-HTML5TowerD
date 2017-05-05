@@ -11,9 +11,15 @@ var BrigBlasterTower = function(TDgame){
     this.angle += 180;
     this.inputEnabled = true; 
     this.input.enableDrag(true);
-    game.world.add(this);
-    
-    
+    this.weapon = game.add.weapon(30, 'spaceItems', 'beam6.png');
+    this.weapon.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
+    this.weapon.bulletKillDistance = 300;
+    this.weapon.bulletSpeed = 2000;
+    this.weapon.fireRate = 150;
+    this.weapon.trackRotation = true;
+    this.weapon.autoFire = true;    
+    this.weapon.multiFire = true;
+    this.weapon.damage = 3;
     //to add one child for radius
     var fireRadius = game.add.graphics();
     game.physics.arcade.enable(fireRadius);
@@ -22,6 +28,7 @@ var BrigBlasterTower = function(TDgame){
     fireRadius.drawCircle(0, 0, 600);
     this.addChild(fireRadius);
     this.children[0].visible = false;
+    game.world.add(this);
     
 } 
  
@@ -48,7 +55,7 @@ BrigBlasterTower.prototype.update = function(){
         this.children[0].visible = false;
     }
     
-    weaponBrigBlaster.trackSprite(enemies, 0, 0);
+    this.weapon.trackSprite(enemies, 0, 0);
     
     game.physics.arcade.overlap(this, enemies, boundCheck, null, this);
     
