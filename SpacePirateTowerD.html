@@ -46,10 +46,12 @@ function preload() {
     game.load.image('villager', 'spr_m_unko.png'); 
     game.load.atlasXML('spaceItems', 'spaceItems.png', 'spaceItems.xml');
     game.load.image('star', 'star.png');
+    game.load.image('navbar','gameNavBarLogo.png');
     
+    //Google Web Fonts For Text Editing
+    game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
     
     game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-    //game.scale.setScreenSize(true);
     
 }
 //***************************
@@ -59,6 +61,12 @@ function preload() {
 var map;
 var layer;
 var sendWaveButton;
+
+//MenuBarVariables
+var navbar;
+var currentLevel,level;
+var wave, currentWave;
+
 //Sprites from spaceItems
 var brigBlasterTower;
 var clipCatastTower;
@@ -97,17 +105,27 @@ function create() {
     
     
     layer = map.createLayer('Ground');
+    layer.scale.y = .95;
     layer = map.createLayer('Background');
+    layer.scale.y = .95;
     layer = map.createLayer('Foreground');
+    layer.scale.y = .95;
     layer = map.createLayer('TowerCollision');
+    layer.scale.y = .95;
 
+    navbar = game.add.sprite(0, 1760, 'navbar');
     //Send Wave Button
-    sendWaveButton = game.add.sprite(1600,16,'sendNextWaveButtn');
+    sendWaveButton = game.add.sprite(250,1800,'sendNextWaveButtn');
     sendWaveButton.inputEnabled = true;
     sendWaveButton.scale.x = 1.5;
     sendWaveButton.scale.y = 1.5;
     
-    
+
+    //CurrentLevelTextOnNavBar
+    currentLevel = "Level 1";
+    currentLevelName = "Tortuga";
+    level = game.add.text(20,1800, currentLevel, { font: "40px Arial", fill: "#EBEBEB" })
+    levelName = game.add.text(20,1850, currentLevelName, { font: "40px Arial", fill: "#7FFFD4" })
     //to create group for berzerker towers
     berzerkers = game.add.group();
     towerRange = game.add.group();
@@ -130,6 +148,7 @@ function create() {
     villager1 = game.add.sprite(1400, 600, 'villager');
     villager1.width = 100;
     villager1.height = 165;
+    
     
     
     //Game Board Alignment
@@ -269,6 +288,13 @@ function wave10(){
         sendWaveButton.events.onInputDown.add(
         wrapSendWave(dragon,10,level1Path,sendWaveButton,
         wrapSendWave(admiral,15,level1Path,null)), this);
+        
+    //Next Level TEXT
+    level.kill();
+    currentLevel = "Level 2";
+    currentLevelName = "CutThroat";
+    level = game.add.text(20,1800, currentLevel, { font: "40px Arial", fill: "#EBEBEB" })
+    levelName = game.add.text(20,1850, currentLevelName, { font: "40px Arial", fill: "#7FFFD4" })
 }
 //ENEMY LEVEL 1 WAVES
 //============================
