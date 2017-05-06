@@ -4,7 +4,9 @@
 
 var ClipCatastTower = function(TDgame){
     
-    Phaser.Sprite.call(this, TDgame, 1380, 45, 'spaceItems', 'enemyRed1.png');
+    Phaser.Sprite.call(this, TDgame, 1610, 1830, 'spaceItems', 'enemyRed1.png');
+    this.scale.y=.6;
+    this.scale.x=.6;
     
     this.towerType = "clipCatast";
     this.anchor.setTo(.5,.5);
