@@ -47,6 +47,7 @@ function preload() {
     game.load.atlasXML('spaceItems', 'spaceItems.png', 'spaceItems.xml');
     game.load.image('star', 'star.png');
     game.load.image('navbar','gameNavBarLogo.png');
+    game.load.image('village','village.png');
     
     //Google Web Fonts For Text Editing
     game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
@@ -84,6 +85,7 @@ var weaponClipCatast;
 var weaponFleetSinker;
 var spTree;
 var villager1;
+var village;
 //===Sprites====
 var whiteShip = 'ship (1).png';
 var blueShip = 'ship (17).png';
@@ -141,15 +143,17 @@ function create() {
     
     
     //Misc Sprites
-    spTree = game.add.sprite(1250, 1000, 'tree');
+    spTree = game.add.sprite(1400, 1100, 'tree');
     spTree.scale.x = .6;
     spTree.scale.y = .6;
     
-    villager1 = game.add.sprite(1400, 600, 'villager');
-    villager1.width = 100;
-    villager1.height = 165;
-    
-    
+
+    village = game.add.sprite(675,1030,'village');
+    village.scale.x = .7;
+    village.scale.y = .7;
+    villager1 = game.add.sprite(908, 1024, 'villager');
+    villager1.scale.x = 1.6;
+    villager1.scale.y = 1.6;
     
     //Game Board Alignment
     layer.resizeWorld();
@@ -162,11 +166,11 @@ function create() {
    
  
      //Self Made Path Variables
-    path1 = [{x:200,y:535},{x:1695,y:520},{x:1695,y:860},{x:70,y:860},{x:70,y:1820},{x:2500,y:1820}];
-    path2 = [{x:200,y:535},{x:1150,y:520},{x:1150,y:190},{x:1695,y:190},{x:1695,y:860},{x:70,y:860},{x:70,y:1820},{x:2500,y:1820}];
+    path1 = [{x:200,y:500},{x:1695,y:500},{x:1695,y:840},{x:70,y:840},{x:70,y:1715},{x:2500,y:1715}];
+    path2 = [{x:200,y:500},{x:1150,y:500},{x:1150,y:190},{x:1695,y:190},{x:1695,y:840},{x:70,y:840},{x:70,y:1715},{x:2500,y:1715}];
     //Path 3 goes around the first island
-    path3 = [{x:200,y:535},{x:510,y:520},{x:510,y:860},{x:1040,y:860},{x:1040,y:1420},{x:70,y:1420},{x:70,y:1820},{x:2500,y:1820}];
-    path4 = [{x:200,y:535},{x:1695,y:520},{x:1695,y:860},{x:1000,y:860},{x:1000,y:1420},{x:70,y:1420},{x:70,y:1820},{x:2500,y:1820}];
+    path3 = [{x:200,y:500},{x:510,y:500},{x:510,y:840},{x:1050,y:840},{x:1050,y:1390},{x:70,y:1390},{x:70,y:1715},{x:2500,y:1715}];
+    path4 = [{x:200,y:500},{x:1695,y:500},{x:1695,y:840},{x:1050,y:840},{x:1050,y:1390},{x:70,y:1390},{x:70,y:1715},{x:2500,y:1715}];
     level1Path = [path1,path2,path3,path4];
   
     //Initiate Tween
