@@ -33,6 +33,28 @@ function dragTower(tower){
 //Set tower in placed
 function setTower(tower){
     console.log("****SETTTTTTTTIIIINNGGGG*********");
+    
+    var setTile = map.getTileWorldXY(tower.x, tower.y, 32, 32, collisionLayer);
+    
+    //Check if tower is placed in the water
+    if(setTile == null){
+    
+        //console.log("OVER WATER??");
+        towerRange.remove(tower);
+        tower.kill();
+        return;
+    }
+    else
+    {    
+        if(setTile.x >= 3 && setTile.y >= 50)
+        {
+            //console.log("OVER WATER??");
+            towerRange.remove(tower);
+            tower.kill();
+            return;
+        }
+    }
+  
     game.physics.arcade.enable(tower);
     
     //to set the radius of each different type of tower for collision detection

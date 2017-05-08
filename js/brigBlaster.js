@@ -53,11 +53,13 @@ BrigBlasterTower.prototype.constructor = BrigBlasterTower;
 //************************ 
 
 BrigBlasterTower.prototype.update = function(){
-  
-    //this.events.onDragStart.add(function(){dragTower(this)}, this);
-    if(!game.physics.arcade.overlap(this, berzerkers, towerCollide, null, this)){;
+
+ //this.events.onDragStart.add(function(){dragTower(this)}, this);
+    if(!game.physics.arcade.overlap(this, berzerkers, towerCollide, null, this)){
         this.events.onDragStop.add(function(){setTower(this)}, this); 
     }
+    
+    
     //Add Radius on hover 
     if(this.input.pointerOver()){
 

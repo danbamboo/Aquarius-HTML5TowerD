@@ -62,6 +62,8 @@ function preload() {
 var map;
 var layer;
 var sendWaveButton;
+var collisionLayer;
+var pathTiles = [3, 4, 5, ,6, 7, 63, 64, 65, 66, 67, 123, 124, 125, 126, 127, 183, 184, 185, 186, 187, 243, 244, 245, 246, 247, 303, 304, 305, 306, 307, 363, 364, 365, 366, 367, 423, 424, 425, 426, 427];
 
 //MenuBarVariables
 var navbar;
@@ -103,13 +105,36 @@ function create() {
     
     layer = map.createLayer('Ground');
     layer.scale.y = .95;
-    layer = map.createLayer('Background');
-    layer.scale.y = .95;
+    collisionLayer = map.createLayer('Background');
+    collisionLayer.scale.y = .95;
+    //layer = map.createLayer('Background');
+    //layer.scale.y = .95;
     layer = map.createLayer('Foreground');
     layer.scale.y = .95;
     layer = map.createLayer('TowerCollision');
     layer.scale.y = .95;
-
+    
+    
+    //Game Board Alignment
+    layer.resizeWorld();
+    
+    //map.setLayer(collisionLayer);
+    //map.setCollisionByExclusion([], true, collisionLayer);
+    //map.setCollision([273, 274, 305, 306], true, collisionLayer);
+    //map.setCollision(['272', '273', '304', '305'], true, collisionLayer);
+    //map.setCollisionByExclusion('null', collisionLayer);
+    collisionLayer.resizeWorld();
+    
+    game.scale.pageAlignVertically = true;
+    game.scale.pageAlignHorizontally = true; 
+    game.scale.refresh();
+    
+    //Enemies
+    enemies = game.add.group();
+    game.physics.arcade.enable(enemies);
+   
+    
+    
     navbar = game.add.sprite(0, 1760, 'navbar');
     //Send Wave Button
     sendWaveButton = game.add.sprite(250,1800,'sendNextWaveButtn');
@@ -149,16 +174,6 @@ function create() {
     villager1 = game.add.sprite(908, 1024, 'villager');
     villager1.scale.x = 1.6;
     villager1.scale.y = 1.6;
-    
-    //Game Board Alignment
-    layer.resizeWorld();
-    game.scale.pageAlignVertically = true;
-    game.scale.pageAlignHorizontally = true; 
-    game.scale.refresh();
-    //Enemies
-    enemies = game.add.group();
-    game.physics.arcade.enable(enemies);
-   
  
      //Self Made Path Variables
     path1 = [{x:200,y:500},{x:1695,y:500},{x:1695,y:840},{x:70,y:840},{x:70,y:1715},{x:2500,y:1715}];
