@@ -74,6 +74,9 @@ var wave, currentWave;
 var brigBlasterTower;
 var clipCatastTower;
 var fleetSinkerTower;
+
+//Player Current Gold
+var currentGold, goldMeter;
     
 //Tower Groups
 var berzerkers;
@@ -143,11 +146,19 @@ function create() {
     sendWaveButton.scale.y = 1.5;
     
 
-    //CurrentLevelTextOnNavBar
+    //CurrentLevelTextOnNavBar Initalize
     currentLevel = "Level 1";
     currentLevelName = "Tortuga";
-    level = game.add.text(20,1800, currentLevel, { font: "40px Arial", fill: "#EBEBEB" })
-    levelName = game.add.text(20,1850, currentLevelName, { font: "40px Arial", fill: "#7FFFD4" })
+    currentWave = '0 / 10';
+    level = game.add.text(20,1800, currentLevel, { font: "40px Arial", fill: "#EBEBEB" });
+    levelName = game.add.text(20,1850, currentLevelName, { font: "40px Arial", fill: "#7FFFD4" });
+    game.add.text(277,1845, 'Wave:', { font: "30px Arial", fill: "#EBEBEB" });
+    wave = game.add.text(280,1880, currentWave, { font: "30px Arial", fill: "#E74C3C" });
+    
+    currentGold = 250;  //Init player with 250 gold to start game
+    game.add.text(510,1845, 'Gold:', { font: "30px Arial", fill: "#EBEBEB" });
+    goldMeter = game.add.text(530,1880, currentGold, { font: "30px Arial", fill: "#F1C40F" });
+    
     //to create group for berzerker towers
     berzerkers = game.add.group();
     towerRange = game.add.group();
@@ -219,12 +230,14 @@ function render(){
 //================================
 //ENEMY LEVEL 1 WAVES
 function wave1() {
+    setWave('1 / 10');
     sendWave(brethren,10,level1Path,null,
     wrapSendWave(scourge,1,level1Path,null,
     wrapSendWave(brethren,2,level1Path,null,wave2)));
     sendWaveButton.visible = false;
 }
 function wave2(){
+    setWave('2 / 10');
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
     // sendWaveButton.events.onInputDown.add(wrapSendWave(admiral,1,level1Path,sendWaveButton), this);
@@ -235,6 +248,7 @@ function wave2(){
         wrapSendWave(scourge,5,level1Path,null,wave3)))), this);
 }
 function wave3(){
+    setWave('3 / 10');
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
         sendWaveButton.events.onInputDown.add(
@@ -244,6 +258,7 @@ function wave3(){
         wrapSendWave(squirrel,6,level1Path,null,wave4)))), this);
 }
 function wave4(){
+    setWave('4 / 10');
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
         sendWaveButton.events.onInputDown.add(
@@ -253,6 +268,7 @@ function wave4(){
         wrapSendWave(scourge,9,level1Path,null,wave5)))), this);
 }
 function wave5(){
+    setWave('5 / 10');
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
         sendWaveButton.events.onInputDown.add(
@@ -262,6 +278,7 @@ function wave5(){
         wrapSendWave(dragon,1,level1Path,null,wave6)))), this);
 }
 function wave6(){
+    setWave('6 / 10');
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
         sendWaveButton.events.onInputDown.add(
@@ -271,6 +288,7 @@ function wave6(){
         wrapSendWave(royal,6,level1Path,null,wave7)))), this);
 }
 function wave7(){
+    setWave('7 / 10');
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
         sendWaveButton.events.onInputDown.add(
@@ -278,6 +296,7 @@ function wave7(){
         wrapSendWave(royal,15,level1Path,null,wave8)), this);
 }
 function wave8(){
+    setWave('8 / 10');
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
         sendWaveButton.events.onInputDown.add(
@@ -286,6 +305,7 @@ function wave8(){
         wrapSendWave(royal,10,level1Path,null,wave9))), this);
 }
 function wave9(){
+    setWave('9 / 10');
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
         sendWaveButton.events.onInputDown.add(
@@ -297,6 +317,7 @@ function wave9(){
         wrapSendWave(admiral,8,level1Path,null,wave10)))))), this);
 }
 function wave10(){
+    setWave('10 / 10');
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
         sendWaveButton.events.onInputDown.add(
@@ -304,14 +325,34 @@ function wave10(){
         wrapSendWave(admiral,15,level1Path,null)), this);
         
     //Next Level TEXT
-    level.kill();
-    currentLevel = "Level 2";
-    currentLevelName = "CutThroat";
-    level = game.add.text(20,1800, currentLevel, { font: "40px Arial", fill: "#EBEBEB" })
-    levelName = game.add.text(20,1850, currentLevelName, { font: "40px Arial", fill: "#7FFFD4" })
+    setLevel('Level 2', 'Cutthroat');
 }
 //ENEMY LEVEL 1 WAVES
 //============================
+
+
+//Nav Bar Update Functions for Text
+
+function setLevel(levelNumberText,levelName){
+    level.kill();
+    levelName.kill();
+    currentLevel = levelNumberText;
+    currentLevelName = levelName;
+    level = game.add.text(20,1800, currentLevel, { font: "40px Arial", fill: "#EBEBEB" })
+    levelName = game.add.text(20,1850, currentLevelName, { font: "40px Arial", fill: "#7FFFD4" })
+}
+
+function setWave(waveText){
+    wave.kill();
+    wave = game.add.text(280,1880, waveText, { font: "30px Arial", fill: "#E74C3C" })
+}
+
+function setGold(goldValue){
+    goldMeter.kill();
+    goldMeter = game.add.text(530,1880, goldValue, { font: "30px Arial", fill: "#F1C40F" })
+}
+
+
 </script>
 
 </body>
