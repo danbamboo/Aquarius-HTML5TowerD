@@ -4,7 +4,7 @@
 
 var BrigBlasterTower = function(TDgame){
     
-    Phaser.Sprite.call(this, TDgame, 1800, 1830, 'spaceItems', 'playerShip3_blue.png');
+    Phaser.Sprite.call(this, TDgame, 1400, 1830, 'spaceItems', 'playerShip3_blue.png');
     this.scale.y=.6;
     this.scale.x=.6;
     

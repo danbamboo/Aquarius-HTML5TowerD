@@ -4,7 +4,7 @@
 
 var FleetSinkerTower = function(TDgame){
     
-    Phaser.Sprite.call(this, TDgame, 1400, 1830, 'spaceItems', 'enemyGreen3.png');
+    Phaser.Sprite.call(this, TDgame, 1700, 1830, 'spaceItems', 'enemyGreen3.png');
     this.scale.y=.6;
     this.scale.x=.6;
     
