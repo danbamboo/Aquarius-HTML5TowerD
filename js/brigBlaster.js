@@ -22,6 +22,10 @@ var BrigBlasterTower = function(TDgame){
     this.weapon.autoFire = true;    
     this.weapon.multiFire = true;
     this.weapon.damage = 3;
+    
+    this.inMenu = true;
+    this.pointerOn = false;
+    this.statsMenu;
 
     //to add one child for radius
     var fireRadius = game.add.graphics();
@@ -63,16 +67,21 @@ BrigBlasterTower.prototype.update = function(){
     //Add Radius on hover 
     if(this.input.pointerOver()){
 
-        this.children[0].visible = true;           
-    }
+        this.children[0].visible = true;
+        if(this.inMenu && !this.pointerOn){
+            getStats(this);
+        }
+        
+    }    
     else{
-
+        if(this.inMenu)
+        {
+            removeStats(this);
+        }
         this.children[0].visible = false;
     }
     
     this.weapon.trackSprite(enemies, 0, 0);
-    
-    ;
     
     game.physics.arcade.overlap(this, enemies, boundCheck, null, this);
     

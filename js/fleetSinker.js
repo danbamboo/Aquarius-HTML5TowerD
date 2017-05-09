@@ -22,6 +22,10 @@ var FleetSinkerTower = function(TDgame){
     this.weapon.autoFire = true;    
     this.weapon.multiFire = true;
     this.weapon.damage = 8;
+    
+    this.inMenu = true;  
+    this.pointerOn = false;
+    this.statsMenu;
 
     var fireRadius = game.add.graphics();
     game.physics.arcade.enable(fireRadius);
@@ -64,10 +68,16 @@ FleetSinkerTower.prototype.update = function(){
     if(this.input.pointerOver()){
 
         this.children[0].visible = true;
-
+        if(this.inMenu && !this.pointerOn){
+            getStats(this);
+        }
+        
     }    
     else{
-        
+        if(this.inMenu)
+        {
+            removeStats(this);
+        }
         this.children[0].visible = false;
     }
     

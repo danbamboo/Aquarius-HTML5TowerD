@@ -22,6 +22,10 @@ var ClipCatastTower = function(TDgame){
     this.weapon.autoFire = true;    
     this.weapon.multiFire = true;
     this.weapon.damage = 6;
+    
+    this.inMenu = true;
+    this.pointerOn = false;
+    this.statsMenu;
 
     //to add radius around the tower
     var fireRadius = game.add.graphics();
@@ -64,10 +68,16 @@ ClipCatastTower.prototype.update = function(){
     if(this.input.pointerOver()){
 
         this.children[0].visible = true;
+        if(this.inMenu && !this.pointerOn){
+            getStats(this);
+        }
         
     }    
     else{
-        
+        if(this.inMenu && this.pointerOn)
+        {
+            removeStats(this);
+        }
         this.children[0].visible = false;
     }
 

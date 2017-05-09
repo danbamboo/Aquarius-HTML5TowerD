@@ -100,3 +100,18 @@ function towerCollide(tower, colTower){
         tower.input.enableDrag();
     
 }
+
+function getStats(tower){
+    tower.statsMenu = game.add.sprite(tower.x,tower.y-100,'scroll');
+    tower.statsMenu.anchor.setTo(.5,.5);
+    tower.statsMenu.scale.x = .15;
+    tower.statsMenu.scale.y = .15;
+    tower.pointerOn = true;
+}
+
+function removeStats(tower){
+    tower.pointerOn = false;
+    if(tower.statsMenu){
+        tower.statsMenu.kill();
+    }
+}
