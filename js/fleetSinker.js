@@ -9,6 +9,7 @@ var FleetSinkerTower = function(TDgame){
     this.scale.x=.6;
     
     this.towerType = "fleetSinker";
+    this.towerName = "Fleet Sinker";
     this.anchor.setTo(.5,.5);
     this.angle += 180;
     this.inputEnabled = true; 
@@ -23,9 +24,13 @@ var FleetSinkerTower = function(TDgame){
     this.weapon.multiFire = true;
     this.weapon.damage = 8;
     
-    this.inMenu = true;  
+    this.inMenu = true;
     this.pointerOn = false;
     this.statsMenu;
+    this.nameMenuText;
+    this.damageMenuText;
+    this.fireRateText;
+    this.rangeText;
 
     var fireRadius = game.add.graphics();
     game.physics.arcade.enable(fireRadius);

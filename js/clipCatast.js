@@ -9,6 +9,7 @@ var ClipCatastTower = function(TDgame){
     this.scale.x=.6;
     
     this.towerType = "clipCatast";
+    this.towerName = "Clipper Catastrophe";
     this.anchor.setTo(.5,.5);
     this.angle += 180;
     this.inputEnabled = true; 
@@ -26,6 +27,10 @@ var ClipCatastTower = function(TDgame){
     this.inMenu = true;
     this.pointerOn = false;
     this.statsMenu;
+    this.nameMenuText;
+    this.damageMenuText;
+    this.fireRateText;
+    this.rangeText;
 
     //to add radius around the tower
     var fireRadius = game.add.graphics();

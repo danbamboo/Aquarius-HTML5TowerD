@@ -9,6 +9,7 @@ var BrigBlasterTower = function(TDgame){
     this.scale.x=.6;
     
     this.towerType = "brigBlaster";
+    this.towerName = "Brigantine Blaster";
     this.anchor.setTo(.5,.5);
     this.angle += 180;
     this.inputEnabled = true; 
@@ -26,6 +27,10 @@ var BrigBlasterTower = function(TDgame){
     this.inMenu = true;
     this.pointerOn = false;
     this.statsMenu;
+    this.nameMenuText;
+    this.damageMenuText;
+    this.fireRateText;
+    this.rangeText;
 
     //to add one child for radius
     var fireRadius = game.add.graphics();

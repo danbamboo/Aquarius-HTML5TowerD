@@ -110,11 +110,31 @@ function getStats(tower){
     tower.statsMenu.scale.x = .15;
     tower.statsMenu.scale.y = .15;
     tower.pointerOn = true;
+    
+    tower.nameMenuText = game.add.text(tower.x,tower.y-130, tower.towerName, { font: "15px Arial", fill: "#641E16" });
+    tower.nameMenuText.anchor.setTo(.5,.5);
+    
+    tower.damageMenuText = game.add.text(tower.x-18,tower.y-105, 'Damage:  ' + tower.weapon.damage, { font: "16px Arial", fill: "#212F3C" });
+    tower.damageMenuText.anchor.setTo(.5,.5);
+    
+    tower.fireRateText = game.add.text(tower.x-8,tower.y-85, 'Fire Rate: ' + tower.weapon.fireRate, { font: "16px Arial", fill: "#212F3C" });
+    tower.fireRateText.anchor.setTo(.5,.5);
+    
+    tower.rangeText = game.add.text(tower.x-18,tower.y-65, 'Range:  ' + tower.weapon.bulletKillDistance, { font: "16px Arial", fill: "#212F3C" });
+    tower.rangeText.anchor.setTo(.5,.5);
+    
+    
 }
 
 function removeStats(tower){
     tower.pointerOn = false;
     if(tower.statsMenu){
         tower.statsMenu.kill();
+        tower.nameMenuText.kill();
+        tower.damageMenuText.kill();
+        tower.fireRateText.kill();
+        tower.rangeText.kill();
     }
 }
+
+
