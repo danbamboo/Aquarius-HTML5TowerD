@@ -8,6 +8,9 @@ function dragTower(tower){
     var newTower;
     tower.scale.x=1;
     tower.scale.y=1;
+    
+    removeStats(tower);
+    tower.inMenu=false;
         
     if(tower.towerType == "brigBlaster")
     {
