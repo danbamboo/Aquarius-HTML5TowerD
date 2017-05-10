@@ -10,9 +10,14 @@ var FleetSinkerTower = function(TDgame){
     
     this.towerType = "fleetSinker";
     this.towerName = "Fleet Sinker";
+<<<<<<< HEAD
     this.cost = 210;
     this.placedOnWater = false;
     this.hasBeenMoved=false;
+=======
+    this.radius = 100;
+    this.set = 0;
+>>>>>>> cc0e4b26236630fb5528034a63cb7101cc3868ce
     this.anchor.setTo(.5,.5);
     this.angle += 180;
     this.inputEnabled = true; 
@@ -46,7 +51,7 @@ var FleetSinkerTower = function(TDgame){
     var invalidPlacement = game.add.graphics();
     game.physics.arcade.enable(invalidPlacement);
     invalidPlacement.beginFill(0xFF0000, 0.3);
-    invalidPlacement.drawCircle(0, 0, 250);
+    invalidPlacement.drawCircle(0, 0, 110);
     this.addChild(invalidPlacement);
     this.children[1].visible = false;
     
@@ -68,7 +73,7 @@ FleetSinkerTower.prototype.constructor = FleetSinkerTower;
 FleetSinkerTower.prototype.update = function(){
   
     //this.events.onDragStart.add(function(){dragTower(this)}, this);
-    if(!game.physics.arcade.overlap(this, berzerkers, towerCollide, null, this)){;
+    if((towerCollision(berzerkers, this) == 0) && (this.set == 0)){
         this.events.onDragStop.add(function(){setTower(this)}, this); 
     }
  

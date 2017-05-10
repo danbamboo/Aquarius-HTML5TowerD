@@ -13,6 +13,8 @@ var BrigBlasterTower = function(TDgame){
     this.cost = 90;
     this.placedOnWater = false;
     this.hasBeenMoved=false;
+    this.radius = 100;
+    this.set = 0;
     this.anchor.setTo(.5,.5);
     this.angle += 180;
     this.inputEnabled = true; 
@@ -48,7 +50,7 @@ var BrigBlasterTower = function(TDgame){
     var invalidPlacement = game.add.graphics();
     game.physics.arcade.enable(invalidPlacement);
     invalidPlacement.beginFill(0xFF0000, 0.3);
-    invalidPlacement.drawCircle(0, 0, 250);
+    invalidPlacement.drawCircle(0, 0, 110);
     this.addChild(invalidPlacement);
     this.children[1].visible = false;
     
@@ -67,7 +69,7 @@ BrigBlasterTower.prototype.constructor = BrigBlasterTower;
 BrigBlasterTower.prototype.update = function(){
 
  //this.events.onDragStart.add(function(){dragTower(this)}, this);
-    if(!game.physics.arcade.overlap(this, berzerkers, towerCollide, null, this)){
+    if((towerCollision(berzerkers, this) == 0) && (this.set == 0)){
         this.events.onDragStop.add(function(){setTower(this)}, this); 
     }
     
