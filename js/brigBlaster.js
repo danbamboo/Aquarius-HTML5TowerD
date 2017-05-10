@@ -10,6 +10,9 @@ var BrigBlasterTower = function(TDgame){
     
     this.towerType = "brigBlaster";
     this.towerName = "Brigantine Blaster";
+    this.cost = 90;
+    this.placedOnWater = false;
+    this.hasBeenMoved=false;
     this.anchor.setTo(.5,.5);
     this.angle += 180;
     this.inputEnabled = true; 

@@ -10,6 +10,9 @@ var ClipCatastTower = function(TDgame){
     
     this.towerType = "clipCatast";
     this.towerName = "Clipper Catastrophe";
+    this.cost = 150;
+    this.placedOnWater = false;
+    this.hasBeenMoved=false;
     this.anchor.setTo(.5,.5);
     this.angle += 180;
     this.inputEnabled = true; 
