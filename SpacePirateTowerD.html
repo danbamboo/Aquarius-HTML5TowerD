@@ -218,8 +218,8 @@ function update() {
     
     //Check for collision between bullets and enemies
     game.physics.arcade.overlap(brigBlasterTower.weapon.bullets, enemies, collisionCheck, null, this);
-    game.physics.arcade.overlap(clipCatastTower.bullets, enemies, collisionCheck, null, this);
-    game.physics.arcade.overlap(fleetSinkerTower.bullets, enemies, collisionCheck, null, this);
+    game.physics.arcade.overlap(clipCatastTower.weapon.bullets, enemies, collisionCheck, null, this);
+    game.physics.arcade.overlap(fleetSinkerTower.weapon.bullets, enemies, collisionCheck, null, this);
     game.physics.arcade.overlap(rectangleEnding, enemies, enemyReachedTheEnd, null, this);
    
 }
