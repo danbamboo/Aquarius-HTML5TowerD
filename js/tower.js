@@ -60,6 +60,10 @@ function setTower(tower){
   
     game.physics.arcade.enable(tower);
     
+    console.log("BERZ LENGTH: " + berzerkers.length);
+    
+    
+    
     //to set the radius of each different type of tower for collision detection
     if(tower.towerType == "brigBlaster")
     {
@@ -77,12 +81,13 @@ function setTower(tower){
     
     console.log("Berz " + berzerkers.length + " towerR " + towerRange.length);
     //console.log("TOWERR " + towerRange.children[0].towerType);
-    
+        
     tower.input.disableDrag();
     tower.children[1].visible = false;
     berzerkers.add(tower);
+    //to mark tower as set
+    tower.set = 1;
 
-    
 }
 
 
@@ -95,14 +100,6 @@ function boundCheck(tower, enemy){
     tower.weapon.fireAtSprite(enemy);
 }
 
-function towerCollide(tower, colTower){
-    
-    console.log("BOUNDS 1 " + tower.children[0].getBounds());
-    console.log("BOUNDS 2 " + colTower.children[0].getBounds());
-        tower.children[1].visible = true;
-        tower.input.enableDrag();
-    
-}
 
 function getStats(tower){
     tower.statsMenu = game.add.sprite(tower.x,tower.y-100,'scroll');
@@ -137,4 +134,30 @@ function removeStats(tower){
     }
 }
 
+function towerCollision(towerGroup, tower){
+     
+     var collisionYN = 0
+     towerGroup.forEach(function(setTower){
+        
+        //console.log("CHECKING DISTANCE");
+        //console.log("X " + tower.x);
+        //console.log("DISTANCE IS: " + setTower.radius);
+        var tester = game.physics.arcade.distanceBetween(tower, setTower);
+        //console.log("TESTER " + tester);
+        
+        if(game.physics.arcade.distanceBetween(tower, setTower) < tower.radius){
+            //console.log("TOWER OVERLAP");
+            if(tower.set == 0){
+                tower.children[1].visible = true;
+                collisionYN = 1;
+            }
+            
+        }
+        else{
+            tower.children[1].visible = false;
+        }
 
+    });
+    
+        return collisionYN;
+}
