@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+	<head>
+		<script src="js/phaser.min.js"></script>
+		<!--Towers-->
+		<script type="text/javascript" src="js/tower.1.js"></script>
+		<script type="text/javascript" src="js/brigBlaster.1.js"></script>
+		<script type="text/javascript" src="js/clipCatast.1.js"></script>
+		<script type="text/javascript" src="js/fleetSinker.1.js"></script>
+		<!--Enemy Ships-->
+		<script type="text/javascript" src="js/enemyClass.js"></script>
+		<script type="text/javascript" src="js/enemyS-BrethrenOfTheCoast.js"></script>
+		<script type="text/javascript" src="js/enemyS-ScourgeOfTheSevenSeas.js"></script>
+		<script type="text/javascript" src="js/enemyS-TheSquirrel.js"></script>
+		<script type="text/javascript" src="js/enemyS-RoyalFortune.js"></script>
+		<script type="text/javascript" src="js/enemyS-FlyingDragon.js"></script>
+		<script type="text/javascript" src="js/enemyS-AdmiralOfTheBlack.js"></script>
+		<!--Levels-->
+		<script type="text/javascript" src="js/level1.js"></script>
+		<!--Game States-->
+    	
+    	<script src="states/boot.js"></script>
+		<script src="states/preload.js"></script>
+		<script src="states/gameMenu.js"></script>
+		<script src="states/levelOneState.js"></script>
+		<script src="states/tutorial.js"></script>
+		<script src="states/gameOver.js"></script>	
+    		<style>
+    			body{margin:0}
+    		</style>
+		<script>
+			(function() {
+				var game = new Phaser.Game(1920, 1920, Phaser.AUTO, '');
+				game.state.add("Boot",boot);
+				game.state.add("Preload",preload);
+				game.state.add("GameMenu",gameMenu);
+				game.state.add("Tutorial", tutorial);
+				game.state.add("LevelOneState", levelOneState);
+				//game.state.add("GameOver",gameOver);
+				game.state.start("Boot");
+			})();    
+		</script>
+    </head>
+    <body>
+    </body>
+</html>
