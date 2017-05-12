@@ -11,26 +11,39 @@ function dragTower(tower){
     
     removeStats(tower);
     tower.inMenu=false;
-        
-    if(tower.towerType == "brigBlaster")
-    {
-        newTower = new BrigBlasterTower(game);
-        newTower.events.onDragStart.add(function(){dragTower(newTower)}, this);
-
-    }
-    else if(tower.towerType == "clipCatast")
-    {
-        newTower = new ClipCatastTower(game);
-        newTower.events.onDragStart.add(function(){dragTower(newTower)}, this);
-    }
-    else if(tower.towerType == "fleetSinker")
-    {
-        newTower = new FleetSinkerTower(game);
-        newTower.events.onDragStart.add(function(){dragTower(newTower)}, this);
-    }
     
-    towerRange.add(newTower);
-} 
+    
+    if(currentGold >= tower.cost)
+    {
+        currentGold -= tower.cost;
+        setGold(currentGold);
+        tower.hasBeenMoved =true;
+    }
+     else{
+        tower.kill();
+    }
+     
+    
+        if(tower.towerType == "brigBlaster")
+        {
+            newTower = new BrigBlasterTower(game);
+            newTower.events.onDragStart.add(function(){dragTower(newTower)}, this);
+    
+        }
+        else if(tower.towerType == "clipCatast")
+        {
+            newTower = new ClipCatastTower(game);
+            newTower.events.onDragStart.add(function(){dragTower(newTower)}, this);
+        }
+        else if(tower.towerType == "fleetSinker")
+        {
+            newTower = new FleetSinkerTower(game);
+            newTower.events.onDragStart.add(function(){dragTower(newTower)}, this);
+        }
+        
+        towerRange.add(newTower);
+    }
+   
 
 
 //Set tower in placed
@@ -42,15 +55,26 @@ function setTower(tower){
     //Check if tower is placed in the water
     if(setTile == null){
     
-        //console.log("OVER WATER??");
+        if(!tower.placedOnWater && tower.hasBeenMoved){
+            currentGold += tower.cost;
+            setGold(currentGold);
+            tower.placedOnWater = true;
+        }
+         //console.log("OVER WATER??");
         towerRange.remove(tower);
         tower.kill();
+      
         return;
     }
     else
     {    
         if(setTile.x >= 3 && setTile.y >= 50)
         {
+            if(!tower.placedOnWater  && tower.hasBeenMoved){
+                currentGold += tower.cost;
+                setGold(currentGold);
+                tower.placedOnWater = true;
+            }
             //console.log("OVER WATER??");
             towerRange.remove(tower);
             tower.kill();

@@ -197,7 +197,11 @@ function create() {
     villager1 = game.add.sprite(908, 1024, 'villager');
     villager1.scale.x = 1.6;
     villager1.scale.y = 1.6;
- 
+    
+    rectangleEnding = game.add.sprite(2100, 1715, null);
+    game.physics.arcade.enable(rectangleEnding);
+    rectangleEnding.body.setSize(50, 50, 0, 0); // set the size of the rectangle
+    
      //Self Made Path Variables
     path1 = [{x:200,y:500},{x:1695,y:500},{x:1695,y:840},{x:70,y:840},{x:70,y:1715},{x:2500,y:1715}];
     path2 = [{x:200,y:500},{x:1150,y:500},{x:1150,y:190},{x:1695,y:190},{x:1695,y:840},{x:70,y:840},{x:70,y:1715},{x:2500,y:1715}];
@@ -214,8 +218,9 @@ function update() {
     
     //Check for collision between bullets and enemies
     game.physics.arcade.overlap(brigBlasterTower.weapon.bullets, enemies, collisionCheck, null, this);
-    game.physics.arcade.overlap(clipCatastTower.bullets, enemies, collisionCheck, null, this);
-    game.physics.arcade.overlap(fleetSinkerTower.bullets, enemies, collisionCheck, null, this);
+    game.physics.arcade.overlap(clipCatastTower.weapon.bullets, enemies, collisionCheck, null, this);
+    game.physics.arcade.overlap(fleetSinkerTower.weapon.bullets, enemies, collisionCheck, null, this);
+    game.physics.arcade.overlap(rectangleEnding, enemies, enemyReachedTheEnd, null, this);
    
 }
 //Removes enemies killed
@@ -229,6 +234,8 @@ function collisionCheck(star, enemy){
         enemy.health -= star.data.bulletManager.damage;
     }
     else{
+        currentGold += enemy.gold;
+        setGold(currentGold);
         enemy.destroy();
     }    
         star.kill();
@@ -259,6 +266,22 @@ function setWave(waveText){
 function setGold(goldValue){
     goldMeter.kill();
     goldMeter = game.add.text(530,1880, goldValue, { font: "30px Arial", fill: "#F1C40F" })
+}
+
+
+function enemyReachedTheEnd(end, enemy){
+    
+    currentGold -=  enemy.gold*2;  //Takes two times gold if you fail to kill
+    enemy.kill();
+    
+    if(currentGold < 0)
+    {
+        enemies.callAll('kill');
+        game.add.text(600,800, 'GAME OVER', { font: "150px Arial", fill: "#4A235A" })
+    }
+    else{
+        setGold(currentGold);
+    }
 }
 
 

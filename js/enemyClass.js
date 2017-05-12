@@ -6,8 +6,9 @@ var enemy = function (game,enemyType){
     
     Phaser.Sprite.call(this, game, 135, -400, enemyType.spriteSheet, enemyType.sprite);
     
+    this.name = enemyType.name;
     this.health = enemyType.health;
-    this.gold = enemyType.gold;
+    this.gold = enemyType.goldValue;
     this.speed = enemyType.speed;
     this.spriteSheet = enemyType.spriteSheet;
     this.sprite = enemyType.sprite;
