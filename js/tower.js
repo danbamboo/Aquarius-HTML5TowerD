@@ -48,6 +48,7 @@ function dragTower(tower){
 
 //Set tower in placed
 function setTower(tower){
+    if(tower.set ==0){
     console.log("****SETTTTTTTTIIIINNGGGG*********");
     
     var setTile = map.getTileWorldXY(tower.x, tower.y, 32, 32, collisionLayer);
@@ -111,7 +112,8 @@ function setTower(tower){
     berzerkers.add(tower);
     //to mark tower as set
     tower.set = 1;
-
+    }
+    
 }
 
 
