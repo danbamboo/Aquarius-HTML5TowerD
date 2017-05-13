@@ -21,7 +21,7 @@ var FleetSinkerTower = function(TDgame){
     this.input.enableDrag(true);
     this.weapon = game.add.weapon(30, 'spaceItems', 'laserGreen13.png');
     this.weapon.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
-    this.weapon.bulletKillDistance = 50;
+    this.weapon.bulletKillDistance = 70;
     this.weapon.bulletSpeed = 4000;
     this.weapon.fireRate = 550;
     this.weapon.trackRotation = true;
@@ -96,5 +96,6 @@ FleetSinkerTower.prototype.update = function(){
     
     //Check when enemy enter boundary
     game.physics.arcade.overlap(this, enemies, boundCheck, null, this);
+    this.game.physics.arcade.overlap(this.weapon.bullets, enemies, collisionCheck, null, this);
     
 }

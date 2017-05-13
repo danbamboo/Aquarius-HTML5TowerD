@@ -94,5 +94,5 @@ BrigBlasterTower.prototype.update = function(){
     this.weapon.trackSprite(enemies, 0, 0);
     
     game.physics.arcade.overlap(this, enemies, boundCheck, null, this);
-    
+    this.game.physics.arcade.overlap(this.weapon.bullets, enemies, collisionCheck, null, this);
 }

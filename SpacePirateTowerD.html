@@ -219,26 +219,20 @@ function create() {
 function update() {
     
     //Check for collision between bullets and enemies
-    game.physics.arcade.overlap(brigBlasterTower.weapon.bullets, enemies, collisionCheck, null, this);
-    game.physics.arcade.overlap(clipCatastTower.weapon.bullets, enemies, collisionCheck, null, this);
-    game.physics.arcade.overlap(fleetSinkerTower.weapon.bullets, enemies, collisionCheck, null, this);
     game.physics.arcade.overlap(rectangleEnding, enemies, enemyReachedTheEnd, null, this);
    
 }
 //Removes enemies killed
 function collisionCheck(star, enemy){
-    console.log("HEALTH " + enemy.health);
-    console.log("CURRENT DAMAGE " + star.data.bulletManager.damage);
+    // console.log("HEALTH " + enemy.health);
+    // console.log("CURRENT DAMAGE " + star.data.bulletManager.damage);
     
-    
-    if(enemy.health > 0){
-        
-        enemy.health -= star.data.bulletManager.damage;
+    enemy.health -= star.data.bulletManager.damage;
         if(DEBUG){
             updateEnemyHealth(enemy);
         }
-    }
-    else{
+    
+    if(enemy.health <  0){
         currentGold += enemy.gold;
         setGold(currentGold);
         enemy.destroy();
