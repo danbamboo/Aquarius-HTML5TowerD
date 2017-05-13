@@ -61,7 +61,9 @@ function preload() {
 //***************************
 // Global Variables
 //***************************
-    
+//DEBUG MODE
+var DEBUG = false;
+
 var map;
 var layer;
 var sendWaveButton;
@@ -232,6 +234,9 @@ function collisionCheck(star, enemy){
     if(enemy.health > 0){
         
         enemy.health -= star.data.bulletManager.damage;
+        if(DEBUG){
+            updateEnemyHealth(enemy);
+        }
     }
     else{
         currentGold += enemy.gold;

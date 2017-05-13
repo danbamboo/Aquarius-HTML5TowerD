@@ -18,6 +18,14 @@ var enemy = function (game,enemyType){
     this.anchor.setTo(.5,.5);
     game.physics.arcade.enable(this);
     enemies.add(this);
+    
+    //DEBUG  for enemy health update
+    if(DEBUG){
+           
+    var enemyHealthText = game.add.text(this.x-135,this.y+300, this.health, { font: "50px Arial", fill: "#4A235A" });
+    this.addChild(enemyHealthText);
+
+    }
 }
 
 enemy.prototype = Object.create(Phaser.Sprite.prototype);
@@ -183,3 +191,9 @@ function wrapSendWave(enemyType, howMany,pathArr,text,callNext){
 function pickRandomPathLevel1(numberOfPossiblePaths){
     return Math.floor((Math.random()*100) % numberOfPossiblePaths);
 }
+
+function updateEnemyHealth(enemy){
+        enemy.children[0].destroy();
+        var enemyHealthText = game.add.text(this.x,this.y, enemy.health, { font: "50px Arial", fill: "#4A235A" });
+        enemy.addChild(enemyHealthText);
+    }
