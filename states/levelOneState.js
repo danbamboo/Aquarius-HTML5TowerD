@@ -200,13 +200,14 @@ levelOneState.prototype = {
     setGold: function(goldValue){
         goldMeter.kill();
         goldMeter = this.game.add.text(530,1880, goldValue, { font: "30px Arial", fill: "#F1C40F" })
-    },
+    }
+
 
 	
+	/*level2: function(){
+		this.game.state.start("");
+	}*/
 	
-	menu: function(){
-		this.game.state.start("GameMenu");
-	}
-	
-	
+
 }
+

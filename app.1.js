@@ -12,7 +12,7 @@ var dynamicPortAssignment;  //Choose port based on deployment (cloud9 vs EC2)
 app.use(express.static(__dirname + '/js'));
 app.use(express.static(__dirname + '/assets'));
 app.use(express.static(__dirname + '/Spritesheets'));
-
+app.use(express.static(__dirname + '/states'));
 
 
 //DEMO HOW TO ADD SOME JSON WITH  ROUTE
@@ -30,8 +30,8 @@ app.use(express.static(__dirname + '/Spritesheets'));
 // });
 
 app.get('/', function(req, res){
-   res.sendFile(path.join(__dirname+'/SpacePirateTowerD.html')); 
-   
+   //res.sendFile(path.join(__dirname+'/SpacePirateTowerD.html')); 
+   res.sendFile(path.join(__dirname+'/index.html'));
 });
 
 //For use on node server

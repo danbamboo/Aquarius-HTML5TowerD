@@ -96,3 +96,4 @@ ClipCatastTower.prototype.update = function(){
     this.game.physics.arcade.overlap(this, enemies, boundCheck, null, this);
     
 }
+

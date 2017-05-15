@@ -65,7 +65,7 @@ BrigBlasterTower.prototype.constructor = BrigBlasterTower;
 
 BrigBlasterTower.prototype.update = function(){
 
- //this.events.onDragStart.add(function(){dragTower(this)}, this);
+    //this.events.onDragStart.add(function(){dragTower(this)}, this);
     if((towerCollision(berzerkers, this) == 0) && (this.set == 0)){
         this.events.onDragStop.add(function(){setTower(this)}, this); 
     }

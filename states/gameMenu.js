@@ -22,9 +22,12 @@ gameMenu.prototype = {
 	
 	playGame: function(){
 		this.game.state.start("LevelOneState");
+		//console.log("play game");
+		
 	},
 	
 	tutorial: function(){
 		this.game.state.start("Tutorial");
+	//console.log("tutorial");
 	}
 }
