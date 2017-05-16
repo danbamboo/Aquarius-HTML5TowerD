@@ -1,0 +1,57 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+	<meta charset="UTF-8" />
+	<title>Space Pirate Defense Tutorial</title>
+	<script ty pe="text/javascript" src="phaser.min.js"></script>
+
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+<script type="text/javascript">
+
+var tutorialPage = new Phaser.Game(1920, 1920, Phaser.AUTO, '', {preload: preload, create: create});
+
+function preload() {
+
+    tutorialPage.load.image('stars', 'stars.jpg');
+    tutorialPage.load.image('gameLogo','gameLogo.png');
+    tutorialPage.load.image('tutorial','tutorial.png');
+    tutorialPage.load.image('back','back.png');
+    
+    tutorialPage.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+}
+
+function create() {
+    
+    	tutorialPage.scale.pageAlignVertically = true;
+    	tutorialPage.scale.pageAlignHorizontally = true; 
+    	tutorialPage.scale.refresh();
+    
+        var background = tutorialPage.add.sprite(0, 0, 'stars');
+  	    
+  	    var gameLogo = tutorialPage.add.sprite(tutorialPage.world.centerX-840, 200, 'gameLogo');
+
+		var text = tutorialPage.add.text(tutorialPage.world.centerX-240, 700, 'Tutorial Page', {font: "80px Arial", fill: 'white'});
+		
+		var backButton = tutorialPage.add.button(310, 1800, 'back', menu, this);
+		backButton.anchor.setTo(0.5,0.5);
+		
+}
+
+//Return to menu
+function menu(){
+		window.location.href = '/menu';
+	}
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+	<meta charset="UTF-8" />
+	<title>Loading Space Pirate Defense</title>
+	<script ty pe="text/javascript" src="phaser.min.js"></script>
+
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+<script type="text/javascript">
+
+var loadingPage = new Phaser.Game(1920, 1920, Phaser.AUTO, '', {preload: preload, create: create});
+
+function preload() {
+ 
+    loadingPage.load.image('stars', 'stars.jpg');
+    loadingPage.load.image('gameLogo','gameLogo.png');
+    loadingPage.load.image('bar','bar.png'); 
+    
+    loadingPage.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+}
+
+function create() {
+    
+    	loadingPage.scale.pageAlignVertically = true;
+    	loadingPage.scale.pageAlignHorizontally = true; 
+    	loadingPage.scale.refresh();
+    
+        var background = loadingPage.add.sprite(0, 0, 'stars');
+  	    
+  	    var gameLogo = loadingPage.add.sprite(loadingPage.world.centerX-840, 600, 'gameLogo');
+        
+        //var bar = loadingPage.add.sprite(loadingPage.world.centerX-600, 1000,'bar');
+        //this.load.setPreloadSprite(bar);
+		
+		var status = loadingPage.add.text(loadingPage.world.centerX-100, 1200, 'Loading...', {font: '52px Arial', fill: 'white'});
+		
+		this.start(window.location.href = '/menu');
+}
+
+
+</script>
+
+</body>
+</html>
+
