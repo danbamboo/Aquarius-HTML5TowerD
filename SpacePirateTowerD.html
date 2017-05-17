@@ -18,6 +18,7 @@
 		<script type="text/javascript" src="enemyS-AdmiralOfTheBlack.js"></script>
 		<!--Levels-->
 		<script type="text/javascript" src="level1.js"></script>
+		<script type="text/javascript" src="level2.js"></script>
 		
     <style type="text/css">
         body {
@@ -37,9 +38,11 @@ var game = new Phaser.Game(1920, 1920, Phaser.AUTO, '', { preload: preload, crea
 function preload() {
     //load map
     game.load.tilemap('pirateMapOcean', 'pirateMapProto4-2.json', null, Phaser.Tilemap.TILED_JSON);
+    game.load.tilemap('pirateMapLevel2', 'pirateMapLvl2.json', null, Phaser.Tilemap.TILED_JSON);
     
     //Load Images
     game.load.image('tiles', 'tiles_sheet.png');
+    game.load.image('tiles2', 'towerDefense_tilesheet.png');
     game.load.image('sendNextWaveButtn', 'SendWaveRed.png');
     game.load.image('tree', 'Tree_1.png');
     game.load.image('shipsMisc3', '2nd_ship_new_3.png');
@@ -84,6 +87,7 @@ var fleetSinkerTower;
 var currentGold, goldMeter;
 var brigCost, clipCost,fleetCost;
 var rectangleEnding, enemySign;
+var victoryText;
     
 //Tower Groups
 var berzerkers;
@@ -213,7 +217,7 @@ function create() {
     level1Path = [path1,path2,path3,path4];
   
     //Initiate Tween
-    sendWaveButton.events.onInputDown.add(wave1, this);
+    sendWaveButton.events.onInputDown.add(level1Wave1, this);
     
 }
 function update() {
@@ -248,13 +252,11 @@ function render(){
 
 //Nav Bar Update Functions for Text
 
-function setLevel(levelNumberText,levelName){
+function setLevel(levelNumberText,levelNameText){
     level.kill();
     levelName.kill();
-    currentLevel = levelNumberText;
-    currentLevelName = levelName;
-    level = game.add.text(20,1800, currentLevel, { font: "40px Arial", fill: "#EBEBEB" })
-    levelName = game.add.text(20,1850, currentLevelName, { font: "40px Arial", fill: "#7FFFD4" })
+    level = game.add.text(20,1800, levelNumberText, { font: "40px Arial", fill: "#EBEBEB" })
+    levelName = game.add.text(20,1850, levelNameText, { font: "40px Arial", fill: "#7FFFD4" })
 }
 
 function setWave(waveText){
@@ -273,16 +275,33 @@ function enemyReachedTheEnd(end, enemy){
     currentGold -=  enemy.gold*2;  //Takes two times gold if you fail to kill
     enemy.kill();
     
-    if(currentGold < 0)
+    if(currentGold <= 0)
     {
-        enemies.callAll('kill');
-        game.add.text(600,800, 'GAME OVER', { font: "150px Arial", fill: "#4A235A" })
+        gameOver();
     }
     else{
         setGold(currentGold);
     }
 }
 
+function gameOver(){
+    enemies.callAll('kill');
+    enemies.destroy();
+    berzerkers.destroy();
+    var gameOver = game.add.text(600,800, 'GAME OVER\nClick To Retry?', { font: "150px Arial", fill: "#1B4F72" });
+    gameOver.inputEnabled = true;
+     gameOver.events.onInputDown.add(function(){
+         window.location.href = '/level1';
+     }, this);
+}
+
+function victoryTextCreate(){
+    victoryText = game.add.text(600,800, 'Victory!', { font: "150px Arial", fill: "#1B4F72" });
+}
+
+function victoryTextDestroy(){
+    victoryText.kill();
+}
 
 </script>
 
