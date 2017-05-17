@@ -10,7 +10,7 @@ var BrigBlasterTower = function(TDgame){
     
     this.towerType = "brigBlaster";
     this.towerName = "Brigantine Blaster";
-    this.cost = 90;
+    this.cost = 75;
     this.placedOnWater = false;
     this.hasBeenMoved=false;
     this.radius = 100;
@@ -21,14 +21,14 @@ var BrigBlasterTower = function(TDgame){
     this.input.enableDrag(true);
     this.weapon = game.add.weapon(30, 'spaceItems', 'beam6.png');
     this.weapon.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
-    this.weapon.bulletKillDistance = 300;
-    this.weapon.bulletSpeed = 2000;
-    this.weapon.fireRate = 150;
+    this.weapon.bulletKillDistance = 550;
+    this.weapon.bulletSpeed = 4000;
+    this.weapon.fireRate = 500
     this.weapon.trackRotation = true;
     this.weapon.autoFire = true;    
     this.weapon.multiFire = true;
-    this.weapon.damage = 3;
-    
+    this.weapon.damage = 1
+
     this.inMenu = true;
     this.pointerOn = false;
     this.statsMenu;
@@ -42,7 +42,7 @@ var BrigBlasterTower = function(TDgame){
     game.physics.arcade.enable(fireRadius);
     //to make it invisible upon creation
     fireRadius.lineStyle(5, 0x191970, 0.8);
-    fireRadius.drawCircle(0, 0, 600);
+    fireRadius.drawCircle(0, 0, 1100);
     this.addChild(fireRadius);
     this.children[0].visible = false;
     
@@ -90,9 +90,10 @@ BrigBlasterTower.prototype.update = function(){
         }
         this.children[0].visible = false;
     }
-    
+
     this.weapon.trackSprite(enemies, 0, 0);
-    
+
     game.physics.arcade.overlap(this, enemies, boundCheck, null, this);
+
     this.game.physics.arcade.overlap(this.weapon.bullets, enemies, collisionCheck, null, this);
 }

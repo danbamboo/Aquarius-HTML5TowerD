@@ -92,15 +92,15 @@ function setTower(tower){
     //to set the radius of each different type of tower for collision detection
     if(tower.towerType == "brigBlaster")
     {
-        tower.body.setCircle(300, -300, -300);
+        tower.body.setCircle(550, -550, -550);
     }
     else if(tower.towerType == "clipCatast")
     {
-        tower.body.setCircle(250,-250,-250);
+        tower.body.setCircle(400,-400,-400);
     }
     else if(tower.towerType == "fleetSinker")
     {
-        tower.body.setCircle(150,-150,-150);
+        tower.body.setCircle(250,-250,-250);
     }  
     
     

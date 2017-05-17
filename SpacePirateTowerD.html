@@ -166,10 +166,10 @@ function create() {
     game.add.text(277,1845, 'Wave:', { font: "30px Arial", fill: "#EBEBEB" });
     wave = game.add.text(280,1880, currentWave, { font: "30px Arial", fill: "#E74C3C" });
     //Menu Bar Gold Costs
-    brigCost = 90;
+    brigCost = 75;
     clipCost = 150;
-    fleetCost = 210;
-    currentGold = 250;  //Init player with 250 gold to start game
+    fleetCost = 300;
+    currentGold = 300;  //Init player with 250 gold to start game
     game.add.text(510,1845, 'Gold:', { font: "30px Arial", fill: "#EBEBEB" });
     goldMeter = game.add.text(530,1880, currentGold, { font: "30px Arial", fill: "#F1C40F" });
     game.add.text(1385,1870, brigCost, { font: "30px Arial", fill: "#F1C40F" });
@@ -237,7 +237,7 @@ function collisionCheck(star, enemy){
         }
     
     if(enemy.health <  0){
-        currentGold += enemy.gold;
+        currentGold += enemy.gold * 3;
         setGold(currentGold);
         enemy.destroy();
     }    
