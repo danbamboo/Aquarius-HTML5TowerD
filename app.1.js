@@ -29,11 +29,8 @@ app.use(express.static(__dirname + '/Spritesheets'));
 //    });
 // });
 
-app.get('/', function(req, res){
-   res.sendFile(path.join(__dirname+'/loading.html')); 
-})
 
-app.get('/menu', function(req, res){
+app.get('/', function(req, res){
    res.sendFile(path.join(__dirname+'/menu.html')); 
 });
 
