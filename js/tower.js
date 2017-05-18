@@ -24,25 +24,26 @@ function dragTower(tower){
     }
      
     
-        if(tower.towerType == "brigBlaster")
-        {
-            newTower = new BrigBlasterTower(game);
-            newTower.events.onDragStart.add(function(){dragTower(newTower)}, this);
-    
-        }
-        else if(tower.towerType == "clipCatast")
-        {
-            newTower = new ClipCatastTower(game);
-            newTower.events.onDragStart.add(function(){dragTower(newTower)}, this);
-        }
-        else if(tower.towerType == "fleetSinker")
-        {
-            newTower = new FleetSinkerTower(game);
-            newTower.events.onDragStart.add(function(){dragTower(newTower)}, this);
-        }
-        
-        towerRange.add(newTower);
+    if(tower.towerType == "brigBlaster")
+    {
+        newTower = new BrigBlasterTower(game);
+        newTower.events.onDragStart.add(function(){dragTower(newTower)}, this);
+
     }
+    else if(tower.towerType == "clipCatast")
+    {
+        newTower = new ClipCatastTower(game);
+        newTower.events.onDragStart.add(function(){dragTower(newTower)}, this);
+    }
+    else if(tower.towerType == "fleetSinker")
+    {
+        newTower = new FleetSinkerTower(game);
+        newTower.events.onDragStart.add(function(){dragTower(newTower)}, this);
+    }
+    
+    towerRange.add(newTower);
+    
+}
    
 
 
@@ -51,7 +52,8 @@ function setTower(tower){
     if(tower.set ==0){
     console.log("****SETTTTTTTTIIIINNGGGG*********");
     
-    var setTile = map.getTileWorldXY(tower.x, tower.y, 32, 32, collisionLayer);
+    var setTile = map.getTileWorldXY(tower.x, tower.y, 32, 29, collisionLayer);
+    //console.log(setTile);
     
     //Check if tower is placed in the water
     if(setTile == null){
@@ -64,29 +66,12 @@ function setTower(tower){
          //console.log("OVER WATER??");
         towerRange.remove(tower);
         tower.kill();
-      
         return;
     }
-    else
-    {    
-        if(setTile.x >= 3 && setTile.y >= 50)
-        {
-            if(!tower.placedOnWater  && tower.hasBeenMoved){
-                currentGold += tower.cost;
-                setGold(currentGold);
-                tower.placedOnWater = true;
-            }
-            //console.log("OVER WATER??");
-            towerRange.remove(tower);
-            tower.kill();
-            return;
-        }
-    }
-  
+
     game.physics.arcade.enable(tower);
     
     console.log("BERZ LENGTH: " + berzerkers.length);
-    
     
     
     //to set the radius of each different type of tower for collision detection
@@ -113,7 +98,6 @@ function setTower(tower){
     //to mark tower as set
     tower.set = 1;
     }
-    
 }
 
 

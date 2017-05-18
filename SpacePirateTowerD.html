@@ -71,7 +71,7 @@ var map;
 var layer;
 var sendWaveButton;
 var collisionLayer;
-var pathTiles = [3, 4, 5, ,6, 7, 63, 64, 65, 66, 67, 123, 124, 125, 126, 127, 183, 184, 185, 186, 187, 243, 244, 245, 246, 247, 303, 304, 305, 306, 307, 363, 364, 365, 366, 367, 423, 424, 425, 426, 427];
+
 
 //MenuBarVariables
 var navbar;
@@ -116,27 +116,17 @@ function create() {
     //add the tileset from the json file
     map.addTilesetImage('tiles_sheet', 'tiles');
     
-    
     layer = map.createLayer('Ground');
-    layer.scale.y = .95;
+    layer.scale.y = .93;
     collisionLayer = map.createLayer('Background');
-    collisionLayer.scale.y = .95;
-    //layer = map.createLayer('Background');
-    //layer.scale.y = .95;
+    collisionLayer.scale.y = .93;
     layer = map.createLayer('Foreground');
-    layer.scale.y = .95;
+    layer.scale.y = .93;
     layer = map.createLayer('TowerCollision');
-    layer.scale.y = .95;
-    
+    layer.scale.y = .93;
     
     //Game Board Alignment
     layer.resizeWorld();
-    
-    //map.setLayer(collisionLayer);
-    //map.setCollisionByExclusion([], true, collisionLayer);
-    //map.setCollision([273, 274, 305, 306], true, collisionLayer);
-    //map.setCollision(['272', '273', '304', '305'], true, collisionLayer);
-    //map.setCollisionByExclusion('null', collisionLayer);
     collisionLayer.resizeWorld();
     
     game.scale.pageAlignVertically = true;
@@ -147,7 +137,6 @@ function create() {
     enemies = game.add.group();
     game.physics.arcade.enable(enemies);
    
-    
     
     navbar = game.add.sprite(0, 1760, 'navbar');
     //Send Wave Button
@@ -193,8 +182,8 @@ function create() {
     
     //Misc Sprites
     spTree = game.add.sprite(1400, 1100, 'tree');
-    spTree.scale.x = .6;
-    spTree.scale.y = .6;
+    spTree.scale.x = .5;
+    spTree.scale.y = .5;
     
 
     village = game.add.sprite(675,1030,'village');

@@ -53,18 +53,16 @@ function loadLevel2(){
         layer.scale.y = .93;
         collisionLayer = map.createLayer('Background');
         collisionLayer.scale.y = .93;
-        //layer = map.createLayer('Background');
-        //layer.scale.y = .95;
         layer = map.createLayer('Ground');
         layer.scale.y = .93;
     
     
-    //Game Board Alignment
-    layer.resizeWorld();
-    collisionLayer.resizeWorld();
-    game.scale.pageAlignVertically = true;
-    game.scale.pageAlignHorizontally = true; 
-    game.scale.refresh();
+        //Game Board Alignment
+        layer.resizeWorld();
+        collisionLayer.resizeWorld();
+        game.scale.pageAlignVertically = true;
+        game.scale.pageAlignHorizontally = true; 
+        game.scale.refresh();
         
         
         rectangleEnding = game.add.sprite(2100, 1715, null);
