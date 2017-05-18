@@ -50,13 +50,13 @@ function loadLevel2(){
         map.addTilesetImage('tiles_sheet', 'tiles');
         map.addTilesetImage('towerDefense_tilesheet', 'tiles2');
         layer = map.createLayer('Water');
-        layer.scale.y = .95;
+        layer.scale.y = .93;
         collisionLayer = map.createLayer('Background');
-        collisionLayer.scale.y = .95;
+        collisionLayer.scale.y = .93;
         //layer = map.createLayer('Background');
         //layer.scale.y = .95;
         layer = map.createLayer('Ground');
-        layer.scale.y = .95;
+        layer.scale.y = .93;
     
     
     //Game Board Alignment
