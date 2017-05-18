@@ -121,9 +121,11 @@ function setTower(tower){
 function boundCheck(tower, enemy){
     
     //to follow first enemy within tower radius
-    tower.rotation = game.physics.arcade.angleBetween(tower, enemy) - 80; 
-    tower.weapon.trackSprite(tower, 0, 0);
-    tower.weapon.fireAtSprite(enemy);
+    //tower.rotation = game.physics.arcade.angleBetween(tower.weapon, enemy) - 80; 
+    tower.weapon.trackSprite(tower, 0, 0, true);
+    while(tower.weapon.fireAtSprite(enemy)){
+        tower.rotation = game.physics.arcade.angleBetween(tower, enemy) -80;
+    }
 }
 
 

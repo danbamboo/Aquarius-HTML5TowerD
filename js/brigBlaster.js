@@ -68,6 +68,9 @@ BrigBlasterTower.prototype.constructor = BrigBlasterTower;
 
 BrigBlasterTower.prototype.update = function(){
 
+    //console.log(this);
+    
+
  //this.events.onDragStart.add(function(){dragTower(this)}, this);
     if((towerCollision(berzerkers, this) == 0) && (this.set == 0)){
         this.events.onDragStop.add(function(){setTower(this)}, this); 
@@ -92,8 +95,19 @@ BrigBlasterTower.prototype.update = function(){
     }
 
     this.weapon.trackSprite(enemies, 0, 0);
+    
+    //to cycle through each enemy checking if it is within shooting range, if so fire upon first enemy in range
+    enemies.forEach(function(IndEnemy){
+        console.log(IndEnemy);
+        if(game.physics.arcade.distanceBetween(this, IndEnemy) < this.weapon.bulletKillDistance){
+            boundCheck(this, IndEnemy);
+        }
 
-    game.physics.arcade.overlap(this, enemies, boundCheck, null, this);
+        
+    }, this);
+
+
+    //game.physics.arcade.overlap(this, enemies, boundCheck, null, this);
 
     this.game.physics.arcade.overlap(this.weapon.bullets, enemies, collisionCheck, null, this);
 }
