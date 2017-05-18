@@ -94,7 +94,7 @@ FleetSinkerTower.prototype.update = function(){
     
     this.weapon.trackSprite(enemies, 0, 0);
     
-    //Check when enemy enter boundary
+    //to cycle through enemies and see if they are within shooting range, if so engage with them
     game.physics.arcade.overlap(this, enemies, boundCheck, null, this);
     this.game.physics.arcade.overlap(this.weapon.bullets, enemies, collisionCheck, null, this);
     
