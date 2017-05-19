@@ -217,9 +217,13 @@ function collisionCheck(star, enemy){
     if(enemy.health <  0){
         currentGold += enemy.gold * 3;
         setGold(currentGold);
+        var currTile = map.getTileWorldXY(enemy.x, enemy.y, 32, 29, layer1);
         enemy.destroy();
+        var explosion = game.add.sprite(currTile.x*32, currTile.y*29, 'shipsMisc1', 'explosion1.png');
+        game.time.events.add(300, function(){removeExplosion(explosion)}, this);
     }    
         star.kill();
+       
 }
  
     
@@ -261,6 +265,11 @@ function enemyReachedTheEnd(end, enemy){
     else{
         setGold(currentGold);
     }
+}
+
+function removeExplosion(explosion){
+    
+    explosion.kill();
 }
 
 function gameOver(){
