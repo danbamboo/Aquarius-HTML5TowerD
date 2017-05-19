@@ -65,7 +65,7 @@ function preload() {
 // Global Variables
 //***************************
 //DEBUG MODE
-var DEBUG = false;
+var DEBUG = true;
 var skipLevel2;
 
 var map;
@@ -176,16 +176,16 @@ function create() {
     villager1.scale.x = 1.6;
     villager1.scale.y = 1.6;
     
-    rectangleEnding = game.add.sprite(2100, 1715, null);
+    rectangleEnding = game.add.sprite(2100, 1680, null);
     game.physics.arcade.enable(rectangleEnding);
     rectangleEnding.body.setSize(50, 50, 0, 0); // set the size of the rectangle
     
      //Self Made Path Variables
-    path1 = [{x:200,y:500},{x:1695,y:500},{x:1695,y:840},{x:70,y:840},{x:70,y:1715},{x:2500,y:1715}];
-    path2 = [{x:200,y:500},{x:1150,y:500},{x:1150,y:190},{x:1695,y:190},{x:1695,y:840},{x:70,y:840},{x:70,y:1715},{x:2500,y:1715}];
+    path1 = [{x:200,y:490},{x:1695,y:490},{x:1695,y:823},{x:70,y:823},{x:70,y:1700},{x:2500,y:1700}];
+    path2 = [{x:200,y:490},{x:1150,y:490},{x:1150,y:185},{x:1695,y:185},{x:1695,y:823},{x:70,y:823},{x:70,y:1700},{x:2500,y:1700}];
     //Path 3 goes around the first island
-    path3 = [{x:200,y:500},{x:510,y:500},{x:510,y:840},{x:1050,y:840},{x:1050,y:1390},{x:70,y:1390},{x:70,y:1715},{x:2500,y:1715}];
-    path4 = [{x:200,y:500},{x:1695,y:500},{x:1695,y:840},{x:1050,y:840},{x:1050,y:1390},{x:70,y:1390},{x:70,y:1715},{x:2500,y:1715}];
+    path3 = [{x:200,y:490},{x:510,y:490},{x:510,y:823},{x:1050,y:823},{x:1050,y:1355},{x:70,y:1355},{x:70,y:1700},{x:2500,y:1700}];
+    path4 = [{x:200,y:490},{x:1695,y:490},{x:1695,y:823},{x:1050,y:823},{x:1050,y:1355},{x:70,y:1355},{x:70,y:1700},{x:2500,y:1700}];
     level1Path = [path1,path2,path3,path4];
   
 
