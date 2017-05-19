@@ -4,7 +4,14 @@
 
 var enemy = function (game,enemyType){
     
-    Phaser.Sprite.call(this, game, 135, -400, enemyType.spriteSheet, enemyType.sprite);
+    //Inital Position Based On Level
+    if(currentLevel=="Level 1"){
+        Phaser.Sprite.call(this, game, 135, -400, enemyType.spriteSheet, enemyType.sprite);
+
+    }
+    else if(currentLevel=="Level 2"){
+        Phaser.Sprite.call(this, game, 1850, -400, enemyType.spriteSheet, enemyType.sprite);
+    }
     
     this.name = enemyType.name;
     this.health = enemyType.health;
@@ -21,9 +28,14 @@ var enemy = function (game,enemyType){
     
     //DEBUG  for enemy health update
     if(DEBUG){
-           
-    var enemyHealthText = game.add.text(this.x-135,this.y+300, this.health, { font: "50px Arial", fill: "#4A235A" });
-    this.addChild(enemyHealthText);
+        var enemyHealthText;
+           if(currentLevel=="Level 1"){
+               enemyHealthText = game.add.text(this.x-135,this.y+300, this.health, { font: "50px Arial", fill: "#4A235A" });
+           }
+           else if(currentLevel=="Level 2"){
+                enemyHealthText = game.add.text(this.x-1800,this.y+300, this.health, { font: "50px Arial", fill: "#4A235A" });
+           }
+                this.addChild(enemyHealthText);
 
     }
 }

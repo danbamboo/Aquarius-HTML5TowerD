@@ -106,6 +106,7 @@ var village;
 
 //Self Made Path Variables
 var level1Path = [];
+var level2Path = [];
 var path1,path2,path3,path4,path5;
 var timeoutIndex =0;
 function create() {
@@ -232,6 +233,7 @@ function render(){
 function setLevel(levelNumberText,levelNameText){
     level.kill();
     levelName.kill();
+    currentLevel = levelNumberText;
     level = game.add.text(20,1800, levelNumberText, { font: "40px Arial", fill: "#EBEBEB" })
     levelName = game.add.text(20,1850, levelNameText, { font: "40px Arial", fill: "#7FFFD4" })
 }
