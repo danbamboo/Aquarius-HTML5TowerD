@@ -27,7 +27,7 @@ var BrigBlasterTower = function(TDgame){
     this.weapon.trackRotation = true;
     this.weapon.autoFire = true;    
     this.weapon.multiFire = true;
-    this.weapon.damage = 1
+    this.weapon.damage = 1;
 
     this.inMenu = true;
     this.pointerOn = false;
@@ -97,15 +97,16 @@ BrigBlasterTower.prototype.update = function(){
     this.weapon.trackSprite(enemies, 0, 0);
     
     //to cycle through each enemy checking if it is within shooting range, if so fire upon first enemy in range
-    enemies.forEach(function(IndEnemy){
-        console.log(IndEnemy);
-        if(game.physics.arcade.distanceBetween(this, IndEnemy) < this.weapon.bulletKillDistance){
-            boundCheck(this, IndEnemy);
-        }
-
-        
-    }, this);
-
+    if(this.set == 1){
+        enemies.forEach(function(IndEnemy){
+            console.log(IndEnemy);
+            if(game.physics.arcade.distanceBetween(this, IndEnemy) < this.weapon.bulletKillDistance){
+                boundCheck(this, IndEnemy);
+            }
+    
+            
+        }, this);
+    }
 
     //game.physics.arcade.overlap(this, enemies, boundCheck, null, this);
 

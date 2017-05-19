@@ -92,7 +92,17 @@ FleetSinkerTower.prototype.update = function(){
     }
     
     
-    this.weapon.trackSprite(enemies, 0, 0);
+    //to cycle through each enemy checking if it is within shooting range, if so fire upon first enemy in range
+    if(this.set == 1){
+        enemies.forEach(function(IndEnemy){
+            console.log(IndEnemy);
+            if(game.physics.arcade.distanceBetween(this, IndEnemy) < this.weapon.bulletKillDistance){
+                boundCheck(this, IndEnemy);
+            }
+    
+            
+        }, this);
+    }
     
     //to cycle through enemies and see if they are within shooting range, if so engage with them
     game.physics.arcade.overlap(this, enemies, boundCheck, null, this);
