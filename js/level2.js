@@ -172,16 +172,16 @@ function level2Wave10(){
 
 function createMap2(){
      //to load the map into the map
-    map2 = game.add.tilemap('pirateMapLevel2');
+    map = game.add.tilemap('pirateMapLevel2');
     //add the tileset from the json file
-    map2.addTilesetImage('tiles_sheet', 'tiles');
-    map2.addTilesetImage('towerDefense_tilesheet', 'tiles2');
+    map.addTilesetImage('tiles_sheet', 'tiles');
+    map.addTilesetImage('towerDefense_tilesheet', 'tiles2');
 
-    layer1 = map2.createLayer('Water');
+    layer1 = map.createLayer('Water');
     layer1.scale.y=.93;
-    collisionLayer = map2.createLayer('Background');
+    collisionLayer = map.createLayer('Background');
     collisionLayer.scale.y = .93;
-    layer2 = map2.createLayer('Ground');
+    layer2 = map.createLayer('Ground');
     layer2.scale.y = .93;
     
     //SendToBack
@@ -199,8 +199,8 @@ function createMap2(){
     game.scale.refresh();
 }
 
-function destroyMap2(){
-    map2.destroy();
+function destroymap(){
+    map.destroy();
     collisionLayer.destroy();
     layer1.destroy();
     layer2.destroy();
