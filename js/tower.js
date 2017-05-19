@@ -78,6 +78,7 @@ function setTower(tower){
     if(tower.towerType == "brigBlaster")
     {
         tower.body.setCircle(550, -550, -550);
+        
     }
     else if(tower.towerType == "clipCatast")
     {
