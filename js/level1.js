@@ -98,3 +98,37 @@ function level1Wave10(){
 }
 //ENEMY LEVEL 1 WAVES
 //============================
+
+function createMap1(){
+     //to load the map into the map
+    map = game.add.tilemap('pirateMapOcean');
+    //add the tileset from the json file
+    map.addTilesetImage('tiles_sheet', 'tiles');
+   
+    layer1 = map.createLayer('Ground');
+    layer1.scale.y = .93;
+    collisionLayer = map.createLayer('Background');
+    collisionLayer.scale.y = .93;
+    layer2 = map.createLayer('Foreground');
+    layer2.scale.y = .93;
+    layer3 = map.createLayer('TowerCollision');
+    layer3.scale.y = .93;
+    
+    //Game Board Alignment
+    layer1.resizeWorld();
+    layer2.resizeWorld();
+    layer3.resizeWorld();
+    collisionLayer.resizeWorld();
+    
+    game.scale.pageAlignVertically = true;
+    game.scale.pageAlignHorizontally = true; 
+    game.scale.refresh();
+}
+
+function destroyMap1(){
+    map.destroy();
+    collisionLayer.destroy();
+    layer1.destroy();
+    layer2.destroy();
+    layer3.destroy();
+}

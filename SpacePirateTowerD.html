@@ -66,9 +66,10 @@ function preload() {
 //***************************
 //DEBUG MODE
 var DEBUG = false;
+var skipLevel2;
 
 var map;
-var layer;
+var layer1,layer2,layer3,layer4;
 var sendWaveButton;
 var collisionLayer;
 
@@ -111,28 +112,10 @@ function create() {
     
     game.physics.startSystem(Phaser.Physics.ARCADE);
     
-    //to load the map into the map
-    map = game.add.tilemap('pirateMapOcean');
-    //add the tileset from the json file
-    map.addTilesetImage('tiles_sheet', 'tiles');
+    createMap1();  //Create Map for Level 1
     
-    layer = map.createLayer('Ground');
-    layer.scale.y = .93;
-    collisionLayer = map.createLayer('Background');
-    collisionLayer.scale.y = .93;
-    layer = map.createLayer('Foreground');
-    layer.scale.y = .93;
-    layer = map.createLayer('TowerCollision');
-    layer.scale.y = .93;
-    
-    //Game Board Alignment
-    layer.resizeWorld();
-    collisionLayer.resizeWorld();
-    
-    game.scale.pageAlignVertically = true;
-    game.scale.pageAlignHorizontally = true; 
-    game.scale.refresh();
-    
+   
+
     //Enemies
     enemies = game.add.group();
     game.physics.arcade.enable(enemies);
@@ -205,9 +188,14 @@ function create() {
     path4 = [{x:200,y:500},{x:1695,y:500},{x:1695,y:840},{x:1050,y:840},{x:1050,y:1390},{x:70,y:1390},{x:70,y:1715},{x:2500,y:1715}];
     level1Path = [path1,path2,path3,path4];
   
-    //Initiate Tween
+
+    if(DEBUG){
+        skipLevel2 = game.add.text(590,1790, 'LvL2', { font: "45px Arial", fill: "#EBEBEB" });
+        skipLevel2.inputEnabled = true;
+        skipLevel2.events.onInputDown.add(startLevel2, this);
+    }
     sendWaveButton.events.onInputDown.add(level1Wave1, this);
-    
+
 }
 function update() {
     
@@ -291,6 +279,8 @@ function victoryTextCreate(){
 function victoryTextDestroy(){
     victoryText.kill();
 }
+
+
 
 </script>
 
