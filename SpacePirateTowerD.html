@@ -44,6 +44,7 @@ function preload() {
     game.load.audio('brigLaser', 'laser1.mp3');
     game.load.audio('clipLaser', 'laser4.mp3');
     game.load.audio('fleetLaser', 'laser9.mp3');
+    game.load.audio('explosion', 'explosion.mp3');
     
     //Load Images
     game.load.image('tiles', 'tiles_sheet.png');
@@ -82,6 +83,7 @@ var collisionLayer;
 var brigSound;
 var clipSound;
 var fleetSound;
+var shipSink;
 
 //MenuBarVariables
 var navbar;
@@ -134,6 +136,7 @@ function create() {
     brigSound = game.add.audio('brigLaser');
     clipSound = game.add.audio('clipLaser');
     fleetSound = game.add.audio('fleetLaser');
+    shipSink = game.add.audio('explosion');
     
     navbar = game.add.sprite(0, 1760, 'navbar');
     //Send Wave Button
@@ -232,6 +235,7 @@ function collisionCheck(star, enemy){
         setGold(currentGold);
         var currTile = map.getTileWorldXY(enemy.x, enemy.y, 32, 29, layer1);
         enemy.destroy();
+        shipSink.play();
         var explosion = game.add.sprite(currTile.x*32, currTile.y*29, 'shipsMisc1', 'explosion1.png');
         game.time.events.add(300, function(){removeExplosion(explosion)}, this);
     }    
