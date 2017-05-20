@@ -109,6 +109,15 @@ function boundCheck(tower, enemy){
     //tower.rotation = game.physics.arcade.angleBetween(tower.weapon, enemy) - 80; 
     tower.weapon.trackSprite(tower, 0, 0, true);
     while(tower.weapon.fireAtSprite(enemy)){
+        if(tower.towerType == 'brigBlaster'){
+            brigSound.play();
+        }
+        if(tower.towerType == 'clipCatast'){
+            clipSound.play();
+        }
+        if(tower.towerType == 'fleetSinker'){
+            fleetSound.play();
+        }
         tower.rotation = game.physics.arcade.angleBetween(tower, enemy) -80;
     }
 }

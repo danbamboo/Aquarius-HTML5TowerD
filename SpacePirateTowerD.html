@@ -40,6 +40,11 @@ function preload() {
     game.load.tilemap('pirateMapOcean', 'pirateMapProto4-2.json', null, Phaser.Tilemap.TILED_JSON);
     game.load.tilemap('pirateMapLevel2', 'pirateMapLvl2.json', null, Phaser.Tilemap.TILED_JSON);
     
+    //load sounds
+    game.load.audio('brigLaser', 'laser1.mp3');
+    game.load.audio('clipLaser', 'laser4.mp3');
+    game.load.audio('fleetLaser', 'laser9.mp3');
+    
     //Load Images
     game.load.image('tiles', 'tiles_sheet.png');
     game.load.image('tiles2', 'towerDefense_tilesheet.png');
@@ -73,6 +78,10 @@ var layer1,layer2,layer3,layer4;
 var sendWaveButton;
 var collisionLayer;
 
+//sounds variables
+var brigSound;
+var clipSound;
+var fleetSound;
 
 //MenuBarVariables
 var navbar;
@@ -121,6 +130,10 @@ function create() {
     enemies = game.add.group();
     game.physics.arcade.enable(enemies);
    
+    //create sounds
+    brigSound = game.add.audio('brigLaser');
+    clipSound = game.add.audio('clipLaser');
+    fleetSound = game.add.audio('fleetLaser');
     
     navbar = game.add.sprite(0, 1760, 'navbar');
     //Send Wave Button
