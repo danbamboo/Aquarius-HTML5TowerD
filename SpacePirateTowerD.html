@@ -134,9 +134,14 @@ function create() {
    
     //create sounds
     brigSound = game.add.audio('brigLaser');
+    brigSound.allowMultiple = true;
     clipSound = game.add.audio('clipLaser');
+    clipSound.allowMultiple = true;
     fleetSound = game.add.audio('fleetLaser');
+    fleetSound.allowMultiple = true;
     shipSink = game.add.audio('explosion');
+    shipSink.allowMultiple = true;
+    
     
     navbar = game.add.sprite(0, 1760, 'navbar');
     //Send Wave Button
