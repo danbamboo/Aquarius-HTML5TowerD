@@ -1,20 +1,26 @@
 
 function startLevel2(){
+    //DEBUG MODE ONLY
     var timer=17000;
     if(DEBUG){
         timer=0;
         skipLevel2.destroy();
+        setTimeout(wrapLevel2Begin(),timer);  //17000
     }
-     setTimeout(wrapLevel2Begin(),timer);  //17000
+    else{
+    //Called on end of last wave
+     endLevel1 = true;
+    }
 }
 
 function wrapLevel2Begin(){
+    var timer=5000;
+    
+    //DEBUG MODE ONLY
+    if(DEBUG){
     return function(){
-        var timer=5000;
-        if(DEBUG)
-        {
             timer=0;
-        }
+        
         if(currentGold > 0){
             victoryTextCreate();
             setTimeout(loadLevel2(),timer)  //5000
@@ -22,7 +28,18 @@ function wrapLevel2Begin(){
         else{
             gameOver();
         }
-}}
+    }}
+
+    //Normal Mode
+    else{
+        endLevel1 = false;
+        victoryTextCreate();
+        setTimeout(loadLevel2(),timer);
+    }
+    
+
+
+}
 
 
 function loadLevel2(){

@@ -95,6 +95,7 @@ function level1Wave10(){
         sendWaveButton.events.onInputDown.add(
         wrapSendWave(dragon,10,level1Path,sendWaveButton,
         wrapSendWave(admiral,15,level1Path,null,startLevel2)), this);
+    
 }
 //ENEMY LEVEL 1 WAVES
 //============================

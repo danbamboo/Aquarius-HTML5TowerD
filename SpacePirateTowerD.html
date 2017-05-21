@@ -75,6 +75,7 @@ function preload() {
 var DEBUG = true;
 var backgroundSoundOn =true;
 var skipLevel2;
+var endLevel1 = false;
 
 var map;
 var layer1,layer2,layer3,layer4;
@@ -229,6 +230,14 @@ function update() {
     
     //Check for collision between bullets and enemies
     game.physics.arcade.overlap(rectangleEnding, enemies, enemyReachedTheEnd, null, this);
+    
+    //Check for victory at end of level1
+    if(endLevel1== true){
+        var livingEnemies = enemies.countLiving();
+        if(livingEnemies == 0){
+            wrapLevel2Begin();
+        }
+    }
    
 }
 //Removes enemies killed
