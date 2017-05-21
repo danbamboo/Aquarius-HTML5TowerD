@@ -98,7 +98,7 @@ ClipCatastTower.prototype.update = function(){
     //to cycle through each enemy checking if it is within shooting range, if so fire upon first enemy in range
     if(this.set == 1){
         enemies.forEach(function(IndEnemy){
-            console.log(IndEnemy);
+            // console.log(IndEnemy);
             if(game.physics.arcade.distanceBetween(this, IndEnemy) < this.weapon.bulletKillDistance){
                 boundCheck(this, IndEnemy);
             }

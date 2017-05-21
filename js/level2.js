@@ -29,8 +29,8 @@ function loadLevel2(){
     return function(){
         //Destroy
         victoryTextDestroy();
-        enemies.callAll('kill');
-        berzerkers.callAll('kill');
+        enemies.destroy();
+        berzerkers.destroy();
         spTree.destroy();
         village.destroy();
         villager1.destroy();
@@ -44,6 +44,11 @@ function loadLevel2(){
         setWave('1 / 10');
         currentGold = 250;  //Init player with 250 gold to start game
         setGold(currentGold);
+        
+        //Groups
+        berzerkers = game.add.group();
+        enemies = game.add.group();
+        game.physics.arcade.enable(enemies);
         
         //MAP
         createMap2();
