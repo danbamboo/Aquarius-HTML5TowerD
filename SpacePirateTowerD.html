@@ -298,6 +298,7 @@ function removeExplosion(explosion){
 }
 
 function gameOver(){
+    backgroundSound.stop();
     enemies.callAll('kill');
     enemies.destroy();
     berzerkers.destroy();
@@ -307,7 +308,7 @@ function gameOver(){
          window.location.href = '/level1';
      }, this);
      
-    backgroundSound.stop();
+   
 }
 
 function victoryTextCreate(){
