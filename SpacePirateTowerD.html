@@ -45,6 +45,7 @@ function preload() {
     game.load.audio('clipLaser', 'laser4.mp3');
     game.load.audio('fleetLaser', 'laser9.mp3');
     game.load.audio('explosion', 'explosion.mp3');
+    game.load.audio('background', 'backgroundMusic.wav');
     
     //Load Images
     game.load.image('tiles', 'tiles_sheet.png');
@@ -84,6 +85,7 @@ var brigSound;
 var clipSound;
 var fleetSound;
 var shipSink;
+var backgroundSound;
 
 //MenuBarVariables
 var navbar;
@@ -141,7 +143,8 @@ function create() {
     fleetSound.allowMultiple = true;
     shipSink = game.add.audio('explosion');
     shipSink.allowMultiple = true;
-    
+    backgroundSound = game.add.audio('background');
+    backgroundSound.loopFull(.2);
     
     navbar = game.add.sprite(0, 1760, 'navbar');
     //Send Wave Button
@@ -303,6 +306,8 @@ function gameOver(){
      gameOver.events.onInputDown.add(function(){
          window.location.href = '/level1';
      }, this);
+     
+    backgroundSound.stop();
 }
 
 function victoryTextCreate(){
