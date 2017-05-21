@@ -73,6 +73,7 @@ function preload() {
 //***************************
 //DEBUG MODE
 var DEBUG = true;
+var backgroundSoundOn =true;
 var skipLevel2;
 
 var map;
@@ -143,8 +144,10 @@ function create() {
     fleetSound.allowMultiple = true;
     shipSink = game.add.audio('explosion');
     shipSink.allowMultiple = true;
+    if(backgroundSoundOn){
     backgroundSound = game.add.audio('background');
     backgroundSound.loopFull(.2);
+    }
     
     navbar = game.add.sprite(0, 1760, 'navbar');
     //Send Wave Button
