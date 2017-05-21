@@ -238,7 +238,7 @@ function collisionCheck(star, enemy){
             updateEnemyHealth(enemy);
         }
     
-    if(enemy.health <  0){
+    if(enemy.health <=  0){
         currentGold += enemy.gold * 3;
         setGold(currentGold);
         var currTile = map.getTileWorldXY(enemy.x, enemy.y, 32, 29, layer1);
