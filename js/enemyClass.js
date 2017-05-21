@@ -147,21 +147,82 @@ function rotateBasedOnNextDirection(i,pathArr){
     //Subtract x1-x2, if not 0, than vertical rotation required
     var xAxisRotation = pathArr[i].x-pathArr[i+1].x;
     var yAxisRotation = pathArr[i].y-pathArr[i+1].y;
+    var prevxAxisRotation
+    var prevyAxisRotation
+    var previousXDirection;
+    var previousYDirection;
+    
+    if(i>0){
+        prevxAxisRotation = pathArr[i-1].x-pathArr[i].x;
+        prevyAxisRotation = pathArr[i-1].y-pathArr[i].y;  
+        if(prevxAxisRotation!=0){
+            if(prevxAxisRotation>0){
+                previousXDirection = 'left';
+            }
+            else{
+                previousXDirection = 'right';
+            }
+        }
+        else if(prevyAxisRotation!=0){
+              if(prevyAxisRotation>0){
+                previousYDirection = 'up';
+            }
+            else{
+                previousYDirection = 'down';
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
     
     if(xAxisRotation!=0){
-        if(xAxisRotation>0){
+        if(xAxisRotation>0){  //LEFT
+            if(previousYDirection){
+                if(previousYDirection == 'up'){
+                    return -270;
+                }
+                else{
+                    return 90;
+                }
+            }
            return 90;
         }
-        else{
+        else{  //RIGHT
+        if(previousYDirection){
+             if(previousYDirection == 'up'){
+                    return -90;
+                }
+                else{
+                    return -90;
+                }}
             return -90;
         }
+        
     }
     //Subtract y1-y2, if not 0, than horizontal rotation required
     else if(yAxisRotation!=0){
-         if(yAxisRotation>0){
+         if(yAxisRotation>0){ //UP
+         if(previousXDirection){
+             if(previousXDirection == 'left'){
+                    return 180
+                }
+                else{
+                    return -180;
+                }}
            return -180;
-        }
-        else{
+        } 
+        else{  //DOWN
+         if(previousXDirection){
+            if(previousXDirection == 'left'){
+                    return 0;
+                }
+                else{
+                    return 0;
+                }}
             return 0;
         }
     }

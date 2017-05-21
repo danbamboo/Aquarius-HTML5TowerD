@@ -71,7 +71,7 @@ function loadLevel2(){
 function level2Wave1() {
     sendWave(brethren,10,level2Path,null,
     wrapSendWave(scourge,1,level2Path,null,
-    wrapSendWave(brethren,2,level2Path,null,level1Wave2)));
+    wrapSendWave(brethren,2,level2Path,null,level2Wave2)));
     sendWaveButton.visible = false;
 }
 function level2Wave2(){
@@ -83,7 +83,7 @@ function level2Wave2(){
         wrapSendWave(brethren,4,level2Path,sendWaveButton,
         wrapSendWave(scourge,5,level2Path,null,
         wrapSendWave(brethren,1,level2Path,null,
-        wrapSendWave(scourge,5,level2Path,null,level1Wave3)))), this);
+        wrapSendWave(scourge,5,level2Path,null,level2Wave3)))), this);
     
         
 }
@@ -95,7 +95,7 @@ function level2Wave3(){
         wrapSendWave(squirrel,2,level2Path,sendWaveButton,
         wrapSendWave(scourge,5,level2Path,null,
         wrapSendWave(brethren,2,level2Path,null,
-        wrapSendWave(squirrel,6,level2Path,null,level1Wave4)))), this);
+        wrapSendWave(squirrel,6,level2Path,null,level2Wave4)))), this);
 }
 function level2Wave4(){
     setWave('4 / 10');
@@ -105,7 +105,7 @@ function level2Wave4(){
         wrapSendWave(squirrel,5,level2Path,sendWaveButton,
         wrapSendWave(royal,4,level2Path,null,
         wrapSendWave(brethren,2,level2Path,null,
-        wrapSendWave(scourge,9,level2Path,null,level1Wave5)))), this);
+        wrapSendWave(scourge,9,level2Path,null,level2Wave5)))), this);
 }
 function level2Wave5(){
     setWave('5 / 10');
@@ -115,7 +115,7 @@ function level2Wave5(){
         wrapSendWave(royal,5,level2Path,sendWaveButton,
         wrapSendWave(squirrel,2,level2Path,null,
         wrapSendWave(royal,8,level2Path,null,
-        wrapSendWave(dragon,1,level2Path,null,level1Wave6)))), this);
+        wrapSendWave(dragon,1,level2Path,null,level2Wave6)))), this);
 }
 function level2Wave6(){
     setWave('6 / 10');
@@ -125,7 +125,7 @@ function level2Wave6(){
         wrapSendWave(squirrel,2,level2Path,sendWaveButton,
         wrapSendWave(dragon,5,level2Path,null,
         wrapSendWave(brethren,1,level2Path,null,
-        wrapSendWave(royal,6,level2Path,null,level1Wave7)))), this);
+        wrapSendWave(royal,6,level2Path,null,level2Wave7)))), this);
 }
 function level2Wave7(){
     setWave('7 / 10');
@@ -133,7 +133,7 @@ function level2Wave7(){
     sendWaveButton.events.onInputDown.removeAll();
         sendWaveButton.events.onInputDown.add(
         wrapSendWave(dragon,5,level2Path,sendWaveButton,
-        wrapSendWave(royal,15,level2Path,null,level1Wave8)), this);
+        wrapSendWave(royal,15,level2Path,null,level2Wave8)), this);
 }
 function level2Wave8(){
     setWave('8 / 10');
@@ -142,7 +142,7 @@ function level2Wave8(){
         sendWaveButton.events.onInputDown.add(
         wrapSendWave(squirrel,3,level2Path,sendWaveButton,
         wrapSendWave(admiral,2,level2Path,null,
-        wrapSendWave(royal,10,level2Path,null,level1Wave9))), this);
+        wrapSendWave(royal,10,level2Path,null,level2Wave9))), this);
 }
 function level2Wave9(){
     setWave('9 / 10');
@@ -154,7 +154,7 @@ function level2Wave9(){
         wrapSendWave(squirrel,2,level2Path,null,
         wrapSendWave(royal,2,level2Path,null,
         wrapSendWave(dragon,5,level2Path,null,
-        wrapSendWave(admiral,8,level2Path,null,level1Wave10)))))), this);
+        wrapSendWave(admiral,8,level2Path,null,level2Wave10)))))), this);
 }
 function level2Wave10(){
     setWave('10 / 10');
