@@ -48,56 +48,168 @@ function dragTower(tower){
 
 
 //Set tower in placed
-function setTower(tower){
-    if(tower.set ==0){
-    console.log("****SETTTTTTTTIIIINNGGGG*********");
-    
-    var setTile = map.getTileWorldXY(tower.x, tower.y, 32, 29, collisionLayer);
-    //console.log(setTile);
-    
-    //Check if tower is placed in the water
-    if(setTile == null){
-    
-        if(!tower.placedOnWater && tower.hasBeenMoved){
-            currentGold += tower.cost;
-            setGold(currentGold);
-            tower.placedOnWater = true;
+function setTower(tower)
+{
+    if(tower.set ==0)
+    {
+        console.log("****SETTTTTTTTIIIINNGGGG*********");
+        
+        var setTile = map.getTileWorldXY(tower.x, tower.y, 32, 29, collisionLayer);
+        var indexTile = map.getTileWorldXY(tower.x, tower.y, 32, 29, layer1);
+        
+        console.log(indexTile);
+        
+        if(setTile == null)   //Check for tower/water overlap
+        {
+        
+            if(!tower.placedOnWater && tower.hasBeenMoved)
+            {
+                currentGold += tower.cost;
+                setGold(currentGold);
+                tower.placedOnWater = true;
+            }
+             //console.log("OVER WATER??");
+            towerRange.remove(tower);
+            tower.kill();
+            return;
         }
-         //console.log("OVER WATER??");
-        towerRange.remove(tower);
-        tower.kill();
-        return;
-    }
+        else  //Init tower/tower overlap check
+        {
+            var xPos = indexTile.x;
+            var yPos = indexTile.y;
+            
+            if(xPos < 30 && yPos < 30){
+            
+                checkTowerCoord(xPos, yPos, towerCoordQ1, tower);
+            }
+            else if(xPos >= 30 && yPos < 30){
+                
+                 checkTowerCoord(xPos, yPos, towerCoordQ2, tower);
+            }
+            else if(xPos < 30 && yPos >=30){
+                
+                 checkTowerCoord(xPos, yPos, towerCoordQ3, tower);
+            }
+            else if(xPos >= 30 && yPos >= 30){
+                
+                 checkTowerCoord(xPos, yPos, towerCoordQ4, tower);
+            }
+        }
 
-    game.physics.arcade.enable(tower);
-    
-    console.log("BERZ LENGTH: " + berzerkers.length);
-    
-    
-    //to set the radius of each different type of tower for collision detection
-    if(tower.towerType == "brigBlaster")
-    {
-        tower.body.setCircle(550, -550, -550);
+        game.physics.arcade.enable(tower);
         
-    }
-    else if(tower.towerType == "clipCatast")
-    {
-        tower.body.setCircle(400,-400,-400);
-    }
-    else if(tower.towerType == "fleetSinker")
-    {
-        tower.body.setCircle(250,-250,-250);
-    }  
-    
-    
-    console.log("Berz " + berzerkers.length + " towerR " + towerRange.length);
-    //console.log("TOWERR " + towerRange.children[0].towerType);
+        console.log("BERZ LENGTH: " + berzerkers.length);
         
-    tower.input.disableDrag();
-    tower.children[1].visible = false;
-    berzerkers.add(tower);
-    //to mark tower as set
-    tower.set = 1;
+        
+        //to set the radius of each different type of tower for collision detection
+        if(tower.towerType == "brigBlaster")
+        {
+            tower.body.setCircle(550, -550, -550);
+            
+        }
+        else if(tower.towerType == "clipCatast")
+        {
+            tower.body.setCircle(400,-400,-400);
+        }
+        else if(tower.towerType == "fleetSinker")
+        {
+            tower.body.setCircle(250,-250,-250);
+        }  
+        
+        
+        console.log("Berz " + berzerkers.length + " towerR " + towerRange.length);
+        //console.log("TOWERR " + towerRange.children[0].towerType);
+            
+        tower.input.disableDrag();
+        tower.children[1].visible = false;
+        berzerkers.add(tower);
+        //to mark tower as set
+        tower.set = 1;
+    }
+}
+
+
+//Add tower coordinates to appropriate array
+function addCoord(xPos, yPos, array){
+    
+    array.push({x: xPos, y: yPos});
+}
+
+//Check for tower/tower overlap
+function checkTowerCoord(newX, newY, array, tower){
+
+    console.log("Array Length: " + array.length);
+
+    if(array.length == 0)
+    {
+        addCoord(newX, newY, array);
+        console.log("store coords");
+        console.log("Array Length: " + array.length);
+    }
+    else
+    {
+        for(var i=0; i < array.length; i++)
+        {
+            //console.log("i: " + i);
+            
+            var xOverlap = false;
+            var yOverlap = false;
+            var overlap = false;
+            
+            var oldX = array[i].x;
+            var oldY = array[i].y;
+            
+            var maxX = Math.max(oldX, newX);
+            var minX = Math.min(oldX, newX);
+            var maxY = Math.max(oldY, newY);
+            var minY = Math.min(oldY, newY);
+            
+            var resultX = maxX - minX; 
+            var resultY = maxY - minY;
+            
+            //Check for x-overlap
+            if(resultX < 3)
+            {
+                xOverlap = true;
+            }
+            
+            //Check for y-overlap
+            if(resultY < 3)
+            {
+                yOverlap = true;
+            }
+            
+            //console.log("xOverlap: " + xOverlap);
+            //console.log("yOverlap: " + yOverlap);
+
+            if((xOverlap == true) && (yOverlap == true))
+            {
+                overlap = true;
+                break;
+            }
+        }
+        
+        if(overlap == false)
+        {
+            addCoord(newX, newY, array);
+            console.log("store coords");
+            console.log("NO OVERLAP");
+            console.log("Array Length: " + array.length);
+        }
+        else
+        {
+            if(!tower.placedOnWater && tower.hasBeenMoved)
+            {
+                currentGold += tower.cost;
+                setGold(currentGold);
+                tower.placedOnWater = true;
+            }
+            
+            console.log("TOWER OVERLAP??");
+            towerRange.remove(tower);
+            tower.kill();
+            return;
+        }
     }
 }
 

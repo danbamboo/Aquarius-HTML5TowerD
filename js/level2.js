@@ -44,6 +44,12 @@ function wrapLevel2Begin(){
 
 function loadLevel2(){
     return function(){
+        //Clear arrays
+        towerCoordQ1.length = 0;
+        towerCoordQ2.length = 0;
+        towerCoordQ3.length = 0;
+        towerCoordQ4.length = 0;
+        
         //Destroy
         victoryTextDestroy();
         enemies.destroy();

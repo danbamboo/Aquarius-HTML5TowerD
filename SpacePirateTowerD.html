@@ -73,7 +73,7 @@ function preload() {
 //***************************
 //DEBUG MODE
 var DEBUG = true;
-var backgroundSoundOn =true;
+var backgroundSoundOn = false;
 var skipLevel2;
 var endLevel1 = false;
 
@@ -118,6 +118,11 @@ var weaponFleetSinker;
 var spTree;
 var villager1;
 var village;
+//Arrays for tower coordinates
+var towerCoordQ1 = [];
+var towerCoordQ2 = [];
+var towerCoordQ3 = [];
+var towerCoordQ4 = [];
 
 //Self Made Path Variables
 var level1Path = [];
@@ -131,7 +136,6 @@ function create() {
     createMap1();  //Create Map for Level 1
     
    
-
     //Enemies
     enemies = game.add.group();
     game.physics.arcade.enable(enemies);
