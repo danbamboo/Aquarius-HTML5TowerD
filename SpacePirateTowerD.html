@@ -277,6 +277,7 @@ function collisionCheck(star, enemy){
         if(DEBUG){
             updateEnemyHealth(enemy);
         }
+    console.log("Current Wave " + currentWave); 
     
     if(enemy.health <=  0){
         currentGold += enemy.gold * 3;

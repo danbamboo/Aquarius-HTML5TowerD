@@ -21,6 +21,7 @@ var menuPage = new Phaser.Game(1920, 1920, Phaser.AUTO, '', {preload: preload, c
 
 function preload() {
  
+    menuPage.load.audio('menuBackground', 'circus.mp3');
     menuPage.load.image('stars', 'stars.jpg');
     menuPage.load.image('gameLogo','gameLogo.png');
     menuPage.load.image('menu','menu.png');
@@ -30,12 +31,17 @@ function preload() {
     menuPage.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 }
 
+//var for the menu music
+var menuMusic;
 
 function create() {
     
     	menuPage.scale.pageAlignVertically = true;
     	menuPage.scale.pageAlignHorizontally = true; 
     	menuPage.scale.refresh();
+    
+        menuMusic = menuPage.add.audio('menuBackground');
+        menuMusic.loopFull(.2);
     
         var background = menuPage.add.sprite(0, 0, 'stars');
   	    
@@ -49,6 +55,15 @@ function create() {
 		
 		var tutorialButton = menuPage.add.button(310, 1100, 'tutorial', tutorial, this);
 		tutorialButton.anchor.setTo(0.5,0.5);
+		
+		var style = { font: "42px Arial", fill: "#ffffff", align: "center"};
+		
+		var credits = menuPage.add.text(menuPage.world.centerX, 1500, 'Graphics From Kenney.nl\nLaser Sounds From Kenney.nl\nGameplay and Menu Background Music From www.orangesfreesounds.com', style);
+		credits.anchor.setTo(0.5,0.5);
+		
+		var license1 = menuPage.add.button(menuPage.world.centerX, 1800, 'Gameplay Music License', gameLicense, this);
+		license1.anchor.setTo(0.5,0.5);
+		
 		
 }
 
