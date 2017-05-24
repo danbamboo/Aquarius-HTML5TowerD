@@ -58,11 +58,13 @@ function create() {
 		
 		var style = { font: "42px Arial", fill: "#ffffff", align: "center"};
 		
-		var credits = menuPage.add.text(menuPage.world.centerX, 1500, 'Graphics From Kenney.nl\nLaser Sounds From Kenney.nl\nGameplay and Menu Background Music From www.orangesfreesounds.com', style);
+		//to give credit for all items utilized in game that we did not provide
+		var credits = menuPage.add.text(menuPage.world.centerX, 1500, 'Graphics From Kenney.nl\nLaser Sounds From Kenney.nl\nGameplay and Menu Background Music From www.orangefreesounds.com', style);
 		credits.anchor.setTo(0.5,0.5);
 		
-		var license1 = menuPage.add.button(menuPage.world.centerX, 1800, 'Gameplay Music License', gameLicense, this);
-		license1.anchor.setTo(0.5,0.5);
+		//to hold link to music licenses
+		//var license1 = menuPage.add.button(menuPage.world.centerX, 1800, 'Gameplay Music License', gameLicense, this);
+		//license1.anchor.setTo(0.5,0.5);
 		
 		
 }
