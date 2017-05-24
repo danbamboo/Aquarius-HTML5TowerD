@@ -124,6 +124,27 @@ function createMap1(){
     game.scale.pageAlignVertically = true;
     game.scale.pageAlignHorizontally = true; 
     game.scale.refresh();
+    
+    
+    //Misc Sprites
+    spTree = game.add.sprite(1400, 1000, 'tree');
+    spTree.scale.x = .6;
+    spTree.scale.y = .6;
+    spTree2 = game.add.sprite(450, 940, 'tree');
+    spTree2.scale.x = .5;
+    spTree2.scale.y = .5;
+    spTree3 = game.add.sprite(550, 980, 'tree');
+    spTree3.scale.x = .4;
+    spTree3.scale.y = .4;
+    spTree4 = game.add.sprite(540, 1040, 'tree');
+    spTree4.scale.x = .3;
+    spTree4.scale.y = .3;
+    village = game.add.sprite(625,1030,'village');
+    village.scale.x = .8;
+    village.scale.y = .8;
+    villager1 = game.add.sprite(900, 1026, 'villager');
+    villager1.scale.x = 1.6;
+    villager1.scale.y = 1.6;
 }
 
 function destroyMap(){

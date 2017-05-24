@@ -55,6 +55,9 @@ function loadLevel3(){
         enemies.destroy();
         berzerkers.destroy();
         spTree.destroy();
+        spTree2.destroy();
+        spTree3.destroy();
+        spTree4.destroy();
         village.destroy();
         villager1.destroy();
         rectangleEnding.destroy();  //Used in update funciton, check for exception when null
@@ -225,6 +228,26 @@ function createMap3(){
     game.scale.pageAlignVertically = true;
     game.scale.pageAlignHorizontally = true; 
     game.scale.refresh();
+    
+    //Misc Sprites
+    spTree = game.add.sprite(1140, 800, 'tree');
+    spTree.scale.x = .5;
+    spTree.scale.y = .6;
+    spTree2 = game.add.sprite(340, 1150, 'tree');
+    spTree2.scale.x = .5;
+    spTree2.scale.y = .5;
+    spTree3 = game.add.sprite(420, 1190, 'tree');
+    spTree3.scale.x = .4;
+    spTree3.scale.y = .4;
+    spTree4 = game.add.sprite(420, 1250, 'tree');
+    spTree4.scale.x = .3;
+    spTree4.scale.y = .3;
+    village = game.add.sprite(500, 1280,'village');
+    village.scale.x = .8;
+    village.scale.y = .8;
+    villager1 = game.add.sprite(710, 1340, 'villager');
+    villager1.scale.x = 1.6;
+    villager1.scale.y = 1.6;
 }
 
 
