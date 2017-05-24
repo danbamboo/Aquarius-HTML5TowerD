@@ -19,7 +19,8 @@ var BrigBlasterTower = function(TDgame){
     this.angle += 180;
     this.inputEnabled = true; 
     this.input.enableDrag(true);
-    this.weapon = game.add.weapon(30, 'spaceItems', 'beam6.png');
+    this.weapon = game.add.weapon(30, 'spaceItems', 'laserBlue03.png');
+    this.weapon.bulletAngleOffset = 90;
     this.weapon.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
     this.weapon.bulletKillDistance = 550;
     this.weapon.bulletSpeed = 4000;

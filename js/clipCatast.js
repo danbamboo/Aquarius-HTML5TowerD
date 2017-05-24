@@ -19,7 +19,8 @@ var ClipCatastTower = function(TDgame){
     this.angle += 180;
     this.inputEnabled = true; 
     this.input.enableDrag(true);
-    this.weapon = game.add.weapon(30, 'spaceItems', 'beam1.png');
+    this.weapon = game.add.weapon(30, 'spaceItems', 'laserRed06.png');
+    this.weapon.bulletAngleOffset = 90;
     this.weapon.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
     this.weapon.bulletKillDistance = 400;
     this.weapon.bulletSpeed = 3000;

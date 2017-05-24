@@ -19,11 +19,12 @@ var FleetSinkerTower = function(TDgame){
     this.angle += 180;
     this.inputEnabled = true; 
     this.input.enableDrag(true);
-    this.weapon = game.add.weapon(30, 'spaceItems', 'laserGreen13.png');
+    this.weapon = game.add.weapon(30, 'spaceItems', 'laserGreen05.png');
+    this.weapon.bulletAngleOffset = 90;
     this.weapon.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
     this.weapon.bulletKillDistance = 250;
     this.weapon.bulletSpeed = 4000;
-    this.weapon.fireRate = 50;
+    this.weapon.fireRate = 250;
     this.weapon.trackRotation = true;
     this.weapon.autoFire = true;    
     this.weapon.multiFire = true;
