@@ -309,6 +309,7 @@ function setLevel(levelNumberText,levelNameText){
 
 function setWave(waveText){
     wave.kill();
+    currentWave = waveText;
     wave = game.add.text(280,1880, waveText, { font: "30px Arial", fill: "#E74C3C" })
 }
 
