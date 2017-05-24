@@ -126,7 +126,7 @@ function createMap1(){
     game.scale.refresh();
 }
 
-function destroyMap1(){
+function destroyMap(){
     map.destroy();
     collisionLayer.destroy();
     layer1.destroy();

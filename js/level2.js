@@ -59,7 +59,7 @@ function loadLevel2(){
         villager1.destroy();
         rectangleEnding.destroy();  //Used in update funciton, check for exception when null
        
-        destroyMap1();
+        destroyMap();
         
         //Create
         sendWaveButton.visible = true;
@@ -190,7 +190,7 @@ function level2Wave10(){
     sendWaveButton.events.onInputDown.removeAll();
         sendWaveButton.events.onInputDown.add(
         wrapSendWave(dragon,10,level2Path,sendWaveButton,
-        wrapSendWave(admiral,15,level2Path,null,startLevel2)), this);
+        wrapSendWave(admiral,15,level2Path,null,startLevel3)), this);
 }
 //ENEMY LEVEL 2 WAVES
 //============================
@@ -227,7 +227,7 @@ function createMap2(){
     game.scale.refresh();
 }
 
-function destroymap(){
+function destroyMap2(){
     map.destroy();
     collisionLayer.destroy();
     layer1.destroy();

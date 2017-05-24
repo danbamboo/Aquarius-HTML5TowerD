@@ -12,6 +12,9 @@ var enemy = function (game,enemyType){
     else if(currentLevel=="Level 2"){
         Phaser.Sprite.call(this, game, 1850, -400, enemyType.spriteSheet, enemyType.sprite);
     }
+    else if(currentLevel=="Level 3"){
+        Phaser.Sprite.call(this, game, 920, -400, enemyType.spriteSheet, enemyType.sprite);
+    }
     
     this.name = enemyType.name;
     this.health = enemyType.health;
@@ -34,6 +37,9 @@ var enemy = function (game,enemyType){
            }
            else if(currentLevel=="Level 2"){
                 enemyHealthText = game.add.text(this.x-1800,this.y+300, this.health, { font: "50px Arial", fill: "#4A235A" });
+           }
+           else if(currentLevel=="Level 3"){
+                enemyHealthText = game.add.text(this.x-920,this.y+300, this.health, { font: "50px Arial", fill: "#4A235A" });
            }
                 this.addChild(enemyHealthText);
 

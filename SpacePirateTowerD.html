@@ -19,6 +19,7 @@
 		<!--Levels-->
 		<script type="text/javascript" src="level1.js"></script>
 		<script type="text/javascript" src="level2.js"></script>
+		<script type="text/javascript" src="level3.js"></script>
 		
     <style type="text/css">
         body {
@@ -39,6 +40,7 @@ function preload() {
     //load map
     game.load.tilemap('pirateMapOcean', 'pirateMapProto4-2.json', null, Phaser.Tilemap.TILED_JSON);
     game.load.tilemap('pirateMapLevel2', 'pirateMapLvl2.json', null, Phaser.Tilemap.TILED_JSON);
+    game.load.tilemap('pirateMapLevel3', 'pirateMapLvl3.json', null, Phaser.Tilemap.TILED_JSON);
     
     //load sounds
     game.load.audio('brigLaser', 'laser1.mp3');
@@ -73,9 +75,11 @@ function preload() {
 //***************************
 //DEBUG MODE
 var DEBUG = true;
-var backgroundSoundOn = false;
-var skipLevel2;
+var backgroundSoundOn = true;
+var skipLevel2, skipLevel3;
 var endLevel1 = false;
+var endLevel2 = false;
+var endLevel3 = false;
 
 var map;
 var layer1,layer2,layer3,layer4;
@@ -127,6 +131,7 @@ var towerCoordQ4 = [];
 //Self Made Path Variables
 var level1Path = [];
 var level2Path = [];
+var level3Path = [];
 var path1,path2,path3,path4,path5;
 var timeoutIndex =0;
 function create() {
@@ -226,6 +231,10 @@ function create() {
         skipLevel2 = game.add.text(590,1790, 'LvL2', { font: "45px Arial", fill: "#EBEBEB" });
         skipLevel2.inputEnabled = true;
         skipLevel2.events.onInputDown.add(startLevel2, this);
+        
+        skipLevel3 = game.add.text(1260,1790, 'LvL3', { font: "45px Arial", fill: "#EBEBEB" });
+        skipLevel3.inputEnabled = true;
+        skipLevel3.events.onInputDown.add(startLevel3, this);
     }
     sendWaveButton.events.onInputDown.add(level1Wave1, this);
 
@@ -242,6 +251,21 @@ function update() {
             wrapLevel2Begin();
         }
     }
+    //Check for victory at the end of level2
+    if(endLevel2== true){
+        var livingEnemies = enemies.countLiving();
+        if(livingEnemies == 0){
+            wrapLevel3Begin();
+        }
+    }
+    //Check for victory at the end of level2
+    if(endLevel3== true){
+        var livingEnemies = enemies.countLiving();
+        if(livingEnemies == 0){
+            gameHasEnded();
+        }
+    }
+    
    
 }
 //Removes enemies killed
