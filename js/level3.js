@@ -52,7 +52,6 @@ function loadLevel3(){
         
         //Destroy
         victoryTextDestroy();
-        enemies.destroy();
         berzerkers.destroy();
         spTree.destroy();
         spTree2.destroy();
@@ -73,7 +72,6 @@ function loadLevel3(){
         
         //Groups
         berzerkers = game.add.group();
-        enemies = game.add.group();
         game.physics.arcade.enable(enemies);
         
         //MAP
