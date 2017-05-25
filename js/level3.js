@@ -68,7 +68,7 @@ function loadLevel3(){
         sendWaveButton.visible = true;
         setLevel('Level 3', 'Mutiny');
         setWave('1 / 10');
-        currentGold = 250;  //Init player with 250 gold to start game
+        currentGold = 400;  //Init player with 250 gold to start game
         setGold(currentGold);
         
         //Groups
@@ -78,21 +78,38 @@ function loadLevel3(){
         
         //MAP
         createMap3();
-        rectangleEnding = game.add.sprite(1000, 2100, null);
+        rectangleEnding = game.add.sprite(920, 2100, null);
         game.physics.arcade.enable(rectangleEnding);
         rectangleEnding.body.setSize(50, 50, 0, 0); // set the size of the rectangle
         sendWaveButton.events.onInputDown.removeAll();
         sendWaveButton.events.onInputDown.add(level3Wave1, this);
         
-         //Self Made Path Variables
-        path1 = [{x:920,y:1000},{x:960,y:370},{x:1050,y:1300},{x:1720,y:1300},{x:1720,y:1650},{x:1000,y:1650},{x:1000,y:2100}];
-        path2 = [{x:920,y:1000},{x:960,y:370},{x:1050,y:740},{x:1720,y:740},{x:1720,y:1650},{x:1000,y:1650},{x:1000,y:2100}];
-        path3 = [{x:920,y:1000},{x:960,y:370},{x:1050,y:180},{x:220,y:180},{x:220,y:1650},{x:1000,y:1650},{x:1000,y:2100}];
-        path4 = [{x:920,y:1000},{x:960,y:370},{x:1050,y:740},{x:220,y:740},{x:220,y:1650},{x:1000,y:1650},{x:1000,y:2100}];
-        path5 = [{x:920,y:1000},{x:960,y:370},{x:1050,y:740},{x:220,y:740},{x:220,y:1050},{x:750,y:1050},{x:750,y:1310},{x:220,y:1310},{x:220,y:1650},{x:1000,y:1650},{x:1000,y:2100}];
-        path6 = [{x:920,y:1000},{x:960,y:370},{x:1050,y:180},{x:220,y:180},{x:220,y:1050},{x:750,y:1050},{x:750,y:1310},{x:220,y:1310},{x:220,y:1650},{x:1000,y:1650},{x:1000,y:2100}];
-        // level3Path = [path1,path2,path3,path4];
-        level3Path = [path1,path2,path3,path4,path5,path6];
+         //Outer Peremeter
+        path1 = [{x:920,y:150},{x:1830,y:150},{x:1830,y:1650},{x:920,y:1650},{x:920,y:2100}];
+        path2 = [{x:920,y:150},{x:90,y:150},{x:90,y:1650},{x:920,y:1650},{x:920,y:2100}];
+        //Start Out, Go across Map in middle, Stay outside
+        path3 = [{x:920,y:150},{x:90,y:150},{x:90,y:678},{x:1830,y:678},{x:1830,y:1650},{x:920,y:1650},{x:920,y:2100}];
+        path4 = [{x:920,y:150},{x:1830,y:150},{x:1830,y:678},{x:90,y:678},{x:90,y:1650},{x:920,y:1650},{x:920,y:2100}];
+        //Start Out, take first inside path
+        path5 = [{x:920,y:150},{x:1830,y:150},{x:1830,y:678},{x:1565,y:678},{x:1565,y:1400},{x:920,y:1400},{x:920,y:2100}];
+        path6 = [{x:920,y:150},{x:90,y:150},{x:90,y:678},{x:360,y:678},{x:360,y:1100},{x:920,y:1100},{x:920,y:2100}];
+        //Start Out, go down middle vert, go down middle horiz
+        path7 = [{x:920,y:150},{x:90,y:150},{x:90,y:678},{x:920,y:678},{x:920,y:2100}];
+        path8 = [{x:920,y:150},{x:1830,y:150},{x:1830,y:678},{x:920,y:678},{x:920,y:2100}];
+       
+        //Start Mid, first inside path
+        path9 = [{x:920,y:375},{x:360,y:375},{x:360,y:1100},{x:920,y:1100},{x:920,y:2100}];
+        path10 = [{x:920,y:375},{x:1565,y:375},{x:1565,y:1400},{x:920,y:1400},{x:920,y:2100}];
+        //Start Mid, Head Outside path
+        path11 = [{x:920,y:375},{x:360,y:375},{x:360,y:678}, {x:90,y:678}, {x:90,y:1650},{x:920,y:1650},{x:920,y:2100}];
+        path12 = [{x:920,y:375},{x:1565,y:375}, {x:1565,y:678}, {x:1830,y:678}, {x:1830,y:1650},{x:920,y:1650},{x:920,y:2100}];
+        //Start Mid, head to Mid
+        path13 = [{x:920,y:375},{x:360,y:375},{x:360,y:678},{x:920,y:678},{x:920,y:2100}];
+        path14 = [{x:920,y:375},{x:1565,y:375},{x:1565,y:678},{x:920,y:678},{x:920,y:2100}];
+        
+        level3PathEasy = [path9,path10,path13,path14];
+        level3PathMed = [path9,path10,path13,path14,path11,path12];
+        level3PathHard = [path1,path2,path3,path4,path5,path6,path7,path8,path9,path10,path11,path12,path13,path14];
 
     }
 }
@@ -100,9 +117,9 @@ function loadLevel3(){
 
 //ENEMY LEVEL 2 WAVES
 function level3Wave1() {
-    sendWave(brethren,10,level3Path,null,
-    wrapSendWave(scourge,1,level3Path,null,
-    wrapSendWave(brethren,2,level3Path,null,level3Wave3)));
+    sendWave(brethren,10,level3PathEasy,null,
+    wrapSendWave(scourge,1,level3PathEasy,null,
+    wrapSendWave(brethren,2,level3PathEasy,null,level3Wave3)));
     sendWaveButton.visible = false;
 }
 function level3Wave2(){
@@ -111,10 +128,10 @@ function level3Wave2(){
     sendWaveButton.events.onInputDown.removeAll();
 
     sendWaveButton.events.onInputDown.add(
-        wrapSendWave(brethren,4,level3Path,sendWaveButton,
-        wrapSendWave(scourge,5,level3Path,null,
-        wrapSendWave(brethren,1,level3Path,null,
-        wrapSendWave(scourge,5,level3Path,null,level3Wave3)))), this);
+        wrapSendWave(brethren,4,level3PathEasy,sendWaveButton,
+        wrapSendWave(scourge,5,level3PathEasy,null,
+        wrapSendWave(brethren,1,level3PathEasy,null,
+        wrapSendWave(scourge,5,level3PathEasy,null,level3Wave3)))), this);
     
         
 }
@@ -123,77 +140,77 @@ function level3Wave3(){
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
         sendWaveButton.events.onInputDown.add(
-        wrapSendWave(squirrel,2,level3Path,sendWaveButton,
-        wrapSendWave(scourge,5,level3Path,null,
-        wrapSendWave(brethren,2,level3Path,null,
-        wrapSendWave(squirrel,6,level3Path,null,level3Wave4)))), this);
+        wrapSendWave(squirrel,2,level3PathMed,sendWaveButton,
+        wrapSendWave(scourge,5,level3PathMed,null,
+        wrapSendWave(brethren,2,level3PathMed,null,
+        wrapSendWave(squirrel,6,level3PathMed,null,level3Wave4)))), this);
 }
 function level3Wave4(){
     setWave('4 / 10');
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
         sendWaveButton.events.onInputDown.add(
-        wrapSendWave(squirrel,5,level3Path,sendWaveButton,
-        wrapSendWave(royal,4,level3Path,null,
-        wrapSendWave(brethren,2,level3Path,null,
-        wrapSendWave(scourge,9,level3Path,null,level3Wave5)))), this);
+        wrapSendWave(squirrel,5,level3PathMed,sendWaveButton,
+        wrapSendWave(royal,4,level3PathMed,null,
+        wrapSendWave(brethren,2,level3PathMed,null,
+        wrapSendWave(scourge,9,level3PathMed,null,level3Wave5)))), this);
 }
 function level3Wave5(){
     setWave('5 / 10');
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
         sendWaveButton.events.onInputDown.add(
-        wrapSendWave(royal,5,level3Path,sendWaveButton,
-        wrapSendWave(squirrel,2,level3Path,null,
-        wrapSendWave(royal,8,level3Path,null,
-        wrapSendWave(dragon,1,level3Path,null,level3Wave6)))), this);
+        wrapSendWave(royal,5,level3PathMed,sendWaveButton,
+        wrapSendWave(squirrel,2,level3PathMed,null,
+        wrapSendWave(royal,8,level3PathMed,null,
+        wrapSendWave(dragon,1,level3PathMed,null,level3Wave6)))), this);
 }
 function level3Wave6(){
     setWave('6 / 10');
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
         sendWaveButton.events.onInputDown.add(
-        wrapSendWave(squirrel,2,level3Path,sendWaveButton,
-        wrapSendWave(dragon,5,level3Path,null,
-        wrapSendWave(brethren,1,level3Path,null,
-        wrapSendWave(royal,6,level3Path,null,level3Wave7)))), this);
+        wrapSendWave(squirrel,2,level3PathMed,sendWaveButton,
+        wrapSendWave(dragon,5,level3PathMed,null,
+        wrapSendWave(brethren,1,level3PathMed,null,
+        wrapSendWave(royal,6,level3PathMed,null,level3Wave7)))), this);
 }
 function level3Wave7(){
     setWave('7 / 10');
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
         sendWaveButton.events.onInputDown.add(
-        wrapSendWave(dragon,5,level3Path,sendWaveButton,
-        wrapSendWave(royal,15,level3Path,null,level3Wave8)), this);
+        wrapSendWave(dragon,5,level3PathHard,sendWaveButton,
+        wrapSendWave(royal,15,level3PathHard,null,level3Wave8)), this);
 }
 function level3Wave8(){
     setWave('8 / 10');
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
         sendWaveButton.events.onInputDown.add(
-        wrapSendWave(squirrel,3,level3Path,sendWaveButton,
-        wrapSendWave(admiral,2,level3Path,null,
-        wrapSendWave(royal,10,level3Path,null,level3Wave9))), this);
+        wrapSendWave(squirrel,3,level3PathHard,sendWaveButton,
+        wrapSendWave(admiral,2,level3PathHard,null,
+        wrapSendWave(royal,10,level3PathHard,null,level3Wave9))), this);
 }
 function level3Wave9(){
     setWave('9 / 10');
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
         sendWaveButton.events.onInputDown.add(
-        wrapSendWave(brethren,3,level3Path,sendWaveButton,
-        wrapSendWave(scourge,1,level3Path,null,
-        wrapSendWave(squirrel,2,level3Path,null,
-        wrapSendWave(royal,2,level3Path,null,
-        wrapSendWave(dragon,5,level3Path,null,
-        wrapSendWave(admiral,8,level3Path,null,level3Wave10)))))), this);
+        wrapSendWave(brethren,3,level3PathHard,sendWaveButton,
+        wrapSendWave(scourge,1,level3PathHard,null,
+        wrapSendWave(squirrel,2,level3PathHard,null,
+        wrapSendWave(royal,2,level3PathHard,null,
+        wrapSendWave(dragon,5,level3PathHard,null,
+        wrapSendWave(admiral,8,level3PathHard,null,level3Wave10)))))), this);
 }
 function level3Wave10(){
     setWave('10 / 10');
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
         sendWaveButton.events.onInputDown.add(
-        wrapSendWave(dragon,10,level3Path,sendWaveButton,
-        wrapSendWave(admiral,15,level3Path,null,level3Over)), this);
+        wrapSendWave(dragon,10,level3PathHard,sendWaveButton,
+        wrapSendWave(admiral,15,level3PathHard,null,level3Over)), this);
 }
 //ENEMY LEVEL 2 WAVES
 //============================
