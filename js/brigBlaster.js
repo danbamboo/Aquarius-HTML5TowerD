@@ -24,11 +24,11 @@ var BrigBlasterTower = function(TDgame){
     this.weapon.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
     this.weapon.bulletKillDistance = 550;
     this.weapon.bulletSpeed = 4000;
-    this.weapon.fireRate = 500
+    this.weapon.fireRate = 600
     this.weapon.trackRotation = true;
     this.weapon.autoFire = true;    
     this.weapon.multiFire = true;
-    this.weapon.damage = 1;
+    this.weapon.damage = 2;
 
     this.inMenu = true;
     this.pointerOn = false;

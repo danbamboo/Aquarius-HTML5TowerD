@@ -10,7 +10,7 @@ var FleetSinkerTower = function(TDgame){
     
     this.towerType = "fleetSinker";
     this.towerName = "Fleet Sinker";
-    this.cost = 210;
+    this.cost = 350;
     this.placedOnWater = false;
     this.hasBeenMoved=false;
     this.radius = 100;

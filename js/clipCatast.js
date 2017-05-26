@@ -10,7 +10,7 @@ var ClipCatastTower = function(TDgame){
     
     this.towerType = "clipCatast";
     this.towerName = "Clipper Catastrophe";
-    this.cost = 150;
+    this.cost = 175;
     this.placedOnWater = false;
     this.hasBeenMoved=false;
     this.radius = 100;

@@ -35,7 +35,7 @@ function level1Wave4(){
     sendWaveButton.events.onInputDown.removeAll();
         sendWaveButton.events.onInputDown.add(
         wrapSendWave(squirrel,5,level1Path,sendWaveButton,
-        wrapSendWave(royal,4,level1Path,null,
+        wrapSendWave(royal,3,level1Path,null,
         wrapSendWave(brethren,2,level1Path,null,
         wrapSendWave(scourge,9,level1Path,null,level1Wave5)))), this);
 }
@@ -64,17 +64,17 @@ function level1Wave7(){
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
         sendWaveButton.events.onInputDown.add(
-        wrapSendWave(dragon,5,level1Path,sendWaveButton,
-        wrapSendWave(royal,15,level1Path,null,level1Wave8)), this);
+        wrapSendWave(dragon,8,level1Path,sendWaveButton,
+        wrapSendWave(royal,6,level1Path,null,level1Wave8)), this);
 }
 function level1Wave8(){
     setWave('8 / 10');
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
         sendWaveButton.events.onInputDown.add(
-        wrapSendWave(squirrel,3,level1Path,sendWaveButton,
+        wrapSendWave(dragon,7,level1Path,sendWaveButton,
         wrapSendWave(admiral,2,level1Path,null,
-        wrapSendWave(royal,10,level1Path,null,level1Wave9))), this);
+        wrapSendWave(royal,8,level1Path,null,level1Wave9))), this);
 }
 function level1Wave9(){
     setWave('9 / 10');
@@ -83,8 +83,8 @@ function level1Wave9(){
         sendWaveButton.events.onInputDown.add(
         wrapSendWave(brethren,3,level1Path,sendWaveButton,
         wrapSendWave(scourge,1,level1Path,null,
-        wrapSendWave(squirrel,2,level1Path,null,
-        wrapSendWave(royal,2,level1Path,null,
+        wrapSendWave(squirrel,3,level1Path,null,
+        wrapSendWave(royal,3,level1Path,null,
         wrapSendWave(dragon,5,level1Path,null,
         wrapSendWave(admiral,8,level1Path,null,level1Wave10)))))), this);
 }
