@@ -253,10 +253,10 @@ function createMap3(){
     spTree4 = game.add.sprite(420, 1250, 'tree');
     spTree4.scale.x = .3;
     spTree4.scale.y = .3;
-    village = game.add.sprite(500, 1280,'village');
+    village = game.add.sprite(180, 1320,'village2');
     village.scale.x = .8;
     village.scale.y = .8;
-    villager1 = game.add.sprite(710, 1340, 'villager');
+    villager1 = game.add.sprite(1250, 1060, 'villager');
     villager1.scale.x = 1.6;
     villager1.scale.y = 1.6;
 }
