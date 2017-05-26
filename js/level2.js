@@ -1,16 +1,12 @@
 
 function startLevel2(){
-    //DEBUG MODE ONLY
-    var timer=17000;
-    if(DEBUG){
-        timer=0;
-        skipLevel2.destroy();
-        setTimeout(wrapLevel2Begin(),timer);  //17000
-    }
-    else{
-    //Called on end of last wave
      endLevel1 = true;
-    }
+
+}
+
+function level2Debug(){
+        timer=0;
+        setTimeout(wrapLevel2Begin(),timer);  //17000
 }
 
 function wrapLevel2Begin(){

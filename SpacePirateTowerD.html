@@ -225,11 +225,11 @@ function create() {
     if(DEBUG){
         skipLevel2 = game.add.text(590,1790, 'LvL2', { font: "45px Arial", fill: "#EBEBEB" });
         skipLevel2.inputEnabled = true;
-        skipLevel2.events.onInputDown.add(startLevel2, this);
+        skipLevel2.events.onInputDown.add(level2Debug, this);
         
         skipLevel3 = game.add.text(1260,1790, 'LvL3', { font: "45px Arial", fill: "#EBEBEB" });
         skipLevel3.inputEnabled = true;
-        skipLevel3.events.onInputDown.add(startLevel3, this);
+        skipLevel3.events.onInputDown.add(level3Debug, this);
     }
     sendWaveButton.events.onInputDown.add(level1Wave1, this);
     soundOption.events.onInputDown.add(musicOnOff, this);
