@@ -10,7 +10,7 @@ var FleetSinkerTower = function(TDgame){
     
     this.towerType = "fleetSinker";
     this.towerName = "Fleet Sinker";
-    this.cost = 350;
+    this.cost = 300;
     this.placedOnWater = false;
     this.hasBeenMoved=false;
     this.radius = 100;
@@ -23,7 +23,7 @@ var FleetSinkerTower = function(TDgame){
     this.weapon.bulletAngleOffset = 90;
     this.weapon.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
     this.weapon.bulletKillDistance = 250;
-    this.weapon.bulletSpeed = 4000;
+    this.weapon.bulletSpeed = 5000;
     this.weapon.fireRate = 250;
     this.weapon.trackRotation = true;
     this.weapon.autoFire = true;    
