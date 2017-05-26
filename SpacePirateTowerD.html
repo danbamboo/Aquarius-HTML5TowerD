@@ -63,6 +63,7 @@ function preload() {
     game.load.image('navbar','gameNavBarLogo.png');
     game.load.image('village','village.png');
     game.load.image('scroll','scroll.png');
+    game.load.image('volume', 'VolumeIconSm.png');
 
     //Google Web Fonts For Text Editing
     // game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
@@ -85,6 +86,7 @@ var map;
 var layer1,layer2,layer3,layer4;
 var sendWaveButton;
 var collisionLayer;
+var soundOption;
 
 //sounds variables
 var brigSound;
@@ -168,6 +170,10 @@ function create() {
     sendWaveButton.scale.x = 1.5;
     sendWaveButton.scale.y = 1.5;
     
+    //to allow user to turn music on and off
+	soundOption = game.add.sprite(1800, 1825, 'volume');
+	soundOption.inputEnabled = true;
+    
     //====== MENU
     //CurrentLevelTextOnNavBar Initalize
     currentLevel = "Level 1";
@@ -187,6 +193,7 @@ function create() {
     game.add.text(1385,1870, brigCost, { font: "30px Arial", fill: "#F1C40F" });
     game.add.text(1525,1870, clipCost, { font: "30px Arial", fill: "#F1C40F" });
     game.add.text(1680,1870, fleetCost, { font: "30px Arial", fill: "#F1C40F" });
+    
     //====== MENU
     
     //to create group for berzerker towers
@@ -225,6 +232,7 @@ function create() {
         skipLevel3.events.onInputDown.add(startLevel3, this);
     }
     sendWaveButton.events.onInputDown.add(level1Wave1, this);
+    soundOption.events.onInputDown.add(musicOnOff, this);
 
 }
 function update() {
@@ -349,7 +357,10 @@ function victoryTextDestroy(){
     victoryText.kill();
 }
 
-
+//allow user to turn music on and off
+function musicOnOff(){
+        game.sound.mute = !game.sound.mute;
+    } 
 
 </script>
 

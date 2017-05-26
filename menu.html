@@ -29,6 +29,7 @@ function preload() {
     menuPage.load.image('tutorial','tutorial.png');
     menuPage.load.image('gameMusic','GameMusic.png');
     menuPage.load.image('menuMusic','MenuLicense.png');
+    menuPage.load.image('sound','VolumeIcon.png');
     
     menuPage.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 }
@@ -64,6 +65,10 @@ function create() {
 		var credits = menuPage.add.text(menuPage.world.centerX, 1500, 'Graphics From Kenney.nl\nLaser Sounds From Kenney.nl\nGameplay and Menu Background Music From www.orangefreesounds.com', style);
 		credits.anchor.setTo(0.5,0.5);
 		
+		//to allow user to turn music on and off
+		var volume = menuPage.add.button(menuPage.world.centerX, 1800, 'sound', musicOnOff, this);
+		volume.anchor.setTo(0.5,0.5);
+		
 		//to hold link to music licenses
 		var license1 = menuPage.add.button(310, 1800, 'gameMusic', gameMusicLink, this);
 		license1.anchor.setTo(0.5,0.5);
@@ -91,6 +96,10 @@ function gameMusicLink(){
 function menuMusicLink(){
         window.location.href = 'https://creativecommons.org/licenses/by-nc/4.0/';
     }    
+
+function musicOnOff(){
+        menuPage.sound.mute = !menuPage.sound.mute;
+    }  
 
 </script>
 
