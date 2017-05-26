@@ -27,6 +27,8 @@ function preload() {
     menuPage.load.image('menu','menu.png');
     menuPage.load.image('play','play.png');
     menuPage.load.image('tutorial','tutorial.png');
+    menuPage.load.image('gameMusic','GameMusic.png');
+    menuPage.load.image('menuMusic','MenuLicense.png');
     
     menuPage.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 }
@@ -63,19 +65,32 @@ function create() {
 		credits.anchor.setTo(0.5,0.5);
 		
 		//to hold link to music licenses
-		//var license1 = menuPage.add.button(menuPage.world.centerX, 1800, 'Gameplay Music License', gameLicense, this);
-		//license1.anchor.setTo(0.5,0.5);
+		var license1 = menuPage.add.button(310, 1800, 'gameMusic', gameMusicLink, this);
+		license1.anchor.setTo(0.5,0.5);
+		
+		//to hold link to music licenses
+		var license2 = menuPage.add.button(1600, 1800, 'menuMusic', menuMusicLink, this);
+		license2.anchor.setTo(0.5,0.5);
 		
 		
 }
 
 function playGame(){
-     window.location.href = '/level1';
+        window.location.href = '/level1';
 	}
 	
 function tutorial(){
-	window.location.href = '/tutorial';
+	    window.location.href = '/tutorial';
 	}
+
+//links to music licenses	
+function gameMusicLink(){
+        window.location.href = 'https://creativecommons.org/licenses/by/4.0/';
+    }
+    
+function menuMusicLink(){
+        window.location.href = 'https://creativecommons.org/licenses/by-nc/4.0/';
+    }    
 
 </script>
 
