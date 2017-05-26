@@ -24,15 +24,22 @@ function preload() {
     tutorialPage.load.image('menu','menu2.png');
     tutorialPage.load.atlasXML('shipsMisc1','shipsMiscellaneous_sheet.png','shipsMiscellaneous_sheet.xml');
     tutorialPage.load.atlasXML('spaceItems', 'spaceItems.png', 'spaceItems.xml');
-    
+    tutorialPage.load.audio('menuBackground', 'circus.mp3');
+    tutorialPage.load.image('sound','VolumeIconXSm.png');
     tutorialPage.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 }
+
+//var for the menu music
+var menuMusic;
 
 function create() {
     
 	tutorialPage.scale.pageAlignVertically = true;
 	tutorialPage.scale.pageAlignHorizontally = true; 
 	tutorialPage.scale.refresh();
+	
+	menuMusic = tutorialPage.add.audio('menuBackground');
+    menuMusic.loopFull(.2);
 
     var background = tutorialPage.add.sprite(0, 0, 'stars');
     
@@ -103,12 +110,20 @@ function create() {
 
     var backButton = tutorialPage.add.button(770, 585, 'menu', menu, this);
 	backButton.anchor.setTo(0.5,0.5);
+	
+	//to allow user to turn music on and off
+	var volume = tutorialPage.add.button(375, 585, 'sound', musicOnOff, this);
+	volume.anchor.setTo(0.5,0.5);
 }
 
 //Return to menu
 function menu(){
 	window.location.href = '/';
 }
+
+function musicOnOff(){
+    tutorialPage.sound.mute = !tutorialPage.sound.mute;
+}  
 
 
 </script>
