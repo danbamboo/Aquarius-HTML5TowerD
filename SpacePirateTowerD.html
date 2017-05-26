@@ -64,6 +64,8 @@ function preload() {
     game.load.image('village','village.png');
     game.load.image('village2','village2.png');
     game.load.image('scroll','scroll.png');
+    game.load.image('gameOver', 'gameOver.png');
+    game.load.image('victory', 'victory.png');
     game.load.image('volume', 'VolumeIconSm.png');
 
     //Google Web Fonts For Text Editing
@@ -145,7 +147,6 @@ function create() {
     
     createMap1();  //Create Map for Level 1
     
-   
     //Enemies
     enemies = game.add.group();
     game.physics.arcade.enable(enemies);
@@ -344,21 +345,21 @@ function gameOver(){
     enemies.callAll('kill');
     enemies.destroy();
     berzerkers.destroy();
-    var gameOver = game.add.text(600,800, 'GAME OVER\nClick To Retry?', { font: "150px Arial", fill: "#1B4F72" });
+    //var gameOver = game.add.text(600,800, 'GAME OVER\nClick To Retry?', { font: "150px Arial", fill: "#1B4F72" });
+    var gameOver = game.add.sprite(game.world.centerX-411, 420, 'gameOver');
     gameOver.inputEnabled = true;
-     gameOver.events.onInputDown.add(function(){
+    gameOver.events.onInputDown.add(function(){
          window.location.href = '/level1';
      }, this);
-     
-   
 }
 
 function victoryTextCreate(){
-    victoryText = game.add.text(600,800, 'Victory!', { font: "150px Arial", fill: "#1B4F72" });
+    //victoryText = game.add.text(600,800, 'Victory!', { font: "150px Arial", fill: "#1B4F72" });
+    victoryText = game.add.sprite(game.world.centerX-411, 420, 'victory');
 }
 
 function victoryTextDestroy(){
-    victoryText.kill();
+    victoryText.destroy();
 }
 
 //allow user to turn music on and off
