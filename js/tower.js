@@ -192,9 +192,9 @@ function checkTowerCoord(newX, newY, array, tower){
         if(overlap == false)
         {
             addCoord(newX, newY, array);
-            console.log("store coords");
+            //console.log("store coords");
             console.log("NO OVERLAP");
-            console.log("Array Length: " + array.length);
+            //console.log("Array Length: " + array.length);
         }
         else
         {

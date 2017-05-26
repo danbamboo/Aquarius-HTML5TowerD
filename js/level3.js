@@ -53,7 +53,7 @@ function loadLevel3(){
         spTree2.destroy();
         spTree3.destroy();
         spTree4.destroy();
-        village.destroy();
+        village2.destroy();
         villager1.destroy();
         rectangleEnding.destroy();  //Used in update funciton, check for exception when null
        

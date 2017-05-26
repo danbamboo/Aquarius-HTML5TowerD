@@ -224,24 +224,24 @@ function createMap2(){
     game.scale.refresh();
     
     //Misc Sprites
-    spTree = game.add.sprite(1160, 2, 'tree');
-    spTree.scale.x = .5;
-    spTree.scale.y = .5;
+    village = game.add.sprite(1200, 20,'village2');
+    village.scale.x = .8;
+    village.scale.y = .8;
+    villager1 = game.add.sprite(1210, 110, 'villager');
+    villager1.scale.x = 1.6;
+    villager1.scale.y = 1.6;
+    spTree = game.add.sprite(1200, 2, 'tree');
+    spTree.scale.x = .4;
+    spTree.scale.y = .4;
     spTree2 = game.add.sprite(1280, 840, 'tree');
     spTree2.scale.x = .5;
     spTree2.scale.y = .5;
     spTree3 = game.add.sprite(1320, 910, 'tree');
     spTree3.scale.x = .4;
     spTree3.scale.y = .4;
-    spTree4 = game.add.sprite(1230, 90, 'tree');
+    spTree4 = game.add.sprite(1240, 60, 'tree');
     spTree4.scale.x = .3;
     spTree4.scale.y = .3;
-    village = game.add.sprite(1430, 70,'village');
-    village.scale.x = .8;
-    village.scale.y = .8;
-    villager1 = game.add.sprite(1300, 150, 'villager');
-    villager1.scale.x = 1.6;
-    villager1.scale.y = 1.6;
 }
 
 function destroyMap2(){
