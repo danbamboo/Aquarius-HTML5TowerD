@@ -38,7 +38,7 @@ app.get('/tutorial', function(req, res){
    res.sendFile(path.join(__dirname+'/tutorial.html')); 
 });
 
-app.get('/level1', function(req, res){
+app.get('/game', function(req, res){
    res.sendFile(path.join(__dirname+'/SpacePirateTowerD.html')); 
 });
 

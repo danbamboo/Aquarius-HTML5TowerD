@@ -47,7 +47,10 @@ function loadLevel2(){
         towerCoordQ4.length = 0;
         
         //Destroy
-        victoryTextDestroy();
+        if(victoryText){
+            victoryTextDestroy();
+        }
+        
         berzerkers.destroy();
         spTree.destroy();
         spTree2.destroy();
@@ -56,6 +59,10 @@ function loadLevel2(){
         village.destroy();
         villager1.destroy();
         rectangleEnding.destroy();  //Used in update funciton, check for exception when null
+        
+        if(gameOverText){
+            gameOverText.destroy();
+        }
        
         destroyMap();
         
@@ -63,7 +70,7 @@ function loadLevel2(){
         sendWaveButton.visible = true;
         setLevel('Level 2', 'Cutthroat');
         setWave('1 / 10');
-        currentGold = 650;  //Init player with 250 gold to start game
+        currentGold = 650;  //Init player with 650 gold to start game
         setGold(currentGold);
         
         //Groups

@@ -47,7 +47,10 @@ function loadLevel3(){
         towerCoordQ4.length = 0;
         
         //Destroy
-        victoryTextDestroy();
+         if(victoryText){
+            victoryTextDestroy();
+        }
+        
         berzerkers.destroy();
         spTree.destroy();
         spTree2.destroy();
@@ -56,6 +59,10 @@ function loadLevel3(){
         village.destroy();
         villager1.destroy();
         rectangleEnding.destroy();  //Used in update funciton, check for exception when null
+        
+        if(gameOverText){
+            gameOverText.destroy();
+        }
        
         destroyMap();
         
@@ -63,7 +70,7 @@ function loadLevel3(){
         sendWaveButton.visible = true;
         setLevel('Level 3', 'Mutiny');
         setWave('1 / 10');
-        currentGold = 400;  //Init player with 250 gold to start game
+        currentGold = 650;  //Init player with 650 gold to start game
         setGold(currentGold);
         
         //Groups

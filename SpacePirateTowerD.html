@@ -113,6 +113,7 @@ var currentGold, goldMeter;
 var brigCost, clipCost,fleetCost;
 var rectangleEnding, enemySign;
 var victoryText;
+var gameOverText;
     
 //Tower Groups
 var berzerkers;
@@ -235,6 +236,19 @@ function create() {
     }
     sendWaveButton.events.onInputDown.add(level1Wave1, this);
     soundOption.events.onInputDown.add(musicOnOff, this);
+    
+      var urlParams = new URLSearchParams(window.location.search);
+    if(urlParams.has('level')){
+        levelByQuery = urlParams.get('level');
+        if(levelByQuery == '2'){
+            level2 = loadLevel2();
+            level2();
+        }
+        if(levelByQuery == '3'){
+            level3 = loadLevel3();
+            level3();
+        }
+    }
 
 }
 function update() {
@@ -346,11 +360,25 @@ function gameOver(){
     enemies.destroy();
     berzerkers.destroy();
     //var gameOver = game.add.text(600,800, 'GAME OVER\nClick To Retry?', { font: "150px Arial", fill: "#1B4F72" });
-    var gameOver = game.add.sprite(game.world.centerX-411, 420, 'gameOver');
-    gameOver.inputEnabled = true;
-    gameOver.events.onInputDown.add(function(){
-         window.location.href = '/level1';
+    gameOverText = game.add.sprite(game.world.centerX-411, 420, 'gameOver');
+    gameOverText.inputEnabled = true;
+    
+    if(currentLevel == 'Level 1')
+    {
+    gameOverText.events.onInputDown.add(function(){
+         window.location.href = '/game';
      }, this);
+    }
+    else if(currentLevel == 'Level 2'){
+        gameOverText.events.onInputDown.add(function(){
+         window.location.href = '/game?level=2';
+     }, this);
+    }
+    else if(currentLevel == 'Level 3'){
+        gameOverText.events.onInputDown.add(function(){
+         window.location.href = '/game?level=3';
+     }, this);
+    }
 }
 
 function victoryTextCreate(){
