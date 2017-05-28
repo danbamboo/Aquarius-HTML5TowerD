@@ -94,6 +94,8 @@ var collisionLayer;
 var soundOption;
 var soundOnOffText;
 var mainMenuButton;
+var difficulty='easy';
+var difficultyText;
 
 //sounds variables
 var brigSound;
@@ -177,7 +179,7 @@ function create() {
          window.location.href = '/';
      }, this);
     //Send Wave Button
-    sendWaveButton = game.add.sprite(250,1800,'sendNextWaveButtn');
+    sendWaveButton = game.add.sprite(200,1800,'sendNextWaveButtn');
     sendWaveButton.inputEnabled = true;
     sendWaveButton.scale.x = 1.5;
     sendWaveButton.scale.y = 1.5;
@@ -186,6 +188,23 @@ function create() {
 	soundOption = game.add.sprite(1790, 1850, 'volume');
 	soundOnOffText = game.add.text(1860,1870, 'On', { font: "30px Arial", fill: "#B3B6B7" });
 	soundOption.inputEnabled = true;
+	
+	//Check For Difficulty
+	var urlParams = new URLSearchParams(window.location.search);
+    if(urlParams.has('difficulty')){
+        difficulty = urlParams.get('difficulty');
+        if(difficulty == 'easy'){
+            difficultyText = game.add.text(510,1800, 'Easy', { font: "30px Arial", fill: "#27AE60" });
+        }
+        else if(difficulty == 'medium'){
+            difficultyText = game.add.text(510,1800, 'Medium', { font: "30px Arial", fill: "#D35400" });
+        }
+        else if(difficulty == 'hard'){
+            difficultyText = game.add.text(510,1800, 'Hard', { font: "30px Arial", fill: "#E74C3C" });
+        }
+    }
+    
+
     
     //====== MENU
     //CurrentLevelTextOnNavBar Initalize
@@ -200,9 +219,11 @@ function create() {
     brigCost = 75;
     clipCost = 175;
     fleetCost = 300;
-    currentGold = 350;  //Init player with 250 gold to start game
+    
+    //Gold Based On Difficulty
+    setGoldBasedOnDifficulty();
+    
     game.add.text(510,1845, 'Gold:', { font: "30px Arial", fill: "#EBEBEB" });
-    goldMeter = game.add.text(530,1880, currentGold, { font: "30px Arial", fill: "#F1C40F" });
     game.add.text(1385,1870, brigCost, { font: "30px Arial", fill: "#F1C40F" });
     game.add.text(1525,1870, clipCost, { font: "30px Arial", fill: "#F1C40F" });
     game.add.text(1680,1870, fleetCost, { font: "30px Arial", fill: "#F1C40F" });
@@ -236,18 +257,18 @@ function create() {
   
 
     if(DEBUG){
-        skipLevel2 = game.add.text(590,1790, 'LvL2', { font: "45px Arial", fill: "#EBEBEB" });
+        skipLevel2 = game.add.text(1260,1790, 'LvL2', { font: "45px Arial", fill: "#EBEBEB" });
         skipLevel2.inputEnabled = true;
         skipLevel2.events.onInputDown.add(level2Debug, this);
         
-        skipLevel3 = game.add.text(1260,1790, 'LvL3', { font: "45px Arial", fill: "#EBEBEB" });
+        skipLevel3 = game.add.text(1260,1860, 'LvL3', { font: "45px Arial", fill: "#EBEBEB" });
         skipLevel3.inputEnabled = true;
         skipLevel3.events.onInputDown.add(level3Debug, this);
     }
     sendWaveButton.events.onInputDown.add(level1Wave1, this);
     soundOption.events.onInputDown.add(musicOnOff, this);
     
-      var urlParams = new URLSearchParams(window.location.search);
+    var urlParams = new URLSearchParams(window.location.search);
     if(urlParams.has('level')){
         levelByQuery = urlParams.get('level');
         if(levelByQuery == '2'){
@@ -346,7 +367,10 @@ function setWave(waveText){
 }
 
 function setGold(goldValue){
-    goldMeter.kill();
+    if(goldMeter){
+        goldMeter.kill();
+    }
+    
     goldMeter = game.add.text(530,1880, goldValue, { font: "30px Arial", fill: "#F1C40F" })
 }
 
@@ -383,17 +407,17 @@ function gameOver(){
     if(currentLevel == 'Level 1')
     {
     gameOverText.events.onInputDown.add(function(){
-         window.location.href = '/game';
+         window.location.href = '/game?difficulty=' + difficulty;
      }, this);
     }
     else if(currentLevel == 'Level 2'){
         gameOverText.events.onInputDown.add(function(){
-         window.location.href = '/game?level=2';
+         window.location.href = '/game?level=2&difficulty=' + difficulty;
      }, this);
     }
     else if(currentLevel == 'Level 3'){
         gameOverText.events.onInputDown.add(function(){
-         window.location.href = '/game?level=3';
+         window.location.href = '/game?level=3&difficulty=' + difficulty;
      }, this);
     }
 }
@@ -405,6 +429,47 @@ function victoryTextCreate(){
 
 function victoryTextDestroy(){
     victoryText.destroy();
+}
+
+function setGoldBasedOnDifficulty(){
+    if(currentLevel=='Level 1'){
+        if(difficulty=='easy'){
+            currentGold = 600;  
+        }
+        else if(difficulty=='medium'){
+            currentGold = 450;  
+        }
+        else if(difficulty=='hard'){
+            currentGold = 350;  
+        }
+    }
+    
+    else if(currentLevel=='Level 2'){
+        if(difficulty=='easy'){
+            currentGold = 800;  
+        }
+        else if(difficulty=='medium'){
+            currentGold = 650;  
+        }
+        else if(difficulty=='hard'){
+            currentGold = 550;  
+        }
+    }
+    
+    else if(currentLevel=='Level 3'){
+         if(difficulty=='easy'){
+            currentGold = 800;  
+        }
+        else if(difficulty=='medium'){
+            currentGold = 650;  
+        }
+        else if(difficulty=='hard'){
+            currentGold = 550;  
+        }
+    }
+    
+    setGold(currentGold);
+ 
 }
 
 //allow user to turn music on and off

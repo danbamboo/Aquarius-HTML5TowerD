@@ -70,8 +70,7 @@ function loadLevel2(){
         sendWaveButton.visible = true;
         setLevel('Level 2', 'Cutthroat');
         setWave('1 / 10');
-        currentGold = 650;  //Init player with 650 gold to start game
-        setGold(currentGold);
+        setGoldBasedOnDifficulty();
         
         //Groups
         berzerkers = game.add.group();

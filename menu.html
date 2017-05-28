@@ -81,7 +81,24 @@ function create() {
 }
 
 function playGame(){
-        window.location.href = '/game';
+    var level1Text = menuPage.add.text(450,750, 'Easy', { font: "60px Holtwood One SC", fill: "#ECF0F1" });
+        level1Text.inputEnabled = true;
+        level1Text.events.onInputDown.add(function(){
+            window.location.href = '/game?difficulty=easy';
+        }, this);
+        
+         var level2Text = menuPage.add.text(450,850, 'Medium', { font: "60px Holtwood One SC", fill: "#ECF0F1" });
+        level2Text.inputEnabled = true;
+        level2Text.events.onInputDown.add(function(){
+            window.location.href = '/game?difficulty=medium';
+        }, this);
+        
+         var level3Text = menuPage.add.text(450,950, 'Hard', { font: "60px Holtwood One SC", fill: "#ECF0F1" });
+        level3Text.inputEnabled = true;
+        level3Text.events.onInputDown.add(function(){
+            window.location.href = '/game?difficulty=hard';
+        }, this);
+        
 	}
 	
 function tutorial(){
