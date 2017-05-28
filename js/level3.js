@@ -119,7 +119,7 @@ function loadLevel3(){
 function level3Wave1() {
     sendWave(brethren,10,level3PathEasy,null,
     wrapSendWave(scourge,1,level3PathEasy,null,
-    wrapSendWave(brethren,2,level3PathEasy,null,level3Wave3)));
+    wrapSendWave(brethren,2,level3PathEasy,null,level3Wave2)));
     sendWaveButton.visible = false;
 }
 function level3Wave2(){
