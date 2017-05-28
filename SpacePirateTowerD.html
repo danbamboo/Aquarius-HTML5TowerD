@@ -68,6 +68,7 @@ function preload() {
     game.load.image('gameOver', 'gameOver.png');
     game.load.image('victory', 'victory.png');
     game.load.image('volume', 'VolumeIconSm.png');
+    game.load.image('mainMenu', 'mainMenuButton.png');
 
     //Google Web Fonts For Text Editing
     // game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
@@ -91,6 +92,8 @@ var layer1,layer2,layer3,layer4;
 var sendWaveButton;
 var collisionLayer;
 var soundOption;
+var soundOnOffText;
+var mainMenuButton;
 
 //sounds variables
 var brigSound;
@@ -168,6 +171,11 @@ function create() {
     }
     
     navbar = game.add.sprite(0, 1760, 'navbar');
+    mainMenuButton = game.add.sprite(1770, 1800, 'mainMenu');
+    mainMenuButton.inputEnabled = true;
+    mainMenuButton.events.onInputDown.add(function(){
+         window.location.href = '/';
+     }, this);
     //Send Wave Button
     sendWaveButton = game.add.sprite(250,1800,'sendNextWaveButtn');
     sendWaveButton.inputEnabled = true;
@@ -175,7 +183,8 @@ function create() {
     sendWaveButton.scale.y = 1.5;
     
     //to allow user to turn music on and off
-	soundOption = game.add.sprite(1800, 1825, 'volume');
+	soundOption = game.add.sprite(1790, 1850, 'volume');
+	soundOnOffText = game.add.text(1860,1870, 'On', { font: "30px Arial", fill: "#B3B6B7" });
 	soundOption.inputEnabled = true;
     
     //====== MENU
@@ -401,6 +410,13 @@ function victoryTextDestroy(){
 //allow user to turn music on and off
 function musicOnOff(){
         game.sound.mute = !game.sound.mute;
+        soundOnOffText.destroy();
+        if(!game.sound.mute){
+            soundOnOffText = game.add.text(1860,1870, 'On', { font: "30px Arial", fill: "#B3B6B7" });
+        }
+        else{
+            soundOnOffText = game.add.text(1860,1870, 'Off', { font: "30px Arial", fill: "#B3B6B7" });
+        }
     } 
 
 </script>
