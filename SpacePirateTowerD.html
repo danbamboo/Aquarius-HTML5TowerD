@@ -20,6 +20,7 @@
 		<script type="text/javascript" src="level1.js"></script>
 		<script type="text/javascript" src="level2.js"></script>
 		<script type="text/javascript" src="level3.js"></script>
+			
 		
     <style type="text/css">
         body {
@@ -286,9 +287,8 @@ function collisionCheck(star, enemy){
     // console.log("CURRENT DAMAGE " + star.data.bulletManager.damage);
     
     enemy.health -= star.data.bulletManager.damage;
-        if(DEBUG){
-            updateEnemyHealth(enemy);
-        }
+        updateEnemyHealthBar(enemy);
+        
     console.log("Current Wave " + currentWave); 
     
     if(enemy.health <=  0){
@@ -304,6 +304,14 @@ function collisionCheck(star, enemy){
         }    
     }    
         star.kill();
+        
+         setTimeout(function (){
+             if(enemy.children[0]){
+             if(enemy.children[0].visible == true)
+             enemy.children[0].visible = false;
+             }
+    },4000);
+        
 }
  
     

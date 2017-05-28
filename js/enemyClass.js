@@ -18,6 +18,7 @@ var enemy = function (game,enemyType){
     
     this.name = enemyType.name;
     this.health = enemyType.health;
+    this.maxHealth = enemyType.health;
     this.gold = enemyType.goldValue;
     this.speed = enemyType.speed;
     this.spriteSheet = enemyType.spriteSheet;
@@ -29,21 +30,29 @@ var enemy = function (game,enemyType){
     game.physics.arcade.enable(this);
     enemies.add(this);
     
+   
+    
+    
+        var healthBar = game.add.graphics(10, -20);
+        healthBar.beginFill(0x00FF08, 0.1);
+        healthBar.drawRect(-50, -50, 100, 10);
+        this.addChild(healthBar);
+        
     //DEBUG  for enemy health update
-    if(DEBUG){
-        var enemyHealthText;
-           if(currentLevel=="Level 1"){
-               enemyHealthText = game.add.text(this.x-135,this.y+300, this.health, { font: "50px Arial", fill: "#4A235A" });
-           }
-           else if(currentLevel=="Level 2"){
-                enemyHealthText = game.add.text(this.x-1800,this.y+300, this.health, { font: "50px Arial", fill: "#4A235A" });
-           }
-           else if(currentLevel=="Level 3"){
-                enemyHealthText = game.add.text(this.x-920,this.y+300, this.health, { font: "50px Arial", fill: "#4A235A" });
-           }
-                this.addChild(enemyHealthText);
-
-    }
+    //     if(DEBUG){
+    //         var enemyHealthText;
+    //       if(currentLevel=="Level 1"){
+               
+    //         //   enemyHealthText = game.add.text(this.x-135,this.y+300, this.health, { font: "50px Arial", fill: "#4A235A" });
+    //       }
+    //       else if(currentLevel=="Level 2"){
+    //             // enemyHealthText = game.add.text(this.x-1800,this.y+300, this.health, { font: "50px Arial", fill: "#4A235A" });
+    //       }
+    //       else if(currentLevel=="Level 3"){
+    //             // enemyHealthText = game.add.text(this.x-920,this.y+300, this.health, { font: "50px Arial", fill: "#4A235A" });
+    //       }
+    //         this.addChild(enemyHealthText);
+    // }
 }
 
 enemy.prototype = Object.create(Phaser.Sprite.prototype);
@@ -275,4 +284,16 @@ function updateEnemyHealth(enemy){
         enemy.children[0].destroy();
         var enemyHealthText = game.add.text(this.x,this.y, enemy.health, { font: "50px Arial", fill: "#4A235A" });
         enemy.addChild(enemyHealthText);
+    }
+    
+    function updateEnemyHealthBar(enemy){
+        enemy.children[0].destroy();
+        var percentHealth = enemy.health/enemy.maxHealth;
+        percentHealth = Math.floor(percentHealth*100);
+        var healthBar = game.add.graphics(10, -20);
+        healthBar.beginFill(0x943126, 0.4);
+        healthBar.drawRect(-50, -50, percentHealth, 10);
+        
+        enemy.addChild(healthBar);
+        
     }
