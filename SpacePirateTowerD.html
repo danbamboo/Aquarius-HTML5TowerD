@@ -80,7 +80,7 @@ function preload() {
 // Global Variables
 //***************************
 //DEBUG MODE
-var DEBUG = false;
+var DEBUG = true;
 var backgroundSoundOn = true;
 var skipLevel2, skipLevel3;
 var endLevel1 = false;
@@ -284,7 +284,7 @@ function create() {
 }
 function update() {
     
-    //Check for collision between bullets and enemies
+    //Check if enemy has reached the end
     game.physics.arcade.overlap(rectangleEnding, enemies, enemyReachedTheEnd, null, this);
     
     //Check for victory at end of level1
