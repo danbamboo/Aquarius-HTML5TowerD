@@ -188,7 +188,7 @@ function level3Wave8(){
     sendWaveButton.visible = true;
     sendWaveButton.events.onInputDown.removeAll();
         sendWaveButton.events.onInputDown.add(
-        wrapSendWave(dragon,7,sendWaveButton,
+        wrapSendWave(dragon,7,level3PathHard,sendWaveButton,
         wrapSendWave(admiral,2,level3PathHard,null,
         wrapSendWave(royal,8,level3PathHard,null,level3Wave9))), this);
 }
