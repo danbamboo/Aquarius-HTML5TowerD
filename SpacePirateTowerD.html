@@ -120,6 +120,10 @@ var brigCost, clipCost,fleetCost;
 var rectangleEnding, enemySign;
 var victoryText;
 var gameOverText;
+
+//to hold overall gold earned and ships destroyed
+var totalGoldEarned, totalGoldMeter;
+var shipsDestroyed, totalShipsDestroyed;    
     
 //Tower Groups
 var berzerkers;
@@ -158,6 +162,10 @@ function create() {
     enemies = game.add.group();
     game.physics.arcade.enable(enemies);
    
+    //Scorekeeping
+    shipsDestroyed = 0;
+    totalGoldEarned = 0;
+   
     //create sounds
     brigSound = game.add.audio('brigLaser');
     brigSound.allowMultiple = true;
@@ -172,7 +180,7 @@ function create() {
     backgroundSound.loopFull(.2);
     }
     
-    navbar = game.add.sprite(0, 1760, 'navbar');
+    //navbar = game.add.sprite(0, 1760, 'navbar');
     mainMenuButton = game.add.sprite(1770, 1800, 'mainMenu');
     mainMenuButton.inputEnabled = true;
     mainMenuButton.events.onInputDown.add(function(){
@@ -194,13 +202,13 @@ function create() {
     if(urlParams.has('difficulty')){
         difficulty = urlParams.get('difficulty');
         if(difficulty == 'easy'){
-            difficultyText = game.add.text(510,1800, 'Easy', { font: "30px Arial", fill: "#27AE60" });
+            difficultyText = game.add.text(520,1880, 'Easy', { font: "30px Arial", fill: "#27AE60" });
         }
         else if(difficulty == 'medium'){
-            difficultyText = game.add.text(510,1800, 'Medium', { font: "30px Arial", fill: "#D35400" });
+            difficultyText = game.add.text(505,1880, 'Medium', { font: "30px Arial", fill: "#D35400" });
         }
         else if(difficulty == 'hard'){
-            difficultyText = game.add.text(510,1800, 'Hard', { font: "30px Arial", fill: "#E74C3C" });
+            difficultyText = game.add.text(520,1880, 'Hard', { font: "30px Arial", fill: "#E74C3C" });
         }
     }
     
@@ -214,6 +222,7 @@ function create() {
     level = game.add.text(20,1800, currentLevel, { font: "40px Arial", fill: "#EBEBEB" });
     levelName = game.add.text(20,1850, currentLevelName, { font: "40px Arial", fill: "#7FFFD4" });
     game.add.text(277,1845, 'Wave:', { font: "30px Arial", fill: "#EBEBEB" });
+    game.add.text(500,1845, 'Difficulty:', { font: "30px Arial", fill: "#EBEBEB" });
     wave = game.add.text(280,1880, currentWave, { font: "30px Arial", fill: "#E74C3C" });
     //Menu Bar Gold Costs
     brigCost = 75;
@@ -223,7 +232,9 @@ function create() {
     //Gold Based On Difficulty
     setGoldBasedOnDifficulty();
     
-    game.add.text(510,1845, 'Gold:', { font: "30px Arial", fill: "#EBEBEB" });
+    game.add.text(950,1800, 'Total Gold Earned:', {font: "30px Arial", fill: "#EBEBEB" });
+    game.add.text(950,1870, 'Ships Destroyed:', {font: "30px Arial", fill: "#EBEBEB" });
+    game.add.text(700,1820, 'Gold:', { font: "40px Arial", fill: "#EBEBEB" });
     game.add.text(1385,1870, brigCost, { font: "30px Arial", fill: "#F1C40F" });
     game.add.text(1525,1870, clipCost, { font: "30px Arial", fill: "#F1C40F" });
     game.add.text(1680,1870, fleetCost, { font: "30px Arial", fill: "#F1C40F" });
@@ -327,6 +338,10 @@ function collisionCheck(star, enemy){
         var currTile = map.getTileWorldXY(enemy.x, enemy.y, 32, 29, layer1);
         enemy.destroy();
         shipSink.play();
+        shipsDestroyed++;
+        setTotalShipsDestroyed(shipsDestroyed);
+        totalGoldEarned = totalGoldEarned += enemy.gold *3;
+        setTotalGoldEarned(totalGoldEarned);
         
         if(currTile != null){
             var explosion = game.add.sprite(currTile.x*32, currTile.y*29, 'shipsMisc1', 'explosion1.png');
@@ -371,7 +386,25 @@ function setGold(goldValue){
         goldMeter.kill();
     }
     
-    goldMeter = game.add.text(530,1880, goldValue, { font: "30px Arial", fill: "#F1C40F" })
+    goldMeter = game.add.text(810,1820, goldValue, { font: "40px Arial", fill: "#F1C40F" })
+}
+
+//function to update the total gold earned
+function setTotalGoldEarned(totalGold){
+    if(totalGoldMeter){
+        totalGoldMeter.kill();
+    }
+    
+    totalGoldMeter = game.add.text(1220,1800, totalGold, { font: "30px Arial", fill: "#F1C40F" })
+}
+
+//to update the total number of ships destroyed
+function setTotalShipsDestroyed(shipsKilled){
+    if(totalShipsDestroyed){
+        totalShipsDestroyed.kill();
+    }
+    
+    totalShipsDestroyed = game.add.text(1200,1870, shipsKilled, { font: "30px Arial", fill: "#F1C40F" })
 }
 
 
