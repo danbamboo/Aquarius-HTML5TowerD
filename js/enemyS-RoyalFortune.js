@@ -2,7 +2,7 @@
 var royal = {
     name:'Royal Fortune',
     difficulty:6,  //10=Hard
-    health:90,
+    health:85,
     goldValue:5,
     speed:'fast',
     spriteSheet:'shipsMisc1',
