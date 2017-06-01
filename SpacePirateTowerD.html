@@ -80,7 +80,7 @@ function preload() {
 // Global Variables
 //***************************
 //DEBUG MODE
-var DEBUG = false;
+var DEBUG = true;
 var backgroundSoundOn = true;
 var skipLevel2, skipLevel3;
 var endLevel1 = false;
@@ -96,6 +96,7 @@ var soundOnOffText;
 var mainMenuButton;
 var difficulty='easy';
 var difficultyText;
+var sound = false;
 
 //sounds variables
 var brigSound;
@@ -197,6 +198,8 @@ function create() {
 	soundOnOffText = game.add.text(1860,1870, 'On', { font: "30px Arial", fill: "#B3B6B7" });
 	soundOption.inputEnabled = true;
 	
+	
+	
 	//Check For Difficulty
 	var urlParams = new URLSearchParams(window.location.search);
     if(urlParams.has('difficulty')){
@@ -211,6 +214,15 @@ function create() {
             difficultyText = game.add.text(520,1880, 'Hard', { font: "30px Arial", fill: "#E74C3C" });
         }
     }
+    console.log("URL " + urlParams);
+    if(urlParams.has('sound')){
+	    sound = urlParams.get('sound');
+	    console.log("SOUND " + sound);
+	    if(sound == 'true'){
+	        musicOnOff();
+	    }
+	}
+	console.log(sound);
     
 
     
@@ -465,6 +477,8 @@ function victoryTextDestroy(){
 }
 
 function setGoldBasedOnDifficulty(){
+    
+    console.log("Difficulty " + difficulty);
     if(currentLevel=='Level 1'){
         if(difficulty=='easy'){
             currentGold = 800;  
@@ -507,6 +521,7 @@ function setGoldBasedOnDifficulty(){
 
 //allow user to turn music on and off
 function musicOnOff(){
+    console.log("MUSIC OFF/ON");
         game.sound.mute = !game.sound.mute;
         soundOnOffText.destroy();
         if(!game.sound.mute){
