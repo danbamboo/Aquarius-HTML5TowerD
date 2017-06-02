@@ -28,7 +28,6 @@
             background-image: url(back4.JPG);
             background-repeat: no-repeat;
             background-size: cover;
-            
             margin: 0;
         }
     </style>
@@ -190,7 +189,7 @@ function create() {
     mainMenuButton = game.add.sprite(1770, 1800, 'mainMenu');
     mainMenuButton.inputEnabled = true;
     mainMenuButton.events.onInputDown.add(function(){
-         window.location.href = '/';
+         window.location.href = '/?sound=' + sound;
      }, this);
     //Send Wave Button
     sendWaveButton = game.add.sprite(200,1800,'sendNextWaveButtn');
@@ -455,17 +454,17 @@ function gameOver(){
     if(currentLevel == 'Level 1')
     {
     gameOverText.events.onInputDown.add(function(){
-         window.location.href = '/game?difficulty=' + difficulty;
+         window.location.href = '/game?difficulty=' + difficulty + '&sound=' + sound;
      }, this);
     }
     else if(currentLevel == 'Level 2'){
         gameOverText.events.onInputDown.add(function(){
-         window.location.href = '/game?level=2&difficulty=' + difficulty;
+         window.location.href = '/game?level=2&difficulty=' + difficulty + '&sound=' + sound;
      }, this);
     }
     else if(currentLevel == 'Level 3'){
         gameOverText.events.onInputDown.add(function(){
-         window.location.href = '/game?level=3&difficulty=' + difficulty;
+         window.location.href = '/game?level=3&difficulty=' + difficulty + '&sound=' + sound;
      }, this);
     }
 }

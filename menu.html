@@ -51,6 +51,15 @@ function create() {
         var background = menuPage.add.sprite(0, 0, 'stars');
   	    
   	    var gameLogo = menuPage.add.sprite(menuPage.world.centerX-840, 200, 'gameLogo');
+  	    
+  	    //to check if sound is off coming to menu from game
+  	    var urlParams = new URLSearchParams(window.location.search);
+  	    if(urlParams.has('sound')){
+	    sound = urlParams.get('sound');
+	    if(sound == 'true'){
+	        musicOnOff();
+	    }
+	}
         
         var menu = menuPage.add.sprite(menuPage.world.centerX, 650, 'menu');
         menu.anchor.setTo(0.5, 0.5);
