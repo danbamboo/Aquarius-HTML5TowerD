@@ -24,12 +24,17 @@
 		
     <style type="text/css">
         body {
+            
+            background-image: url(back4.JPG);
+            background-repeat: no-repeat;
+            background-size: cover;
+            
             margin: 0;
         }
     </style>
 </head>
 
-<body background = "back4.JPG">
+<body>
 
 <script type="text/javascript">
 var game = new Phaser.Game(1920, 1920, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render});
@@ -214,16 +219,14 @@ function create() {
             difficultyText = game.add.text(520,1880, 'Hard', { font: "30px Arial", fill: "#E74C3C" });
         }
     }
-    console.log("URL " + urlParams);
+
     if(urlParams.has('sound')){
 	    sound = urlParams.get('sound');
-	    console.log("SOUND " + sound);
 	    if(sound == 'true'){
 	        musicOnOff();
 	    }
 	}
-	console.log(sound);
-    
+
 
     
     //====== MENU
@@ -521,7 +524,7 @@ function setGoldBasedOnDifficulty(){
 
 //allow user to turn music on and off
 function musicOnOff(){
-    console.log("MUSIC OFF/ON");
+
         game.sound.mute = !game.sound.mute;
         soundOnOffText.destroy();
         if(!game.sound.mute){
