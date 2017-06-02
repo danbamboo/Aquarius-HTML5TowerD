@@ -131,7 +131,9 @@ var gameOverText;
 var totalGoldEarned, totalGoldMeter;
 var shipsDestroyed, totalShipsDestroyed; 
 var highScore;
-    
+var scoreKeeper = localStorage;
+var browserTest;
+
 //Tower Groups
 var berzerkers;
 //Ranage Tower Group
@@ -162,8 +164,10 @@ var timeoutIndex =0;
 function create() {
     
     game.physics.startSystem(Phaser.Physics.ARCADE);
-    
     createMap1();  //Create Map for Level 1
+    
+    browserTest = browserCheck();
+    console.log("BROWSER " + browserTest);
     
     //Enemies
     enemies = game.add.group();
@@ -456,24 +460,40 @@ function gameOver(){
     gameOverText = game.add.sprite(game.world.centerX-411, 420, 'gameOver');
     gameOverText.inputEnabled = true;
     
-    //to get highscore and check if needs to be replaced
-    /*highScore =  localStorage.getItem("highscore");
-    if(highScore !== null){
-        if(totalGoldEarned > highScore){
-        localStorage.setItem("highscore", highScore);
-        console.log("NEW HIGHSCORE " + highScore);
+    //to ensure that the browser is compatible with local storage
+    if(browserTest === true){
+        console.log("browser valid");
+        //check if gold or ships destroyed local storage exists
+        if(localStorage.getItem('highscore') === 'null'){
+            console.log("Highscore is NULL")
+            localStorage.setItem('highscore', 0);
         }
-        else{
-            console.log("NO NEW HIGHSCORE, STAY AT " + highScore);
-            console.log("");
+        if(localStorage.getItem('highshipsdestroyed') === 'null'){
+            console.log("SHIPS DESTROYED SCORE NULL");
+            localStorage.setItem('highshipsdestroyed', 0);
         }
+    
+    
+        console.log("highscore " + localStorage.getItem('highscore'));
+        console.log("ships d'd " + localStorage.getItem('highshipsdestroyed'));
+        
+        //to get highscore and check if needs to be replaced
+        if(totalGoldEarned > parseInt(localStorage.getItem('highscore'))){
+                localStorage.setItem('highscore', totalGoldEarned);
+                console.log("NEW HIGHSCORE " + localStorage.getItem('highscore'));
+        }
+
+        //to get high ships destroyed
+        if(shipsDestroyed > parseInt(localStorage.getItem('highshipsdestroyed'))){
+            localStorage.setItem('highshipsdestroyed', shipsDestroyed);
+            console.log("NEW HIGH SHIPS DESTROYED " + localStorage.getItem('highshipsdestroyed'));
+        }
+        
     }
-    else{
-        localStorage.setItem("highscore", highScore); 
-        console.log("HIGHSCORE " + highScore);
-    }
-    console.log("GAME OVER");
-    */
+    
+    console.log("CURRENT HIGHSCORE " + localStorage.getItem(('highscore')));
+    console.log("CURRENT HIGH SHIPS DESTROYED " + localStorage.getItem('highshipsdestroyed'));
+
     if(currentLevel == 'Level 1')
     {
     gameOverText.events.onInputDown.add(function(){
@@ -557,7 +577,18 @@ function musicOnOff(){
             soundOnOffText = game.add.text(1860,1870, 'Off', { font: "30px Arial", fill: "#B3B6B7" });
             sound = 'true';
         }
+}
+
+function browserCheck() {
+    if ('localStorage' in window && window['localStorage'] !== null) {
+        return true;
     } 
+    else {
+        return false;
+    }
+}
+
+
 
 </script>
 
