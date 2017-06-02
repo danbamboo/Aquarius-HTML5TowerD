@@ -36,6 +36,10 @@
 <body>
 
 <script type="text/javascript">
+
+//for file manipulation
+//fs = require(fs);
+
 var game = new Phaser.Game(1920, 1920, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render});
 //***************************
 // Phaser Standard Functions
@@ -185,12 +189,7 @@ function create() {
     backgroundSound.loopFull(.2);
     }
     
-    //navbar = game.add.sprite(0, 1760, 'navbar');
-    mainMenuButton = game.add.sprite(1770, 1800, 'mainMenu');
-    mainMenuButton.inputEnabled = true;
-    mainMenuButton.events.onInputDown.add(function(){
-         window.location.href = '/?sound=' + sound;
-     }, this);
+   
     //Send Wave Button
     sendWaveButton = game.add.sprite(200,1800,'sendNextWaveButtn');
     sendWaveButton.inputEnabled = true;
@@ -226,6 +225,12 @@ function create() {
 	    }
 	}
 
+     //navbar = game.add.sprite(0, 1760, 'navbar');
+    mainMenuButton = game.add.sprite(1770, 1800, 'mainMenu');
+    mainMenuButton.inputEnabled = true;
+    mainMenuButton.events.onInputDown.add(function(){
+         window.location.href = '/?sound=' + sound;
+    }, this);
 
     
     //====== MENU
@@ -528,9 +533,11 @@ function musicOnOff(){
         soundOnOffText.destroy();
         if(!game.sound.mute){
             soundOnOffText = game.add.text(1860,1870, 'On', { font: "30px Arial", fill: "#B3B6B7" });
+            sound = 'false';
         }
         else{
             soundOnOffText = game.add.text(1860,1870, 'Off', { font: "30px Arial", fill: "#B3B6B7" });
+            sound = 'true';
         }
     } 
 

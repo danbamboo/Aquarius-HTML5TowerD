@@ -38,6 +38,7 @@ function preload() {
 
 //var for the menu music
 var menuMusic;
+var sound = false;
 
 function create() {
     
@@ -56,6 +57,7 @@ function create() {
   	    var urlParams = new URLSearchParams(window.location.search);
   	    if(urlParams.has('sound')){
 	    sound = urlParams.get('sound');
+	    console.log("SOUND " + sound);
 	    if(sound == 'true'){
 	        musicOnOff();
 	    }
