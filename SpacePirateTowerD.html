@@ -20,8 +20,7 @@
 		<script type="text/javascript" src="level1.js"></script>
 		<script type="text/javascript" src="level2.js"></script>
 		<script type="text/javascript" src="level3.js"></script>
-			
-		
+
     <style type="text/css">
         body {
             
@@ -36,9 +35,6 @@
 <body>
 
 <script type="text/javascript">
-
-//for file manipulation
-//fs = require(fs);
 
 var game = new Phaser.Game(1920, 1920, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render});
 //***************************
@@ -76,7 +72,8 @@ function preload() {
     game.load.image('gameOver', 'gameOver.png');
     game.load.image('victory', 'victory.png');
     game.load.image('volume', 'VolumeIconSm.png');
-    game.load.image('mainMenu', 'mainMenuButton.png');
+    game.load.image('mainMenu', 'mainMenuButton.png')
+    game.load.image('blackNav', 'BlackNavBar.png');
 
     //Google Web Fonts For Text Editing
     // game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
@@ -132,7 +129,8 @@ var gameOverText;
 
 //to hold overall gold earned and ships destroyed
 var totalGoldEarned, totalGoldMeter;
-var shipsDestroyed, totalShipsDestroyed;    
+var shipsDestroyed, totalShipsDestroyed; 
+var highScore;
     
 //Tower Groups
 var berzerkers;
@@ -188,6 +186,8 @@ function create() {
     backgroundSound = game.add.audio('background');
     backgroundSound.loopFull(.2);
     }
+    
+    navbar = game.add.sprite(0, 1760, 'blackNav');
     
    
     //Send Wave Button
@@ -456,6 +456,24 @@ function gameOver(){
     gameOverText = game.add.sprite(game.world.centerX-411, 420, 'gameOver');
     gameOverText.inputEnabled = true;
     
+    //to get highscore and check if needs to be replaced
+    /*highScore =  localStorage.getItem("highscore");
+    if(highScore !== null){
+        if(totalGoldEarned > highScore){
+        localStorage.setItem("highscore", highScore);
+        console.log("NEW HIGHSCORE " + highScore);
+        }
+        else{
+            console.log("NO NEW HIGHSCORE, STAY AT " + highScore);
+            console.log("");
+        }
+    }
+    else{
+        localStorage.setItem("highscore", highScore); 
+        console.log("HIGHSCORE " + highScore);
+    }
+    console.log("GAME OVER");
+    */
     if(currentLevel == 'Level 1')
     {
     gameOverText.events.onInputDown.add(function(){
