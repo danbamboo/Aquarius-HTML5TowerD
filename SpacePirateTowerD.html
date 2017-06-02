@@ -133,6 +133,7 @@ var shipsDestroyed, totalShipsDestroyed;
 var highScore;
 var scoreKeeper = localStorage;
 var browserTest;
+var scoreBackground;
 
 //Tower Groups
 var berzerkers;
@@ -458,6 +459,9 @@ function gameOver(){
     berzerkers.destroy();
     //var gameOver = game.add.text(600,800, 'GAME OVER\nClick To Retry?', { font: "150px Arial", fill: "#1B4F72" });
     gameOverText = game.add.sprite(game.world.centerX-411, 420, 'gameOver');
+    scoreBackground = game.add.sprite(game.world.centerX-350, 900, 'scroll');
+    scoreBackground.scale.y = .7;
+    scoreBackground.scale.x = .7;
     gameOverText.inputEnabled = true;
     
     //to ensure that the browser is compatible with local storage
@@ -465,34 +469,47 @@ function gameOver(){
         console.log("browser valid");
         //check if gold or ships destroyed local storage exists
         if(localStorage.getItem('highscore') === 'null'){
-            console.log("Highscore is NULL")
+            //console.log("Highscore is NULL")
             localStorage.setItem('highscore', 0);
         }
         if(localStorage.getItem('highshipsdestroyed') === 'null'){
-            console.log("SHIPS DESTROYED SCORE NULL");
+            //console.log("SHIPS DESTROYED SCORE NULL");
             localStorage.setItem('highshipsdestroyed', 0);
         }
-    
-    
-        console.log("highscore " + localStorage.getItem('highscore'));
-        console.log("ships d'd " + localStorage.getItem('highshipsdestroyed'));
+        
+        //console.log("highscore " + localStorage.getItem('highscore'));
+        //console.log("ships d'd " + localStorage.getItem('highshipsdestroyed'));
         
         //to get highscore and check if needs to be replaced
         if(totalGoldEarned > parseInt(localStorage.getItem('highscore'))){
-                localStorage.setItem('highscore', totalGoldEarned);
-                console.log("NEW HIGHSCORE " + localStorage.getItem('highscore'));
+            localStorage.setItem('highscore', totalGoldEarned);
+            console.log("NEW HIGHSCORE " + localStorage.getItem('highscore'));
+            game.add.text(910, 970, "NEW", {font: "60px Impact", fill: "#000000"});
+            game.add.text(800, 1050, "High Gold Score:", { font: "60px Arial", fill: "#000000"});
+            game.add.text(940, 1120, localStorage.getItem('highscore'), { font: "60px Arial", fill: "#000000" });
+        }
+        else{
+            game.add.text(800, 1050, "High Gold Score:", {font: "60px Arial", fill: "#000000"});
+            game.add.text(940, 1120, localStorage.getItem('highscore'), { font: "60px Arial", fill: "#000000" });
         }
 
         //to get high ships destroyed
         if(shipsDestroyed > parseInt(localStorage.getItem('highshipsdestroyed'))){
             localStorage.setItem('highshipsdestroyed', shipsDestroyed);
             console.log("NEW HIGH SHIPS DESTROYED " + localStorage.getItem('highshipsdestroyed'));
+            game.add.text(910, 1230, "NEW", {font: "60px Impact", fill: "#000000"});
+            game.add.text(690, 1300, "NEW High Ships Destroyed:", { font: "60px Arial", fill: "#000000"});
+            game.add.text(940, 1370, localStorage.getItem('highshipsdestroyed'), { font: "60px Arial", fill: "#000000" });
+        }
+        else{
+            game.add.text(690, 1200, "High Ships Destroyed:", {font: "60px Arial", fill: "#000000"});
+            game.add.text(940, 1270, localStorage.getItem('highshipsdestroyed'), { font: "60px Arial", fill: "#000000" });
         }
         
     }
     
-    console.log("CURRENT HIGHSCORE " + localStorage.getItem(('highscore')));
-    console.log("CURRENT HIGH SHIPS DESTROYED " + localStorage.getItem('highshipsdestroyed'));
+    //console.log("CURRENT HIGHSCORE " + localStorage.getItem(('highscore')));
+    //console.log("CURRENT HIGH SHIPS DESTROYED " + localStorage.getItem('highshipsdestroyed'));
 
     if(currentLevel == 'Level 1')
     {
