@@ -51,64 +51,65 @@ function create() {
     var introText2 = tutorialPage.add.text(10, 115, 'Use the spaceships to help build the Iron Clan\'s defenses by strategically placing the spaceships where they will inflict \nthe pirate ships with the most damage. Of course, defense comes at a price, so be careful how much gold is spent.', {font: "14px Arial", fill: 'white'}); 
     var introText3 = tutorialPage.add.text(10, 170, 'Earn more gold for each pirate ship you defeat, but if a ship escapes, they\'ll be taking some of the gold with them. \nIf the gold runs out, it\’s game over for the Iron Clan.', {font: "14px Arial", fill: 'white'}); 
       
-    var defense = tutorialPage.add.text(10, 250, 'Defense', {font: "22px Impact", fill: '#E04000'});
-  
+    var defense = tutorialPage.add.text(10, 230, 'Defense', {font: "22px Impact", fill: '#E04000'});
+    var defenseText = tutorialPage.add.text(10, 260, 'Click and drag a tower to where you want it set. Towers cannot be set on the water or overlapping each other.', {font: "14px Arial", fill: 'white'}); 
+    
     var brigBlaster = tutorialPage.add.sprite(100, 320, 'spaceItems', 'playerShip3_blue.png');
     brigBlaster.scale.y=.5;
     brigBlaster.scale.x=.5;
     tutorialPage.add.text(10, 280, 'Brigantine Blaster', {font: "14px Arial", fontWeight: 'bold', fill: '#03CBF1'});
-    tutorialPage.add.text(10, 300,'Damage: Good \nFire Rate: Best \nRange: Best \nCost: $', {font: "12px Arial", fill: 'white'});
+    tutorialPage.add.text(10, 300,'Damage: 2 \nFire Rate: 600 \nRange: 550 \nCost: 75', {font: "12px Arial", fill: 'white'});
 
     var clipCatast = tutorialPage.add.sprite(405, 317, 'spaceItems', 'enemyRed1.png');
     clipCatast.scale.y=.5;
     clipCatast.scale.x=.5;
 	tutorialPage.add.text(300, 280, 'Clipper Catastrophe', {font: "14px Arial", fontWeight: 'bold', fill: '#C16743'});
-    tutorialPage.add.text(300, 300,'Damage: Better \nFire Rate: Better \nRange: Better \nCost: $$', {font: "12px Arial", fill: 'white'});
+    tutorialPage.add.text(300, 300,'Damage: 3 \nFire Rate: 300 \nRange: 400 \nCost: 175', {font: "12px Arial", fill: 'white'});
 	
 	var fleetSinker = tutorialPage.add.sprite(700, 315, 'spaceItems', 'enemyGreen3.png');
 	fleetSinker.scale.y=.5;
     fleetSinker.scale.x=.5;
     tutorialPage.add.text(600, 280, 'Fleet Sinker', {font: "14px Arial", fontWeight: 'bold', fill: '#92A454'});
-    tutorialPage.add.text(600, 300,'Damage: Best \nFire Rate: Good \nRange: Good \nCost: $$$', {font: "12px Arial", fill: 'white'});
+    tutorialPage.add.text(600, 300,'Damage: 5 \nFire Rate: 250 \nRange: 250 \nCost: 300', {font: "12px Arial", fill: 'white'});
 	
 	var enemies = tutorialPage.add.text(10, 400, 'Enemies', {font: "22px Impact", fill: '#E04000'});
 	var enemiesText = tutorialPage.add.text(10, 430, 'Destroy a ship and you\'ll earn triple the gold value of that ship. Let a ship escape and you\'ll lose twice the gold value of \nthat ship. Remember, it\'s game over when the gold runs out.', {font: "14px Arial", fill: 'white'});  
 
-    var brethren = tutorialPage.add.sprite(15, 530, 'shipsMisc1', 'ship (1).png');
+    var brethren = tutorialPage.add.sprite(15, 510, 'shipsMisc1', 'ship (1).png');
     brethren.scale.y=.5;
     brethren.scale.x=.5;
     brethren.angle += 270;
-    tutorialPage.add.text(10, 540,'Gold Value: 2', {font: "12px Arial", fill: 'white'});
+    tutorialPage.add.text(10, 520,'Health: 50 \nGold Value: 2', {font: "12px Arial", fill: 'white'});
     
-    var scourge = tutorialPage.add.sprite(140, 530, 'shipsMisc1', 'ship (17).png');
+    var scourge = tutorialPage.add.sprite(140, 510, 'shipsMisc1', 'ship (17).png');
     scourge.scale.y=.5;
     scourge.scale.x=.5;
     scourge.angle += 270;
-    tutorialPage.add.text(135, 540,'Gold Value: 3', {font: "12px Arial", fill: 'white'});
+    tutorialPage.add.text(135, 520,'Health: 70 \nGold Value: 3', {font: "12px Arial", fill: 'white'});
     
-    var squirrel = tutorialPage.add.sprite(270, 530, 'shipsMisc1', 'ship (12).png');
+    var squirrel = tutorialPage.add.sprite(270, 510, 'shipsMisc1', 'ship (12).png');
     squirrel.scale.y=.5;
     squirrel.scale.x=.5;
     squirrel.angle += 270;
-    tutorialPage.add.text(265, 540,'Gold Value: 4', {font: "12px Arial", fill: 'white'});
+    tutorialPage.add.text(265, 520,'Health: 120 \nGold Value: 4', {font: "12px Arial", fill: 'white'});
     
-    var royal = tutorialPage.add.sprite(400, 530, 'shipsMisc1', 'ship (3).png');
+    var royal = tutorialPage.add.sprite(400, 510, 'shipsMisc1', 'ship (3).png');
     royal.scale.y=.5;
     royal.scale.x=.5;
     royal.angle += 270;
-    tutorialPage.add.text(395, 540,'Gold Value: 5', {font: "12px Arial", fill: 'white'});
+    tutorialPage.add.text(395, 520,'Health: 85 \nGold Value: 5', {font: "12px Arial", fill: 'white'});
     
-    var dragon = tutorialPage.add.sprite(530, 530, 'shipsMisc1', 'ship (4).png');
+    var dragon = tutorialPage.add.sprite(530, 510, 'shipsMisc1', 'ship (4).png');
     dragon.scale.y=.5;
     dragon.scale.x=.5;
     dragon.angle += 270;
-    tutorialPage.add.text(525, 540,'Gold Value: 6', {font: "12px Arial", fill: 'white'});
+    tutorialPage.add.text(525, 520,'Health: 180 \nGold Value: 6', {font: "12px Arial", fill: 'white'});
     
-    var admiral = tutorialPage.add.sprite(660, 530, 'shipsMisc1', 'ship (24).png');
+    var admiral = tutorialPage.add.sprite(660, 510, 'shipsMisc1', 'ship (24).png');
     admiral.scale.y=.5;
     admiral.scale.x=.5;
     admiral.angle += 270;
-    tutorialPage.add.text(655, 540,'Gold Value: 7', {font: "12px Arial", fill: 'white'});
+    tutorialPage.add.text(655, 520,'Heath: 120 \nGold Value: 7', {font: "12px Arial", fill: 'white'});
 
     var backButton = tutorialPage.add.button(770, 585, 'menu', menu, this);
 	backButton.anchor.setTo(0.5,0.5);
