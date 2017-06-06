@@ -134,7 +134,8 @@ var highScore;
 var scoreKeeper = localStorage;
 var browserTest;
 var scoreBackground;
-var scoreText1, scoreText2, scoreText3, scoreText4, scoreText5, scoreText6;
+var scoreText1, scoreText2, scoreText3 = null;
+var scoreText4, scoreText5, scoreText6 = null;
 
 //Tower Groups
 var berzerkers;
@@ -301,7 +302,7 @@ function create() {
         skipLevel3.inputEnabled = true;
         skipLevel3.events.onInputDown.add(level3Debug, this);
     }
-    sendWaveButton.events.onInputDown.add(level1Wave1, this);
+    sendWaveButton.events.onInputDown.add(level1Wave10, this);
     soundOption.events.onInputDown.add(musicOnOff, this);
     
     var urlParams = new URLSearchParams(window.location.search);
@@ -490,14 +491,22 @@ function victoryTextCreate(){
 }
 
 function victoryTextDestroy(){
+    console.log("s3 " + scoreText3);
+    console.log("s6 " + scoreText6);
     victoryText.destroy();
     scoreBackground.destroy();
     scoreText1.destroy();
     scoreText2.destroy();
-    scoreText3.destroy();
+    if(scoreText3 !== null){
+        console.log("SCORE3");
+        scoreText3.destroy();
+    }
     scoreText4.destroy();
     scoreText5.destroy();
-    scoreText6.destroy();
+    if(scoreText6 !== null){
+        console.log("SCORE6");
+        scoreText6.destroy();
+    }
 }
 
 function setGoldBasedOnDifficulty(){
@@ -505,7 +514,7 @@ function setGoldBasedOnDifficulty(){
     console.log("Difficulty " + difficulty);
     if(currentLevel=='Level 1'){
         if(difficulty=='easy'){
-            currentGold = 800;  
+            currentGold = 8000;  
         }
         else if(difficulty=='medium'){
             currentGold = 450;  
@@ -589,14 +598,13 @@ function displayScore(){
         
         //console.log("highscore " + localStorage.getItem('highscore'));
         //console.log("ships d'd " + localStorage.getItem('highshipsdestroyed'));
-        
         //to get highscore and check if needs to be replaced
         if(totalGoldEarned > parseInt(localStorage.getItem('highscore'))){
             localStorage.setItem('highscore', totalGoldEarned);
             console.log("NEW HIGHSCORE " + localStorage.getItem('highscore'));
-            scoreText1 = game.add.text(910, 970, "NEW", {font: "60px Impact", fill: "#000000"});
-            scoreText2 = game.add.text(800, 1050, "High Gold Score:", { font: "60px Arial", fill: "#000000"});
-            scoreText3 = game.add.text(940, 1120, localStorage.getItem('highscore'), { font: "60px Arial", fill: "#000000" });
+            scoreText3 = game.add.text(910, 970, "NEW", {font: "60px Impact", fill: "#000000"});
+            scoreText1 = game.add.text(800, 1050, "High Gold Score:", { font: "60px Arial", fill: "#000000"});
+            scoreText2 = game.add.text(940, 1120, localStorage.getItem('highscore'), { font: "60px Arial", fill: "#000000" });
         }
         else{
             scoreText1 = game.add.text(800, 1050, "High Gold Score:", {font: "60px Arial", fill: "#000000"});
@@ -607,9 +615,9 @@ function displayScore(){
         if(shipsDestroyed > parseInt(localStorage.getItem('highshipsdestroyed'))){
             localStorage.setItem('highshipsdestroyed', shipsDestroyed);
             console.log("NEW HIGH SHIPS DESTROYED " + localStorage.getItem('highshipsdestroyed'));
-            scoreText4 = game.add.text(910, 1230, "NEW", {font: "60px Impact", fill: "#000000"});
-            scoreText5 = game.add.text(690, 1300, "High Ships Destroyed:", { font: "60px Arial", fill: "#000000"});
-            scoreText6 = game.add.text(940, 1370, localStorage.getItem('highshipsdestroyed'), { font: "60px Arial", fill: "#000000" });
+            scoreText6 = game.add.text(910, 1230, "NEW", {font: "60px Impact", fill: "#000000"});
+            scoreText4 = game.add.text(690, 1300, "High Ships Destroyed:", { font: "60px Arial", fill: "#000000"});
+            scoreText5 = game.add.text(940, 1370, localStorage.getItem('highshipsdestroyed'), { font: "60px Arial", fill: "#000000" });
         }
         else{
             scoreText4 = game.add.text(690, 1200, "High Ships Destroyed:", {font: "60px Arial", fill: "#000000"});
