@@ -588,16 +588,18 @@ function displayScore(){
         console.log("browser valid");
         //check if gold or ships destroyed local storage exists
         if(localStorage.getItem('highscore') === 'null'){
-            //console.log("Highscore is NULL")
+            console.log("Highscore is NULL")
             localStorage.setItem('highscore', 0);
+            console.log("HIGHSCORE SET TO " + localStorage.getItem('highscore'));
         }
         if(localStorage.getItem('highshipsdestroyed') === 'null'){
-            //console.log("SHIPS DESTROYED SCORE NULL");
+            console.log("SHIPS DESTROYED SCORE NULL");
             localStorage.setItem('highshipsdestroyed', 0);
+            console.log("HIGH SHIPS DESTROYED " + localStorage.getItem('highshipsdestroyed'));
         }
         
-        //console.log("highscore " + localStorage.getItem('highscore'));
-        //console.log("ships d'd " + localStorage.getItem('highshipsdestroyed'));
+        console.log("highscore " + localStorage.getItem('highscore'));
+        console.log("ships d'd " + localStorage.getItem('highshipsdestroyed'));
         //to get highscore and check if needs to be replaced
         if(totalGoldEarned > parseInt(localStorage.getItem('highscore'))){
             localStorage.setItem('highscore', totalGoldEarned);
