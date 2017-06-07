@@ -302,7 +302,7 @@ function create() {
         skipLevel3.inputEnabled = true;
         skipLevel3.events.onInputDown.add(level3Debug, this);
     }
-    sendWaveButton.events.onInputDown.add(level1Wave10, this);
+    sendWaveButton.events.onInputDown.add(level1Wave1, this);
     soundOption.events.onInputDown.add(musicOnOff, this);
     
     var urlParams = new URLSearchParams(window.location.search);
@@ -514,7 +514,7 @@ function setGoldBasedOnDifficulty(){
     console.log("Difficulty " + difficulty);
     if(currentLevel=='Level 1'){
         if(difficulty=='easy'){
-            currentGold = 8000;  
+            currentGold = 800;  
         }
         else if(difficulty=='medium'){
             currentGold = 450;  
