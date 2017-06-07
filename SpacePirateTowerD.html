@@ -587,12 +587,12 @@ function displayScore(){
     if(browserTest === true){
         console.log("browser valid");
         //check if gold or ships destroyed local storage exists
-        if(localStorage.getItem('highscore') === 'null'){
+        if(localStorage.getItem('highscore') === null){
             console.log("Highscore is NULL")
             localStorage.setItem('highscore', 0);
             console.log("HIGHSCORE SET TO " + localStorage.getItem('highscore'));
         }
-        if(localStorage.getItem('highshipsdestroyed') === 'null'){
+        if(localStorage.getItem('highshipsdestroyed') === null){
             console.log("SHIPS DESTROYED SCORE NULL");
             localStorage.setItem('highshipsdestroyed', 0);
             console.log("HIGH SHIPS DESTROYED " + localStorage.getItem('highshipsdestroyed'));
